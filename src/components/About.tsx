@@ -89,7 +89,7 @@ const About = () => {
                 fontSize: { xs: '0.9rem', sm: '1rem' },
                 textAlign: { xs: 'left', md: 'justify' }
               }}>
-                Currently pursuing a Bachelor of Science in Computer Science at AGH University of Science and Technology in Krakow, Poland. I'm passionate about leveraging tools like Python, SQL, and various machine learning frameworks to create meaningful solutions that drive research and development forward.
+                I hold a Bachelor of Science in Computer Science from AGH University of Science and Technology in Krakow, Poland. I'm passionate about leveraging tools like Python, SQL, and various machine learning frameworks to create meaningful solutions that drive research and development forward.
               </Typography>
               <Typography variant="body1" paragraph color="text.secondary" sx={{
                 fontSize: { xs: '0.9rem', sm: '1rem' },
