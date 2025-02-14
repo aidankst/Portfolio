@@ -21,7 +21,7 @@ const NavItem = styled(motion.div)({
   },
 });
 
-const MobileDrawer = styled(Drawer)(({ theme }) => ({
+const MobileDrawer = styled(Drawer)(() => ({
   '& .MuiDrawer-paper': {
     width: '60%',
     maxWidth: '300px',

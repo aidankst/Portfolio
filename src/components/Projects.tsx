@@ -1,8 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Typography, Container, Grid, Card, CardContent, CardMedia, Box, Link } from '@mui/material';
+import { Typography, Container, Grid, Card, CardContent, Box, Link } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { GitHub as GitHubIcon, Launch as LaunchIcon } from '@mui/icons-material';
+import { GitHub as GitHubIcon } from '@mui/icons-material';
 
 const StyledSection = styled('section')(({ theme }) => ({
   minHeight: '100vh',
