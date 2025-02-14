@@ -61,7 +61,7 @@ const Experience = () => {
     },
     {
       title: 'Backend Developer',
-      company: 'National Unity Government of Myanmar - Volunteer',
+      company: 'NUG - Volunteer',
       period: 'March, 2024 - June, 2024',
       description: [
         'Designed and developed the architecture of a media monitoring tool to enable efficient tracking and analysis of media data',
