@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import { Typography, Container, Box, Paper } from '@mui/material';
 import { styled } from '@mui/material/styles';
@@ -101,6 +100,12 @@ const Experience = () => {
               alignItems: 'center',
               gap: 2,
               mb: 6,
+              '&::before': {
+                content: '""',
+                flex: 1,
+                height: '1px',
+                background: 'rgba(100, 255, 218, 0.3)',
+              },
               '&::after': {
                 content: '""',
                 flex: 1,

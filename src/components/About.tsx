@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import { Typography, Container, Box, Grid } from '@mui/material';
 import { styled } from '@mui/material/styles';
@@ -100,7 +99,7 @@ const About = () => {
               </Typography>
               <Box sx={{ mt: 2 }}>
                 <Grid container spacing={2}>
-                  {skills.map((skill, index) => (
+                  {skills.map((skill) => (
                     <Grid item xs={12} sm={6} md={3} key={skill}>
                       <Typography
                         variant="body2"

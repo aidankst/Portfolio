@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import './App.css'
 import { ThemeProvider, createTheme, CssBaseline } from '@mui/material';
 import Navbar from './components/Navbar';
