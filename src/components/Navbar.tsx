@@ -1,14 +1,40 @@
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { AppBar, Toolbar, Typography, IconButton, useTheme, useMediaQuery, Drawer, List, ListItem, ListItemText } from '@mui/material';
+import { motion, AnimatePresence } from 'framer-motion';
+import { AppBar, Toolbar, Typography, IconButton, useTheme, useMediaQuery, List, ListItem, ListItemText } from '@mui/material';
 import { Menu as MenuIcon } from '@mui/icons-material';
 import { styled } from '@mui/material/styles';
 
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
+  background: 'transparent',
+  boxShadow: 'none',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  padding: theme.spacing(2),
+}));
+
+const NavContainer = styled('div')(({ theme }) => ({
   background: 'rgba(10, 25, 47, 0.85)',
   backdropFilter: 'blur(10px)',
-  boxShadow: theme.shadows[4],
-  borderBottom: '1px solid rgba(100, 255, 218, 0.1)',
+  WebkitBackdropFilter: 'blur(10px)',
+  borderRadius: '50px',
+  padding: theme.spacing(1, 4),
+  border: '1px solid rgba(100, 255, 218, 0.1)',
+  boxShadow: '0 10px 30px -10px rgba(0, 0, 0, 0.3)',
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  width: 'auto',
+  maxWidth: '85%',
+  margin: '0 auto',
+  transition: 'all 0.3s ease',
+  '& > *:not(:last-child)': {
+    marginRight: theme.spacing(4)
+  },
+  '&:hover': {
+    boxShadow: '0 20px 40px -20px rgba(0, 0, 0, 0.4)',
+    transform: 'translateY(2px)',
+  },
 }));
 
 const NavItem = styled(motion.div)({
@@ -20,14 +46,47 @@ const NavItem = styled(motion.div)({
   },
 });
 
-const MobileDrawer = styled(Drawer)(() => ({
-  '& .MuiDrawer-paper': {
-    width: '70%',
-    maxWidth: '320px',
-    background: 'rgba(10, 25, 47, 0.95)',
-    backdropFilter: 'blur(12px)',
-    borderLeft: '1px solid rgba(100, 255, 218, 0.1)',
-    padding: '2rem 0',
+const MobileMenu = styled(motion.div)(({ theme }) => ({
+  position: 'absolute',
+  top: '100%',
+  left: '50%',
+  transform: 'translateX(-50%)',
+  width: '75%',
+  maxWidth: '380px',
+  marginTop: theme.spacing(2),
+  background: 'rgba(10, 25, 47, 0.95)',
+  backdropFilter: 'blur(12px)',
+  WebkitBackdropFilter: 'blur(12px)',
+  borderRadius: '16px',
+  border: '1px solid rgba(100, 255, 218, 0.1)',
+  boxShadow: '0 10px 30px -10px rgba(0, 0, 0, 0.3)',
+  padding: theme.spacing(2),
+  zIndex: 1000,
+  transformOrigin: 'top center',
+}));
+
+const MobileMenuItem = styled(ListItem)(({ theme }) => ({
+  borderRadius: theme.spacing(1),
+  marginBottom: theme.spacing(1),
+  background: 'rgba(255, 255, 255, 0.02)',
+  backdropFilter: 'blur(8px)',
+  WebkitBackdropFilter: 'blur(8px)',
+  border: '1px solid rgba(100, 255, 218, 0.1)',
+  transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+  transform: 'translateX(-10px)',
+  opacity: 0,
+  animation: 'slideIn 0.4s forwards',
+  animationDelay: 'calc(0.1s * var(--index))',
+  '&:hover': {
+    backgroundColor: 'rgba(100, 255, 218, 0.1)',
+    transform: 'translateX(8px)',
+    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
+  },
+  '@keyframes slideIn': {
+    to: {
+      transform: 'translateX(0)',
+      opacity: 1,
+    },
   },
 }));
 
@@ -57,56 +116,120 @@ const Navbar = () => {
     }
   };
 
-  const drawer = (
-    <List sx={{ p: 3 }}>
-      {navItems.map((item) => (
-        <ListItem
-          key={item}
-          onClick={() => scrollToSection(item)}
-          sx={{
-            mb: 2,
-            borderRadius: 1,
-            transition: 'all 0.3s ease',
-            '&:hover': {
-              backgroundColor: 'rgba(100, 255, 218, 0.1)',
-              transform: 'translateX(8px)',
-            },
-          }}
-        >
-          <ListItemText
-            primary={item}
-            sx={{
-              '& .MuiTypography-root': {
-                fontSize: '1.1rem',
-                fontFamily: '"Roboto Mono", monospace',
-                color: '#64ffda',
-                transition: 'all 0.3s ease',
-              },
-            }}
-          />
-        </ListItem>
-      ))}
-    </List>
-  );
+  const menuVariants = {
+    open: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        type: 'spring',
+        stiffness: 400,
+        damping: 30,
+        staggerChildren: 0.1,
+      },
+    },
+    closed: {
+      opacity: 0,
+      y: -20,
+      scale: 0.95,
+      transition: {
+        type: 'spring',
+        stiffness: 400,
+        damping: 30,
+        staggerChildren: 0.05,
+        staggerDirection: -1,
+      },
+    },
+  };
+
+  const itemVariants = {
+    open: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        type: 'spring',
+        stiffness: 300,
+        damping: 24,
+      },
+    },
+    closed: {
+      opacity: 0,
+      x: -20,
+      transition: {
+        type: 'spring',
+        stiffness: 300,
+        damping: 24,
+      },
+    },
+  };
 
   return (
-    <StyledAppBar position="fixed" style={{ background: isScrolled ? 'rgba(10, 25, 47, 0.95)' : 'rgba(10, 25, 47, 0.85)' }}>
-      <Toolbar sx={{ justifyContent: 'space-between' }}>
+    <StyledAppBar position="fixed">
+      <NavContainer style={{ background: isScrolled ? 'rgba(10, 25, 47, 0.95)' : 'rgba(10, 25, 47, 0.85)' }}>
         <Typography variant="h6" component={motion.div} whileHover={{ scale: 1.05 }}>
           Kaung Sithu
         </Typography>
         
         {isMobile ? (
-          <IconButton
-            color="inherit"
-            onClick={() => setMobileOpen(!mobileOpen)}
-            edge="end"
-            aria-label="menu"
-          >
-            <MenuIcon />
-          </IconButton>
+          <>
+            <IconButton
+              color="inherit"
+              onClick={() => setMobileOpen(!mobileOpen)}
+              edge="end"
+              aria-label="menu"
+              sx={{
+                position: 'relative',
+                transform: mobileOpen ? 'rotate(90deg)' : 'none',
+                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                '&:hover': {
+                  background: 'rgba(100, 255, 218, 0.1)'
+                }
+              }}
+            >
+              <MenuIcon />
+            </IconButton>
+            <AnimatePresence>
+              {mobileOpen && (
+                <MobileMenu
+                  initial="closed"
+                  animate="open"
+                  exit="closed"
+                  variants={menuVariants}
+                >
+                  <List sx={{ p: 0 }}>
+                    {navItems.map((item, index) => (
+                      <MobileMenuItem
+                        key={item}
+                        onClick={() => scrollToSection(item)}
+                        style={{ '--index': index } as React.CSSProperties}
+                      >
+                        <motion.div
+                          variants={itemVariants}
+                          initial="closed"
+                          animate="open"
+                          exit="closed"
+                          style={{ width: '100%' }}
+                        >
+                          <ListItemText
+                            primary={item}
+                            sx={{
+                              '& .MuiTypography-root': {
+                                fontSize: '1rem',
+                                fontFamily: '"Roboto Mono", monospace',
+                                color: '#64ffda',
+                              },
+                            }}
+                          />
+                        </motion.div>
+                      </MobileMenuItem>
+                    ))}
+                  </List>
+                </MobileMenu>
+              )}
+            </AnimatePresence>
+          </>
         ) : (
-          <div style={{ display: 'flex', gap: '20px' }}>
+          <motion.div style={{ display: 'flex', gap: '20px' }}>
             {navItems.map((item) => (
               <NavItem
                 key={item}
@@ -116,22 +239,10 @@ const Navbar = () => {
               >
                 <Typography>{item}</Typography>
               </NavItem>
-            ))}
-          </div>
+            ))}            
+          </motion.div>
         )}
-
-        <MobileDrawer
-          variant="temporary"
-          anchor="right"
-          open={mobileOpen}
-          onClose={() => setMobileOpen(false)}
-          ModalProps={{
-            keepMounted: true,
-          }}
-        >
-          {drawer}
-        </MobileDrawer>
-      </Toolbar>
+      </NavContainer>
     </StyledAppBar>
   );
 };

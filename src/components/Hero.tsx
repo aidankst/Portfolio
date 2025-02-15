@@ -8,7 +8,7 @@ const StyledContainer = styled(Container)(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
-  paddingTop: '64px',
+  paddingTop: '54px',
   gap: '2rem',
   [theme.breakpoints.down('md')]: {
     flexDirection: 'column-reverse',
