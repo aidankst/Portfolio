@@ -55,7 +55,6 @@ const Contact = () => {
           whileInView="visible"
           viewport={{ once: true }}
           variants={fadeInUp}
-          style={{ textAlign: 'center' }}
         >
           <Typography
             variant="h4"

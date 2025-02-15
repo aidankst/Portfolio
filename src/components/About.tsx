@@ -1,18 +1,20 @@
 import { motion } from 'framer-motion';
-import { Typography, Container, Box, Grid } from '@mui/material';
+import { Typography, Container, Box, Grid, Button } from '@mui/material';
+import { useState } from 'react';
 import { styled } from '@mui/material/styles';
 
 const StyledSection = styled('section')(({ theme }) => ({
   minHeight: '100vh',
   display: 'flex',
   alignItems: 'center',
-  padding: theme.spacing(10, 2),
+  padding: theme.spacing(10, 1),
   [theme.breakpoints.up('md')]: {
     padding: theme.spacing(10, 0),
   },
 }));
 
 const About = () => {
+  const [showAllSkills, setShowAllSkills] = useState(false);
   const fadeInUp = {
     hidden: { opacity: 0, y: 60 },
     visible: {
@@ -24,6 +26,17 @@ const About = () => {
       },
     },
   };
+
+  const essentialSkills = [
+    'Machine Learning',
+    'Python (NumPy, Pandas)',
+    'Data Visualization',
+    'TensorFlow',
+    'Data Modeling',
+    'Problem Solving',
+    'SQL',
+    'Scikit-learn'
+  ];
 
   const skills = [
     'Machine Learning',
@@ -98,27 +111,72 @@ const About = () => {
                 Here are some technologies I've been working with recently:
               </Typography>
               <Box sx={{ mt: 2 }}>
-                <Grid container spacing={2}>
-                  {skills.map((skill) => (
-                    <Grid item xs={12} sm={6} md={3} key={skill}>
-                      <Typography
-                        variant="body2"
+                <motion.div
+                  initial={false}
+                  animate={{ height: 'auto' }}
+                  style={{ overflow: 'hidden' }}
+                >
+                  <motion.div
+                    initial={false}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <Grid container spacing={2}>
+                      {(showAllSkills ? skills : essentialSkills).map((skill) => (
+                        <Grid item xs={12} sm={6} md={3} key={skill}>
+                          <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.3 }}
+                          >
+                            <Typography
+                              variant="body2"
+                              color="primary"
+                              sx={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: 1,
+                                '&::before': {
+                                  content: '"✔"',
+                                  color: 'primary.main',
+                                },
+                              }}
+                            >
+                              {skill}
+                            </Typography>
+                          </motion.div>
+                        </Grid>
+                      ))}
+                    </Grid>
+                  </motion.div>
+                </motion.div>
+                {skills.length > essentialSkills.length && (
+                  <Box sx={{ mt: 2, display: { sm: 'none' } }}>
+                    <motion.div
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <Button
+                        variant="outlined"
                         color="primary"
+                        size="small"
+                        onClick={() => setShowAllSkills(!showAllSkills)}
                         sx={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: 1,
-                          '&::before': {
-                            content: '"✔"',
-                            color: 'primary.main',
-                          },
+                          fontSize: '0.75rem',
+                          padding: '4px 12px',
+                          minWidth: '120px',
+                          borderColor: 'rgba(100, 255, 218, 0.3)',
+                          '&:hover': {
+                            borderColor: 'primary.main',
+                            backgroundColor: 'rgba(100, 255, 218, 0.1)'
+                          }
                         }}
                       >
-                        {skill}
-                      </Typography>
-                    </Grid>
-                  ))}
-                </Grid>
+                        {showAllSkills ? 'Show Less' : 'Show More Skills'}
+                      </Button>
+                    </motion.div>
+                  </Box>
+                )}
               </Box>
 
               <Typography variant="body1" color="text.secondary" sx={{ mt: 4, mb: 2, fontSize: { xs: '0.9rem', sm: '1rem' } }}>

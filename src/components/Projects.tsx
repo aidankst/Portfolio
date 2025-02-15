@@ -7,7 +7,7 @@ const StyledSection = styled('section')(({ theme }) => ({
   minHeight: '100vh',
   display: 'flex',
   alignItems: 'center',
-  padding: theme.spacing(10, 2),
+  padding: theme.spacing(10, 1),
   [theme.breakpoints.up('md')]: {
     padding: theme.spacing(10, 0),
   },
@@ -91,7 +91,7 @@ const Projects = () => {
             gutterBottom
             sx={{
               display: 'flex',
-              alignItems: 'center',
+              alignItems: 'flex-start',
               gap: 2,
               mb: 6,
               '&::after': {
@@ -99,6 +99,7 @@ const Projects = () => {
                 flex: 1,
                 height: '1px',
                 background: 'rgba(100, 255, 218, 0.3)',
+                marginTop: '0.7em'
               },
             }}
           >

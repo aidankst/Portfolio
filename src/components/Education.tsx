@@ -7,9 +7,11 @@ const StyledSection = styled('section')(({ theme }) => ({
   minHeight: '60vh',
   display: 'flex',
   alignItems: 'center',
-  padding: theme.spacing(6, 2),
+  padding: theme.spacing(8, 1),
+  scrollMarginTop: '56px',
   [theme.breakpoints.up('md')]: {
-    padding: theme.spacing(6, 0),
+    padding: theme.spacing(15, 0),
+    scrollMarginTop: '64px'
   },
 }));
 

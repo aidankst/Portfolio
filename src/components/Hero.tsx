@@ -14,6 +14,8 @@ const StyledContainer = styled(Container)(({ theme }) => ({
     flexDirection: 'column-reverse',
     textAlign: 'center',
     paddingTop: '32px',
+    paddingLeft: '1rem',
+    paddingRight: '1rem',
     '& > div:last-child': {
       marginTop: '2rem'
     }

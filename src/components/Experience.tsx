@@ -6,7 +6,7 @@ const StyledSection = styled('section')(({ theme }) => ({
   minHeight: '100vh',
   display: 'flex',
   alignItems: 'center',
-  padding: theme.spacing(10, 2),
+  padding: theme.spacing(10, 1),
   [theme.breakpoints.up('md')]: {
     padding: theme.spacing(10, 0),
   },
@@ -100,12 +100,6 @@ const Experience = () => {
               alignItems: 'center',
               gap: 2,
               mb: 6,
-              '&::before': {
-                content: '""',
-                flex: 1,
-                height: '1px',
-                background: 'rgba(100, 255, 218, 0.3)',
-              },
               '&::after': {
                 content: '""',
                 flex: 1,

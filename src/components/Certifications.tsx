@@ -8,7 +8,7 @@ const StyledSection = styled('section')(({ theme }) => ({
   minHeight: '100vh',
   display: 'flex',
   alignItems: 'center',
-  padding: theme.spacing(10, 2),
+  padding: theme.spacing(10, 1),
   backgroundColor: theme.palette.background.default,
   [theme.breakpoints.up('md')]: {
     padding: theme.spacing(10, 0),
@@ -128,8 +128,7 @@ const Certifications = () => {
                 flex: 1,
                 height: '1px',
                 background: 'rgba(100, 255, 218, 0.3)',
-              },
-              '&::before': null
+              }
             }}
           >
             <span>Certifications</span>

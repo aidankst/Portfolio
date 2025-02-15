@@ -22,11 +22,12 @@ const NavItem = styled(motion.div)({
 
 const MobileDrawer = styled(Drawer)(() => ({
   '& .MuiDrawer-paper': {
-    width: '60%',
-    maxWidth: '300px',
+    width: '70%',
+    maxWidth: '320px',
     background: 'rgba(10, 25, 47, 0.95)',
-    backdropFilter: 'blur(10px)',
+    backdropFilter: 'blur(12px)',
     borderLeft: '1px solid rgba(100, 255, 218, 0.1)',
+    padding: '2rem 0',
   },
 }));
 
@@ -57,24 +58,29 @@ const Navbar = () => {
   };
 
   const drawer = (
-    <List sx={{ p: 2 }}>
+    <List sx={{ p: 3 }}>
       {navItems.map((item) => (
         <ListItem
           key={item}
           onClick={() => scrollToSection(item)}
           sx={{
-            mb: 1,
+            mb: 2,
+            borderRadius: 1,
+            transition: 'all 0.3s ease',
             '&:hover': {
-              backgroundColor: 'rgba(255, 255, 255, 0.1)',
+              backgroundColor: 'rgba(100, 255, 218, 0.1)',
+              transform: 'translateX(8px)',
             },
           }}
         >
           <ListItemText
             primary={item}
             sx={{
-              color: theme.palette.primary.main,
               '& .MuiTypography-root': {
                 fontSize: '1.1rem',
+                fontFamily: '"Roboto Mono", monospace',
+                color: '#64ffda',
+                transition: 'all 0.3s ease',
               },
             }}
           />
