@@ -90,11 +90,14 @@ const SkillChip = styled(motion.span)(({ theme }) => ({
   },
 }));
 
-const CertificationTitle = styled(Typography)(() => ({
-  color: theme => theme.palette.primary.main,
-  fontSize: { xs: '1.1rem', sm: '1.25rem' },
+const CertificationTitle = styled(Typography)(({ theme }) => ({
+  color: theme.palette.primary.main,
+  fontSize: '1.1rem',
+  [theme.breakpoints.up('sm')]: {
+    fontSize: '1.25rem',
+  },
   fontWeight: 600,
-  marginBottom: theme => theme.spacing(1),
+  marginBottom: theme.spacing(1),
   transition: 'color 0.3s ease',
   '&:hover': {
     color: '#64ffda',
@@ -219,12 +222,14 @@ const Certifications = () => {
                           >
                             Issued {cert.issueDate} · Credential ID {cert.credentialId}
                           </Typography>
-                          <Box sx={{
-                            display: 'flex',
-                            gap: 1,
-                            flexWrap: 'wrap',
-                            mt: 3,
-                          }}>
+                          <Box
+                            sx={{
+                              display: 'flex',
+                              gap: 1,
+                              flexWrap: 'wrap',
+                              mt: 3,
+                            }}
+                          >
                             {cert.skills.map((skill) => (
                               <SkillChip
                                 key={skill}
