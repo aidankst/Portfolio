@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { AppBar, Toolbar, Typography, IconButton, useTheme, useMediaQuery, List, ListItem, ListItemText } from '@mui/material';
+import { AppBar, Typography, IconButton, useTheme, useMediaQuery, List, ListItem, ListItemText } from '@mui/material';
 import { Menu as MenuIcon } from '@mui/icons-material';
 import { styled } from '@mui/material/styles';
 

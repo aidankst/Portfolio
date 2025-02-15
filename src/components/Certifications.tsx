@@ -90,11 +90,11 @@ const SkillChip = styled(motion.span)(({ theme }) => ({
   },
 }));
 
-const CertificationTitle = styled(Typography)(({ theme }) => ({
-  color: theme.palette.primary.main,
+const CertificationTitle = styled(Typography)(() => ({
+  color: theme => theme.palette.primary.main,
   fontSize: { xs: '1.1rem', sm: '1.25rem' },
   fontWeight: 600,
-  marginBottom: theme.spacing(1),
+  marginBottom: theme => theme.spacing(1),
   transition: 'color 0.3s ease',
   '&:hover': {
     color: '#64ffda',

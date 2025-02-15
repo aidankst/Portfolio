@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Typography, Container, Grid, Box, Link, IconButton } from '@mui/material';
+import { Typography, Container, Grid, Box, Link } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { GitHub as GitHubIcon, OpenInNew as OpenInNewIcon } from '@mui/icons-material';
 import aghLogo from '../assets/AGH_logo.png';
