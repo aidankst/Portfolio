@@ -1,8 +1,9 @@
 import { motion } from 'framer-motion';
-import { Typography, Container, Box, Grid, Paper } from '@mui/material';
+import { Typography, Container, Box, Grid, Paper, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import googleLogo from '../assets/google_logo.png';
 import ibmLogo from '../assets/ibm_logo.png';
+import { useState } from 'react';
 
 const StyledSection = styled('section')(({ theme }) => ({
   minHeight: '100vh',
@@ -105,6 +106,8 @@ const CertificationTitle = styled(Typography)(({ theme }) => ({
 }));
 
 const Certifications = () => {
+  const [expandedCompanies, setExpandedCompanies] = useState<Record<string, boolean>>({});
+
   const fadeInUp = {
     hidden: { opacity: 0, y: 60 },
     visible: {
@@ -120,30 +123,35 @@ const Certifications = () => {
         title: 'Analyze Data to Answer Questions',
         issueDate: 'Feb 2025',
         credentialId: 'E71T9UJOR0T8',
+        link: 'https://www.coursera.org/account/accomplishments/verify/E71T9UJOR0T8',
         skills: ['Data Aggregation', 'Spreadsheet', 'Data Analysis', 'Data Calculations', 'SQL'],
       },
       {
         title: 'Process Data from Dirty to Clean',
         issueDate: 'Jan 2025',
         credentialId: 'TMHFH9OBG1A7',
+        link: 'https://www.coursera.org/account/accomplishments/verify/TMHFH9OBG1A7',
         skills: ['Data Analysis', 'R Markdown', 'Data Visualization', 'R Programming', 'Rstudio'],
       },
       {
         title: 'Prepare Data for Exploration',
         issueDate: 'Jan 2025',
         credentialId: 'TJBBCL8WEPS9',
+        link: 'https://www.coursera.org/account/accomplishments/verify/TJBBCL8WEPS9',
         skills: ['Decision-Making', 'Spreadsheet', 'Data Analysis', 'Problem Solving', 'Questioning'],
       },
       {
         title: 'Ask Questions to Make Data-Driven Decisions',
         issueDate: 'Jan 2025',
         credentialId: 'TQOL78EMFEQ0',
+        link: 'https://www.coursera.org/account/accomplishments/verify/TQOL78EMFEQ0',
         skills: ['Decision-Making', 'Spreadsheets', 'Data Analysis', 'Problem Solving', 'Questioning'],
       },
       {
         title: 'Foundations: Data, Data, Everywhere',
         issueDate: 'Dec 2024',
         credentialId: '8MG2THRLCNHB',
+        link: 'https://www.coursera.org/account/accomplishments/verify/8MG2THRLCNHB',
         skills: ['Spreadsheets', 'Data Analysis', 'SQL', 'Data Visualization', 'Data Cleaning'],
       },
     ],
@@ -152,6 +160,7 @@ const Certifications = () => {
         title: 'Exploratory Data Analysis for Machine Learning',
         issueDate: 'Dec 2024',
         credentialId: 'KNYHNHNCTUQ4',
+        link: 'https://www.coursera.org/account/accomplishments/verify/KNYHNHNCTUQ4',
         skills: ['Artificial Intelligence (AI)', 'Machine Learning', 'Feature Engineering', 'Statistical Hypothesis Testing', 'Exploratory Data Analysis'],
       },
     ],
@@ -187,66 +196,128 @@ const Certifications = () => {
           </Typography>
 
           <Grid container spacing={4}>
-            {Object.entries(certifications).map(([company, certs]) => (
-              <Grid item xs={12} key={company}>
-                <Box sx={{ mb: 4, display: 'flex', justifyContent: 'center' }}>
-                  <CompanyLogo
-                    src={company === 'google' ? googleLogo : ibmLogo}
-                    alt={`${company.toUpperCase()} Logo`}
-                  />
-                </Box>
-                <Grid container spacing={3}>
-                  {certs.map((cert, index) => (
-                    <Grid item xs={12} md={6} key={cert.credentialId}>
-                      <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: index * 0.1 }}
-                      >
-                        <AchievementCard
-                          whileHover={{ scale: 1.02 }}
-                          transition={{ type: 'spring', stiffness: 300 }}
-                        >
-                          <CertificationTitle variant="h6">
-                            {cert.title}
-                          </CertificationTitle>
-                          <Typography
-                            variant="body2"
-                            color="text.secondary"
-                            sx={{
-                              mb: 2,
-                              opacity: 0.8,
-                              fontSize: { xs: '0.8rem', sm: '0.85rem' },
+            {Object.entries(certifications).map(([company, certs]) => {
+              const isExpanded = expandedCompanies[company] || false;
+              const visibleCerts = isExpanded ? certs : certs.slice(0, 4);
+              
+              return (
+                <Grid item xs={12} key={company}>
+                  <Box sx={{ mb: 4, display: 'flex', justifyContent: 'center' }}>
+                    <CompanyLogo
+                      src={company === 'google' ? googleLogo : ibmLogo}
+                      alt={`${company.toUpperCase()} Logo`}
+                    />
+                  </Box>
+                  <Box>
+                    <Grid container spacing={3}>
+                      {visibleCerts.map((cert, index) => (
+                        <Grid item xs={12} md={6} key={cert.credentialId}>
+                          <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: index * 0.1 }}
+                            style={{
+                              opacity: !isExpanded && index >= 4 ? 0.4 : 1,
+                              filter: !isExpanded && index >= 4 ? 'grayscale(80%)' : 'none',
+                              pointerEvents: !isExpanded && index >= 4 ? 'none' : 'auto',
+                              transition: 'all 0.3s ease',
                             }}
                           >
-                            Issued {cert.issueDate} · Credential ID {cert.credentialId}
-                          </Typography>
-                          <Box
-                            sx={{
-                              display: 'flex',
-                              gap: 1,
-                              flexWrap: 'wrap',
-                              mt: 3,
-                            }}
-                          >
-                            {cert.skills.map((skill) => (
-                              <SkillChip
-                                key={skill}
-                                whileHover={{ y: -2, scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
+                            <AchievementCard
+                              whileHover={{ scale: 1.02 }}
+                              transition={{ type: 'spring', stiffness: 300 }}
+                            >
+                              <CertificationTitle variant="h6">
+                                {cert.title}
+                              </CertificationTitle>
+                              <Typography
+                                variant="body2"
+                                color="text.secondary"
+                                sx={{
+                                  mb: 2,
+                                  opacity: 0.8,
+                                  fontSize: { xs: '0.8rem', sm: '0.85rem' },
+                                  display: 'flex',
+                                  alignItems: 'center',
+                                  justifyContent: 'center',
+                                  gap: 1.5,
+                                  flexWrap: 'wrap',
+                                  textAlign: 'center',
+                                }}
                               >
-                                {skill}
-                              </SkillChip>
-                            ))}
-                          </Box>
-                        </AchievementCard>
-                      </motion.div>
+                                Issued {cert.issueDate}
+                                {cert.credentialId !== '#' && (
+                                  <>
+                                    · Credential ID {cert.credentialId}
+                                  </>
+                                )}
+                                {cert.link !== '#' && (
+                                  <Button
+                                    variant="outlined"
+                                    size="small"
+                                    onClick={() => window.open(cert.link, '_blank')}
+                                    sx={{
+                                      py: 0.2,
+                                      px: 1.5,
+                                      fontSize: '0.75rem',
+                                      borderColor: 'rgba(100, 255, 218, 0.3)',
+                                      color: 'primary.main',
+                                      '&:hover': {
+                                        borderColor: '#64ffda',
+                                        backgroundColor: 'rgba(100, 255, 218, 0.05)',
+                                      },
+                                    }}
+                                  >
+                                    Verify ↗
+                                  </Button>
+                                )}
+                              </Typography>
+                              <Box
+                                sx={{
+                                  display: 'flex',
+                                  gap: 1,
+                                  flexWrap: 'wrap',
+                                  mt: 3,
+                                }}
+                              >
+                                {cert.skills.map((skill) => (
+                                  <SkillChip
+                                    key={skill}
+                                    whileHover={{ y: -2, scale: 1.05 }}
+                                    whileTap={{ scale: 0.95 }}
+                                  >
+                                    {skill}
+                                  </SkillChip>
+                                ))}
+                              </Box>
+                            </AchievementCard>
+                          </motion.div>
+                        </Grid>
+                      ))}
                     </Grid>
-                  ))}
+                  </Box>
+                  {certs.length > 4 && (
+                    <Box sx={{ display: 'flex', justifyContent: 'center', mt: 3 }}>
+                      <Button
+                        onClick={() => setExpandedCompanies(prev => ({ ...prev, [company]: !prev[company] }))}
+                        variant="outlined"
+                        color="primary"
+                        sx={{
+                          borderColor: 'rgba(100, 255, 218, 0.3)',
+                          '&:hover': {
+                            borderColor: '#64ffda',
+                            backgroundColor: 'rgba(100, 255, 218, 0.05)',
+                          },
+                        }}
+                      >
+                        {isExpanded ? 'Show Less' : `Show All ${certs.length} Certifications`}
+                      </Button>
+                    </Box>
+                  )}
                 </Grid>
-              </Grid>
-            ))}
+              );
+            })}
           </Grid>
         </motion.div>
       </Container>
