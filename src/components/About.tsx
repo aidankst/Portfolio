@@ -1,7 +1,8 @@
 import { motion } from 'framer-motion';
-import { Typography, Container, Box, Grid, Button } from '@mui/material';
+import { Typography, Container, Box, Grid, Button, useTheme } from '@mui/material';
 import { useState } from 'react';
 import { styled } from '@mui/material/styles';
+import { useMediaQuery } from '@mui/material';
 
 const StyledSection = styled('section')(({ theme }) => ({
   minHeight: '100vh',
@@ -15,6 +16,8 @@ const StyledSection = styled('section')(({ theme }) => ({
 
 const About = () => {
   const [showAllSkills, setShowAllSkills] = useState(false);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const fadeInUp = {
     hidden: { opacity: 0, y: 60 },
     visible: {
@@ -122,7 +125,7 @@ const About = () => {
                     transition={{ duration: 0.3 }}
                   >
                     <Grid container spacing={2}>
-                      {(showAllSkills ? skills : essentialSkills).map((skill) => (
+                      {(isMobile ? (showAllSkills ? skills : essentialSkills) : skills).map((skill) => (
                         <Grid item xs={12} sm={6} md={3} key={skill}>
                           <motion.div
                             initial={{ opacity: 0, y: 20 }}
