@@ -186,26 +186,55 @@ const About = () => {
                 Languages I speak:
               </Typography>
               <Grid container spacing={2}>
-                <Grid item xs={12} sm={6} md={3}>
-                  <Typography variant="body2" color="primary" sx={{ display: 'flex', alignItems: 'center', gap: 1, fontSize: { xs: '0.8rem', sm: '0.9rem' } }}>
-                    Burmese (Native)
-                  </Typography>
-                </Grid>
-                <Grid item xs={12} sm={6} md={3}>
-                  <Typography variant="body2" color="primary" sx={{ display: 'flex', alignItems: 'center', gap: 1, fontSize: { xs: '0.8rem', sm: '0.9rem' } }}>
-                    English (Advanced)
-                  </Typography>
-                </Grid>
-                <Grid item xs={12} sm={6} md={3}>
-                  <Typography variant="body2" color="primary" sx={{ display: 'flex', alignItems: 'center', gap: 1, fontSize: { xs: '0.8rem', sm: '0.9rem' } }}>
-                    Chinese (Beginner)
-                  </Typography>
-                </Grid>
-                <Grid item xs={12} sm={6} md={3}>
-                  <Typography variant="body2" color="primary" sx={{ display: 'flex', alignItems: 'center', gap: 1, fontSize: { xs: '0.8rem', sm: '0.9rem' } }}>
-                    Polish (Beginner)
-                  </Typography>
-                </Grid>
+                {[
+                  { lang: 'Burmese', level: 'Native', flag: '🇲🇲' },
+                  { lang: 'English', level: 'Advanced', flag: '🇬🇧' },
+                  { lang: 'Chinese', level: 'Beginner', flag: '🇨🇳' },
+                  { lang: 'Polish', level: 'Beginner', flag: '🇵🇱' },
+                ].map((language, index) => (
+                  <Grid item xs={6} sm={3} key={index}>
+                    <motion.div
+                      whileHover={{ y: -4, scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      style={{ width: '100%' }}
+                    >
+                      <Box
+                        sx={{
+                          p: 1.5,
+                          borderRadius: 4,
+                          border: '1px solid rgba(100, 255, 218, 0.2)',
+                          background: 'rgba(100, 255, 218, 0.03)',
+                          backdropFilter: 'blur(8px)',
+                          transition: 'all 0.3s ease',
+                          '&:hover': {
+                            background: 'rgba(100, 255, 218, 0.08)',
+                            borderColor: 'rgba(100, 255, 218, 0.4)',
+                          },
+                        }}
+                      >
+                        <Typography variant="body2" color="primary" sx={{ 
+                          display: 'flex', 
+                          alignItems: 'center', 
+                          gap: 1.5,
+                          fontSize: { xs: '0.8rem', sm: '0.9rem' }
+                        }}>
+                          <span style={{ fontSize: '1.2em' }}>{language.flag}</span>
+                          <Box>
+                            <div>{language.lang}</div>
+                            <div style={{ 
+                              fontSize: '0.75em',
+                              opacity: 0.8,
+                              lineHeight: 1.2,
+                              marginTop: 2
+                            }}>
+                              {language.level}
+                            </div>
+                          </Box>
+                        </Typography>
+                      </Box>
+                    </motion.div>
+                  </Grid>
+                ))}
               </Grid>
             </Grid>
           </Grid>

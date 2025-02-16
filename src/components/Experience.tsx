@@ -62,13 +62,18 @@ const ExperienceCard = styled(motion(Paper))(({ theme }) => ({
 
 const AchievementChip = styled(Chip)(({ theme }) => ({
   margin: theme.spacing(0.5),
-  background: 'rgba(100, 255, 218, 0.05)',
-  border: '1px solid rgba(100, 255, 218, 0.2)',
+  background: 'rgba(100, 255, 218, 0.03)',
+  border: '1px solid rgba(100, 255, 218, 0.15)',
   color: theme.palette.primary.main,
-  transition: 'all 0.3s ease',
+  backdropFilter: 'blur(8px)',
+  WebkitBackdropFilter: 'blur(8px)',
+  transition: 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
+  boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)',
   '&:hover': {
-    background: 'rgba(100, 255, 218, 0.1)',
-    transform: 'translateY(-2px)',
+    background: 'rgba(100, 255, 218, 0.08)',
+    transform: 'translateY(-4px) scale(1.05)',
+    boxShadow: '0 8px 16px rgba(100, 255, 218, 0.15)',
+    border: '1px solid rgba(100, 255, 218, 0.3)',
   },
 }));
 
@@ -82,6 +87,12 @@ const CompanyLogo = styled('img')(({ theme }) => ({
   width: 'auto',
   height: '40px',
   marginBottom: theme.spacing(2),
+  opacity: 0.8,
+  transition: 'all 0.3s ease',
+  '&:hover': {
+    opacity: 1,
+    transform: 'scale(1.05)',
+  },
 }));
 
 const Experience = () => {
@@ -190,6 +201,17 @@ const Experience = () => {
                       </Typography>
                       <Typography variant="subtitle1" color="text.secondary" sx={{ fontSize: { xs: '0.9rem', sm: '1rem' } }}>
                         {exp.company}
+                      </Typography>
+                      <Typography variant="subtitle2" color="text.secondary" sx={{ fontSize: { xs: '0.85rem', sm: '0.9rem' }, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 1 }}>
+                        {exp.company === 'AGH University of Science and Technology' ? (
+                          <>
+                            🇵🇱 🇪🇺 Krakow, Poland
+                          </>
+                        ) : exp.company === 'NUG - Volunteer' ? (
+                          <>Remote 🌐</>
+                        ) : (
+                          <>🇲🇲 Yangon, Myanmar</>
+                        )}
                       </Typography>
                       <Typography variant="subtitle2" color="text.secondary" sx={{ fontSize: { xs: '0.85rem', sm: '0.9rem' } }}>
                         {exp.period}
