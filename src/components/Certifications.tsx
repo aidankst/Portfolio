@@ -107,18 +107,18 @@ const CertificationTitle = styled(Typography)(({ theme }) => ({
   },
 }));
 
-const SingleCertCard = styled(AchievementCard)(({ theme }) => ({
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  '& .company-logo': {
-    marginBottom: theme.spacing(3),
-    height: '60px',
-    [theme.breakpoints.up('sm')]: {
-      height: '70px',
-    },
-  },
-}));
+// const SingleCertCard = styled(AchievementCard)(({ theme }) => ({
+//   display: 'flex',
+//   flexDirection: 'column',
+//   alignItems: 'center',
+//   '& .company-logo': {
+//     marginBottom: theme.spacing(3),
+//     height: '60px',
+//     [theme.breakpoints.up('sm')]: {
+//       height: '70px',
+//     },
+//   },
+// }));
 
 const CertBadge = styled('img')(({ theme }) => ({
   width: '100px',
