@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { AppBar, Typography, IconButton, useTheme, useMediaQuery, List, ListItem, ListItemText } from '@mui/material';
+import { AppBar, Typography, IconButton, useTheme, useMediaQuery, List, ListItem, ListItemText, Box } from '@mui/material';
 import { Menu as MenuIcon } from '@mui/icons-material';
 import { styled } from '@mui/material/styles';
 
@@ -18,14 +18,14 @@ const NavContainer = styled('div')(({ theme }) => ({
   backdropFilter: 'blur(10px)',
   WebkitBackdropFilter: 'blur(10px)',
   borderRadius: '50px',
-  padding: theme.spacing(1, 4),
+  padding: theme.spacing(1, 3),
   border: '1px solid rgba(100, 255, 218, 0.1)',
   boxShadow: '0 10px 30px -10px rgba(0, 0, 0, 0.3)',
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
   width: 'auto',
-  maxWidth: '85%',
+  maxWidth: '90%',
   margin: '0 auto',
   transition: 'all 0.3s ease',
   '& > *:not(:last-child)': {
@@ -34,6 +34,10 @@ const NavContainer = styled('div')(({ theme }) => ({
   '&:hover': {
     boxShadow: '0 20px 40px -20px rgba(0, 0, 0, 0.4)',
     transform: 'translateY(2px)',
+  },
+  [theme.breakpoints.down('lg')]: {
+    maxWidth: '95%',
+    padding: theme.spacing(1, 2)
   },
 }));
 
@@ -116,6 +120,16 @@ const Navbar = () => {
     }
   };
 
+  const scrollToHero = () => {
+    const heroSection = document.getElementById('hero');
+    if (heroSection) {
+      heroSection.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  };
+
   const menuVariants = {
     open: {
       opacity: 1,
@@ -166,7 +180,17 @@ const Navbar = () => {
   return (
     <StyledAppBar position="fixed">
       <NavContainer style={{ background: isScrolled ? 'rgba(10, 25, 47, 0.95)' : 'rgba(10, 25, 47, 0.85)' }}>
-        <Typography variant="h6" component={motion.div} whileHover={{ scale: 1.05 }}>
+        <Typography
+          variant="h6"
+          component="div"
+          onClick={scrollToHero}
+          sx={{
+            cursor: 'pointer',
+            '&:hover': {
+              color: '#64ffda'
+            }
+          }}
+        >
           Kaung Sithu
         </Typography>
         
@@ -229,18 +253,24 @@ const Navbar = () => {
             </AnimatePresence>
           </>
         ) : (
-          <motion.div style={{ display: 'flex', gap: '20px' }}>
+          <Box component={motion.div} sx={{ 
+            display: 'flex', 
+            gap: { xs: '15px', lg: '20px' }
+          }}>
             {navItems.map((item) => (
               <NavItem
                 key={item}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => scrollToSection(item)}
+                sx={{
+                  fontSize: { md: '0.9rem', lg: '1rem' }
+                }}
               >
                 <Typography>{item}</Typography>
               </NavItem>
             ))}            
-          </motion.div>
+          </Box>
         )}
       </NavContainer>
     </StyledAppBar>

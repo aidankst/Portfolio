@@ -212,12 +212,17 @@ const About = () => {
                           },
                         }}
                       >
-                        <Typography variant="body2" color="primary" sx={{ 
-                          display: 'flex', 
-                          alignItems: 'center', 
-                          gap: 1.5,
-                          fontSize: { xs: '0.8rem', sm: '0.9rem' }
-                        }}>
+                        <Typography 
+                          component="div"
+                          variant="body2" 
+                          color="primary" 
+                          sx={{ 
+                            display: 'flex', 
+                            alignItems: 'center', 
+                            gap: 1.5,
+                            fontSize: { xs: '0.8rem', sm: '0.9rem' }
+                          }}
+                        >
                           <span style={{ fontSize: '1.2em' }}>{language.flag}</span>
                           <Box>
                             <div>{language.lang}</div>
