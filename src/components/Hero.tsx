@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { Typography, Container, Box } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import profilePhoto from '../assets/kst.png';
+import { GitHub as GitHubIcon, LinkedIn as LinkedInIcon } from '@mui/icons-material';
 
 const StyledContainer = styled(Container)(({ theme }) => ({
   minHeight: '100vh',
@@ -150,12 +151,14 @@ const Hero = () => {
               rel="noopener noreferrer"
               style={{
                 textDecoration: 'none',
-                color: 'inherit',
+                color: '#333333',
                 backgroundColor: 'transparent',
                 border: '2px solid #64ffda',
                 padding: '12px 24px',
                 borderRadius: '8px',
-                display: 'inline-block',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '10px',
                 transition: 'all 0.3s ease'
               }}
               whileHover={{
@@ -164,7 +167,7 @@ const Hero = () => {
               }}
               whileTap={{ scale: 0.95 }}
             >
-              Check out my GitHub
+              <GitHubIcon sx={{ color: '#333333' }} /> GitHub
             </motion.a>
           </motion.div>
           <motion.div variants={itemVariants}>
@@ -174,12 +177,14 @@ const Hero = () => {
               rel="noopener noreferrer"
               style={{
                 textDecoration: 'none',
-                color: 'inherit',
+                color: '#0A66C2',
                 backgroundColor: 'transparent',
                 border: '2px solid #64ffda',
                 padding: '12px 24px',
                 borderRadius: '8px',
-                display: 'inline-block',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '10px',
                 transition: 'all 0.3s ease'
               }}
               whileHover={{
@@ -188,7 +193,7 @@ const Hero = () => {
               }}
               whileTap={{ scale: 0.95 }}
             >
-              Connect on LinkedIn
+              <LinkedInIcon sx={{ color: '#0A66C2' }} /> LinkedIn
             </motion.a>
           </motion.div>
         </Box>
