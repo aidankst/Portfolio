@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { AppBar, Typography, IconButton, useTheme, useMediaQuery, List, ListItem, ListItemText, Box } from '@mui/material';
 import { Menu as MenuIcon } from '@mui/icons-material';
 import { styled } from '@mui/material/styles';
+import ThemeToggle from './ThemeToggle';
 
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
   background: 'transparent',
@@ -45,8 +46,11 @@ const NavItem = styled(motion.div)({
   cursor: 'pointer',
   padding: '8px 16px',
   borderRadius: '4px',
+  color: '#ffffff',
+  transition: 'all 0.3s ease',
   '&:hover': {
-    background: 'rgba(255, 255, 255, 0.1)',
+    background: 'rgba(100, 255, 218, 0.1)',
+    color: '#64ffda',
   },
 });
 
@@ -186,6 +190,7 @@ const Navbar = () => {
           onClick={scrollToHero}
           sx={{
             cursor: 'pointer',
+            color: '#ffffff',
             '&:hover': {
               color: '#64ffda'
             }
@@ -194,24 +199,29 @@ const Navbar = () => {
           Kaung Sithu
         </Typography>
         
+        {!isMobile && <ThemeToggle />}
+        
         {isMobile ? (
           <>
-            <IconButton
-              color="inherit"
-              onClick={() => setMobileOpen(!mobileOpen)}
-              edge="end"
-              aria-label="menu"
-              sx={{
-                position: 'relative',
-                transform: mobileOpen ? 'rotate(90deg)' : 'none',
-                transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                '&:hover': {
-                  background: 'rgba(100, 255, 218, 0.1)'
-                }
-              }}
-            >
-              <MenuIcon />
-            </IconButton>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+              <ThemeToggle />
+              <IconButton
+                color="inherit"
+                onClick={() => setMobileOpen(!mobileOpen)}
+                edge="end"
+                aria-label="menu"
+                sx={{
+                  position: 'relative',
+                  transform: mobileOpen ? 'rotate(90deg)' : 'none',
+                  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                  '&:hover': {
+                    background: 'rgba(100, 255, 218, 0.1)'
+                  }
+                }}
+              >
+                <MenuIcon />
+              </IconButton>
+            </Box>
             <AnimatePresence>
               {mobileOpen && (
                 <MobileMenu

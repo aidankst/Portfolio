@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Typography, Container, Box } from '@mui/material';
+import { Typography, Container, Box, useTheme } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import profilePhoto from '../assets/kst.png';
 import { GitHub as GitHubIcon, LinkedIn as LinkedInIcon } from '@mui/icons-material';
@@ -11,6 +11,9 @@ const StyledContainer = styled(Container)(({ theme }) => ({
   justifyContent: 'space-between',
   paddingTop: '54px',
   gap: '2rem',
+  color: theme.palette.text.primary,
+  background: theme.palette.background.default,
+  transition: 'all 0.3s ease',
   [theme.breakpoints.down('md')]: {
     flexDirection: 'column-reverse',
     textAlign: 'center',
@@ -30,8 +33,9 @@ const StyledContainer = styled(Container)(({ theme }) => ({
 const ProfileImage = styled(motion.img)(({ theme }) => ({
   borderRadius: '50%',
   objectFit: 'cover',
-  border: '2px solid #64ffda',
+  border: `2px solid ${theme.palette.primary.main}`,
   padding: '5px',
+  transition: 'all 0.3s ease',
   [theme.breakpoints.down('sm')]: {
     width: '200px',
     height: '200px'
@@ -46,7 +50,31 @@ const ProfileImage = styled(motion.img)(({ theme }) => ({
   }
 }));
 
+const SocialButton = styled(motion.a)(({ theme }) => ({
+  textDecoration: 'none',
+  backgroundColor: 'rgba(100, 255, 218, 0)',
+  border: `2px solid ${theme.palette.primary.main}`,
+  padding: '12px 24px',
+  borderRadius: '8px',
+  display: 'inline-flex',
+  alignItems: 'center',
+  gap: '10px',
+  transition: 'all 0.3s ease',
+  color: theme.palette.mode === 'light' 
+    ? theme.palette.primary.main    // Blue in light mode
+    : theme.palette.text.primary,   // Light slate in dark mode
+  '&:hover': {
+    backgroundColor: theme.palette.primary.light,
+    transform: 'translateY(-2px)',
+    boxShadow: theme.palette.mode === 'light'
+      ? '0 4px 20px rgba(14, 165, 233, 0.15)'
+      : '0 4px 20px rgba(100, 255, 218, 0.15)',
+  }
+}));
+
 const Hero = () => {
+  const theme = useTheme();
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -82,7 +110,10 @@ const Hero = () => {
               variant="subtitle1"
               color="primary"
               gutterBottom
-              sx={{ fontFamily: '"Roboto Mono", monospace' }}
+              sx={{ 
+                fontFamily: '"Roboto Mono", monospace',
+                color: theme.palette.primary.main 
+              }}
             >
               Hi, my name is
             </Typography>
@@ -93,7 +124,8 @@ const Hero = () => {
               variant="h2"
               sx={{
                 fontSize: { xs: '2rem', sm: '2.5rem', md: '3.75rem' },
-                fontWeight: 'bold'
+                fontWeight: 'bold',
+                color: theme.palette.text.primary
               }}
               component="h1"
               gutterBottom
@@ -105,9 +137,11 @@ const Hero = () => {
           <motion.div variants={itemVariants}>
             <Typography
               variant="h3"
-              color="text.secondary"
               gutterBottom
-              sx={{ mb: 4 }}
+              sx={{ 
+                mb: 4,
+                color: theme.palette.text.secondary
+              }}
             >
               I turn data into actionable insights.
             </Typography>
@@ -152,8 +186,8 @@ const Hero = () => {
                 rel="noopener noreferrer"
                 style={{
                   textDecoration: 'none',
-                  color: '#333333',
-                  backgroundColor: 'transparent',
+                  color: theme.palette.mode === 'light' ? '#333333' : '#64ffda',
+                  backgroundColor: 'rgba(100, 255, 218, 0)',
                   border: '2px solid #64ffda',
                   padding: '12px 24px',
                   borderRadius: '8px',
@@ -168,7 +202,12 @@ const Hero = () => {
                 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <GitHubIcon sx={{ color: '#333333' }} /> GitHub
+                <GitHubIcon sx={{ 
+                  color: theme.palette.mode === 'light'
+                    ? '#24292f'  // GitHub's original color
+                    : '#64ffda',
+                  transition: 'color 0.3s ease'
+                }} /> GitHub
               </motion.a>
             </motion.div>
             <motion.div variants={itemVariants}>
@@ -178,8 +217,8 @@ const Hero = () => {
                 rel="noopener noreferrer"
                 style={{
                   textDecoration: 'none',
-                  color: '#0A66C2',
-                  backgroundColor: 'transparent',
+                  color: theme.palette.mode === 'light' ? theme.palette.primary.main : '#64ffda',
+                  backgroundColor: 'rgba(100, 255, 218, 0)',
                   border: '2px solid #64ffda',
                   padding: '12px 24px',
                   borderRadius: '8px',
@@ -194,7 +233,12 @@ const Hero = () => {
                 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <LinkedInIcon sx={{ color: '#0A66C2' }} /> LinkedIn
+                <LinkedInIcon sx={{ 
+                  color: theme.palette.mode === 'light'
+                    ? theme.palette.primary.main
+                    : '#64ffda',
+                  transition: 'color 0.3s ease'
+                }} /> LinkedIn
               </motion.a>
             </motion.div>
           </Box>

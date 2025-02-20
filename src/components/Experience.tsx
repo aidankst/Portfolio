@@ -84,9 +84,13 @@ const CompanyIcon = styled(WorkIcon)(({ theme }) => ({
 }));
 
 const CompanyLogo = styled('img')(({ theme }) => ({
-  width: 'auto',
+  maxWidth: '100px',
   height: '40px',
   marginBottom: theme.spacing(2),
+  backgroundColor: theme.palette.mode === 'dark' ? '#ffffff' : 'transparent',
+  padding: 0,
+  display: 'inline-block',
+  borderRadius: '4px',
   opacity: 0.8,
   transition: 'all 0.3s ease',
   '&:hover': {

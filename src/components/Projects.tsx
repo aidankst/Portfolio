@@ -64,7 +64,11 @@ const ProjectLogo = styled('img')(({ theme }) => ({
   width: 'auto',
   height: '40px',
   marginBottom: theme.spacing(2),
-  opacity: 0.9,
+  backgroundColor: theme.palette.mode === 'dark' ? '#ffffff' : 'transparent',
+  padding: 0,
+  display: 'inline-block',
+  borderRadius: '4px',
+  opacity: 0.8,
   transition: 'all 0.3s ease',
   '&:hover': {
     opacity: 1,

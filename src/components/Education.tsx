@@ -3,10 +3,29 @@ import { Typography, Container, Box, Paper, Grid } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import aghLogo from '../assets/AGH_logo.png';
 
-const EducationSection = styled('section')(({ theme }) => ({
-  padding: theme.spacing(8, 0),
-  backgroundColor: theme.palette.background.default,
-  scrollMarginTop: '64px',
+const StyledSection = styled('section')(({ theme }) => ({
+  minHeight: '100vh',
+  display: 'flex',
+  alignItems: 'center',
+  padding: theme.spacing(10, 1),
+  position: 'relative',
+  overflow: 'hidden',
+  background: theme.palette.background.default,
+  color: theme.palette.text.primary,
+  transition: 'all 0.3s ease',
+  '&::before': {
+    content: '""',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    background: 'radial-gradient(circle at 50% 50%, rgba(100, 255, 218, 0.03) 0%, rgba(10, 25, 47, 0) 50%)',
+    pointerEvents: 'none',
+  },
+  [theme.breakpoints.up('md')]: {
+    padding: theme.spacing(10, 0),
+  },
 }));
 
 const EducationCard = styled(motion(Paper))(({ theme }) => ({
@@ -42,9 +61,12 @@ const EducationCard = styled(motion(Paper))(({ theme }) => ({
 }));
 
 const InstitutionLogo = styled('img')(({ theme }) => ({
-  height: 60,
-  width: 'auto',
-  marginBottom: theme.spacing(3),
+  maxWidth: '120px',
+  marginBottom: theme.spacing(2),
+  backgroundColor: theme.palette.mode === 'dark' ? '#ffffff' : 'transparent',
+  padding: 0,
+  display: 'inline-block',
+  borderRadius: '4px',
   opacity: 0.8,
   transition: 'all 0.3s ease',
   [theme.breakpoints.up('sm')]: {
@@ -73,7 +95,7 @@ const cardVariants = {
 
 const Education = () => {
   return (
-    <EducationSection id="education">
+    <StyledSection id="education">
       <Container>
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -112,7 +134,16 @@ const Education = () => {
           >
             <Box sx={{ textAlign: 'center', mb: 4 }}>
               <InstitutionLogo src={aghLogo} alt="AGH University" />
-              <Typography variant="h5" component="h3" sx={{ mb: 1 }}>
+              <Typography
+                variant="h5"
+                sx={{
+                  color: '##0066cc',
+                  transition: 'color 0.3s ease',
+                  '&:hover': {
+                    color: '#64ffda'
+                  }
+                }}
+              >
                 AGH University of Science and Technology
               </Typography>
               <Typography variant="body2" color="text.secondary" sx={{ 
@@ -203,7 +234,7 @@ const Education = () => {
           </EducationCard>
         </motion.div>
       </Container>
-    </EducationSection>
+    </StyledSection>
   );
 };
 
