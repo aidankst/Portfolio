@@ -8,8 +8,7 @@ const StyledSection = styled('section')(({ theme }) => ({
   minHeight: '100vh',
   display: 'flex',
   alignItems: 'center',
-  padding: theme.spacing(10, 1),
-  // padding: 0,
+  padding: theme.spacing(4, 1),
   position: 'relative',
   overflow: 'hidden',
   '&::before': {
@@ -41,13 +40,17 @@ const TimelineConnector = styled('div')(({ theme }) => ({
 
 const ExperienceCard = styled(Box)(({ theme }) => ({
   position: 'relative',
-  marginBottom: theme.spacing(8),
+  marginBottom: theme.spacing(4),
   padding: theme.spacing(3),
   marginLeft: 0,
   background: theme.palette.mode === 'light' ? '#ffffff' : theme.palette.background.paper,
   borderRadius: theme.spacing(2),
   boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.1)',
   transition: 'all 0.3s ease',
+  [theme.breakpoints.down('sm')]: {
+    padding: theme.spacing(2),
+    marginBottom: theme.spacing(3),
+  },
   '&:hover': {
     transform: 'translateY(-4px)',
     boxShadow: '0px 8px 30px rgba(0, 0, 0, 0.15)',
@@ -210,6 +213,7 @@ const Experience = () => {
               alignItems: 'center',
               gap: 2,
               mb: 6,
+              fontSize: { xs: '1.75rem', sm: '2rem', md: '2.125rem' },
               '&::after': {
                 content: '""',
                 flex: 1,
@@ -235,11 +239,12 @@ const Experience = () => {
                 <ExperienceCard>
                   {/* Company Header */}
                   <Box sx={{ 
-                    display: 'flex', 
-                    alignItems: 'center', 
+                    display: 'flex',
                     gap: 2, 
                     mb: 3,
                     pb: 2,
+                    flexDirection: { xs: 'column', sm: 'row' },
+                    alignItems: { xs: 'flex-start', sm: 'center' },
                     borderBottom: '1px solid rgba(100, 255, 218, 0.2)'
                   }}>
                     {positions[0].company === 'AGH University of Science and Technology' ? (
@@ -254,7 +259,13 @@ const Experience = () => {
                       <Typography 
                         variant="subtitle2" 
                         color="text.secondary"
-                        sx={{ display: 'flex', alignItems: 'center', gap: 1 }}
+                        sx={{ 
+                          display: 'flex', 
+                          alignItems: 'center', 
+                          gap: 1,
+                          textAlign: { xs: 'center', sm: 'left' },
+                          justifyContent: { xs: 'center', sm: 'flex-start' }
+                        }}
                       >
                         {positions[0].company === 'AGH University of Science and Technology'
                           ? '🇵🇱 🇪🇺 Krakow, Poland'
@@ -280,7 +291,9 @@ const Experience = () => {
                         display: 'flex', 
                         justifyContent: 'space-between', 
                         alignItems: 'flex-start',
-                        mb: 1 
+                        mb: { xs: 2, sm: 1 },
+                        flexDirection: { xs: 'column', sm: 'row' },
+                        gap: { xs: 1, sm: 0 }
                       }}>
                         <Typography 
                           variant="subtitle1" 
@@ -309,6 +322,7 @@ const Experience = () => {
                               display: 'flex',
                               mb: 1.5,
                               lineHeight: 1.7,
+                              fontSize: { xs: '0.9rem', sm: '0.95rem' },
                               alignItems: 'flex-start',
                               '&:before': {
                                 content: '"•"',
@@ -324,7 +338,7 @@ const Experience = () => {
                           </Typography>
                         ))}
                       </Box>
-                      <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+                      <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, '& .MuiChip-root': { fontSize: { xs: '0.7rem', sm: '0.8rem' } } }}>
                         {exp.skills.map((skill, i) => (
                           <AchievementChip 
                             key={i} 
