@@ -50,27 +50,27 @@ const ProfileImage = styled(motion.img)(({ theme }) => ({
   }
 }));
 
-const SocialButton = styled(motion.a)(({ theme }) => ({
-  textDecoration: 'none',
-  backgroundColor: 'rgba(100, 255, 218, 0)',
-  border: `2px solid ${theme.palette.primary.main}`,
-  padding: '12px 24px',
-  borderRadius: '8px',
-  display: 'inline-flex',
-  alignItems: 'center',
-  gap: '10px',
-  transition: 'all 0.3s ease',
-  color: theme.palette.mode === 'light' 
-    ? theme.palette.primary.main    // Blue in light mode
-    : theme.palette.text.primary,   // Light slate in dark mode
-  '&:hover': {
-    backgroundColor: theme.palette.primary.light,
-    transform: 'translateY(-2px)',
-    boxShadow: theme.palette.mode === 'light'
-      ? '0 4px 20px rgba(14, 165, 233, 0.15)'
-      : '0 4px 20px rgba(100, 255, 218, 0.15)',
-  }
-}));
+// const SocialButton = styled(motion.a)(({ theme }) => ({
+//   textDecoration: 'none',
+//   backgroundColor: 'rgba(100, 255, 218, 0)',
+//   border: `2px solid ${theme.palette.primary.main}`,
+//   padding: '12px 24px',
+//   borderRadius: '8px',
+//   display: 'inline-flex',
+//   alignItems: 'center',
+//   gap: '10px',
+//   transition: 'all 0.3s ease',
+//   color: theme.palette.mode === 'light' 
+//     ? theme.palette.primary.main    // Blue in light mode
+//     : theme.palette.text.primary,   // Light slate in dark mode
+//   '&:hover': {
+//     backgroundColor: theme.palette.primary.light,
+//     transform: 'translateY(-2px)',
+//     boxShadow: theme.palette.mode === 'light'
+//       ? '0 4px 20px rgba(14, 165, 233, 0.15)'
+//       : '0 4px 20px rgba(100, 255, 218, 0.15)',
+//   }
+// }));
 
 const Hero = () => {
   const theme = useTheme();
