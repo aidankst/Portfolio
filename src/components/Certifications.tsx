@@ -181,6 +181,13 @@ const Certifications = () => {
   const certifications = {
     google: [
       {
+        title: 'Share Data Through the Art of Visualization',
+        issueDate: 'Feb 2025',
+        credentialId: '67JLUGMS70F8',
+        link: 'https://www.coursera.org/account/accomplishments/verify/67JLUGMS70F8',
+        skills: ['Data Analysis', 'Tableau Software', 'Data Visualization', 'Presentation'],
+      },
+      {
         title: 'Analyze Data to Answer Questions',
         issueDate: 'Feb 2025',
         credentialId: 'E71T9UJOR0T8',
