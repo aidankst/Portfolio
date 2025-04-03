@@ -181,6 +181,20 @@ const Certifications = () => {
   const certifications = {
     google: [
       {
+        title: 'Google Data Analytics Professional Certificate',
+        issueDate: 'April 2025',
+        credentialId: 'JS5MOS9SOV3D',
+        link: 'https://www.coursera.org/account/accomplishments/verify/JS5MOS9SOV3D',
+        skills: ['Data Analysis', 'SQL', 'Spreadsheets', 'Data Management'],
+      },
+      {
+        title: 'Data Analysis with R Programming',
+        issueDate: 'April 2025',
+        credentialId: '8OJSFHYC6HHW',
+        link: 'https://www.coursera.org/account/accomplishments/verify/8OJSFHYC6HHW',
+        skills: ['Data Analysis', 'R Markdown', 'Data Visualization', 'R Programming', 'Rstudio'],
+      },
+      {
         title: 'Share Data Through the Art of Visualization',
         issueDate: 'Feb 2025',
         credentialId: '67JLUGMS70F8',
