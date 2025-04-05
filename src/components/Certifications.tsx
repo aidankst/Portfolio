@@ -239,6 +239,13 @@ const Certifications = () => {
     ],
     ibm: [
       {
+        title: 'Introduction to Software Engineering',
+        issueDate: 'April 2025',
+        credentialId: 'ZFYVMCALGRSR',
+        link: 'https://www.coursera.org/account/accomplishments/verify/ZFYVMCALGRSR',
+        skills: ['Software Architecture', 'Programming Principles', 'Agile and Scrum', 'Software Engineering', 'Software Development Lifecycle (SDLC)'],
+      },
+      {
         title: 'Exploratory Data Analysis for Machine Learning',
         issueDate: 'Dec 2024',
         credentialId: 'KNYHNHNCTUQ4',
