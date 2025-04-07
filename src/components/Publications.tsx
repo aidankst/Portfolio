@@ -99,18 +99,6 @@ const PublicationTag = styled(motion.span)(({ theme }) => ({
   },
 }));
 
-const PublicationLink = styled(Link)(({ theme }) => ({
-  color: theme.palette.primary.main,
-  display: 'inline-flex',
-  alignItems: 'center',
-  gap: theme.spacing(0.5),
-  textDecoration: 'none',
-  transition: 'all 0.3s ease',
-  '&:hover': {
-    color: '#64ffda',
-    textDecoration: 'none',
-  },
-}));
 
 const Publications = () => {
   const fadeInUp = {
