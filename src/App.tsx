@@ -5,6 +5,7 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
 import Education from './components/Education';
+import Publications from './components/Publications';
 import Certifications from './components/Certifications';
 import Experience from './components/Experience';
 import Projects from './components/Projects';
@@ -75,6 +76,7 @@ const ThemedApp = () => {
           <About />
           <Experience />
           <Education />
+          <Publications />
           <Certifications />
           <Projects />
           <Contact />
