@@ -1,20 +1,9 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Typography, Box, Link, Container } from '@mui/material';
-import { styled, keyframes } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import { GitHub as GitHubIcon, Launch as LaunchIcon, Code as CodeIcon, Web as WebIcon, Storage as DatabaseIcon, School as EducationIcon } from '@mui/icons-material';
 import aghLogo from '../assets/AGH_logo.png';
-
-// Keyframe animations
-const shimmer = keyframes`
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
-`;
-
-const float = keyframes`
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-`;
 
 // Styled components
 const ProjectsSection = styled('section')(({ theme }) => ({
@@ -25,7 +14,7 @@ const ProjectsSection = styled('section')(({ theme }) => ({
   alignItems: 'center',
 }));
 
-const ProjectsContent = styled(Box)(({ theme }) => ({
+const ProjectsContent = styled(Box)(({ }) => ({
   maxWidth: '1200px',
   margin: '0 auto',
   width: '100%',

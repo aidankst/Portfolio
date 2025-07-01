@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, Box, Grid, Chip } from '@mui/material';
+import { Typography, Box } from '@mui/material';
 import { styled, keyframes } from '@mui/material/styles';
 import { motion } from 'framer-motion';
 
@@ -75,30 +75,6 @@ const skillCategories = [
     ]
   }
 ];
-
-// Keyframe animations
-const skillsGradientPulse = keyframes`
-  0%, 100% {
-    transform: scale(1) rotate(0deg);
-    opacity: 0.45;
-    filter: saturate(1);
-  }
-  25% {
-    transform: scale(1.02) rotate(1deg);
-    opacity: 0.6;
-    filter: saturate(1.2);
-  }
-  50% {
-    transform: scale(1.06) rotate(0deg);
-    opacity: 0.75;
-    filter: saturate(0.8);
-  }
-  75% {
-    transform: scale(1.04) rotate(-1deg);
-    opacity: 0.55;
-    filter: saturate(1.1);
-  }
-`;
 
 const shimmer = keyframes`
   0% {
