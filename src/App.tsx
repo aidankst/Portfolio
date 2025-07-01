@@ -9,6 +9,7 @@ import Publications from './components/Publications';
 import Certifications from './components/Certifications';
 import Experience from './components/Experience';
 import Projects from './components/Projects';
+import Skills from './components/Skills';
 import Contact from './components/Contact';
 import { ThemeProvider as CustomThemeProvider, useTheme } from './context/ThemeContext';
 import styled from '@emotion/styled';
@@ -79,6 +80,7 @@ const ThemedApp = () => {
           <Publications />
           <Certifications />
           <Projects />
+          <Skills />
           <Contact />
         </main>
       </ThemeTransitionRoot>

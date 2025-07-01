@@ -1,10 +1,10 @@
 import { motion } from 'framer-motion';
-import { Typography, Container, Box, useTheme } from '@mui/material';
+import { Typography, Box, useTheme, useMediaQuery } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import profilePhoto from '../assets/kst.png';
 import { GitHub as GitHubIcon, LinkedIn as LinkedInIcon } from '@mui/icons-material';
 
-const StyledContainer = styled(Container)(({ theme }) => ({
+const StyledContainer = styled(Box)(({ theme }) => ({
   minHeight: '100vh',
   display: 'flex',
   alignItems: 'center',
@@ -14,6 +14,8 @@ const StyledContainer = styled(Container)(({ theme }) => ({
   color: theme.palette.text.primary,
   background: theme.palette.background.default,
   transition: 'all 0.3s ease',
+  paddingLeft: '4rem',
+  paddingRight: '4rem',
   [theme.breakpoints.down('md')]: {
     flexDirection: 'column-reverse',
     textAlign: 'center',
@@ -50,6 +52,44 @@ const ProfileImage = styled(motion.img)(({ theme }) => ({
   }
 }));
 
+const ProfileContainer = styled(Box)({
+  position: 'relative',
+  display: 'inline-block',
+});
+
+const FloatingKeyword = styled(motion.div)(({ theme }) => ({
+  position: 'absolute',
+  padding: '4px 8px',
+  borderRadius: '16px',
+  fontSize: '0.7rem',
+  fontWeight: 500,
+  fontFamily: '"Roboto Mono", monospace',
+  background: theme.palette.mode === 'dark' 
+    ? 'rgba(100, 255, 218, 0.1)' 
+    : 'rgba(14, 165, 233, 0.1)',
+  border: theme.palette.mode === 'dark'
+    ? '1px solid rgba(100, 255, 218, 0.3)'
+    : '1px solid rgba(14, 165, 233, 0.3)',
+  color: theme.palette.mode === 'dark' 
+    ? '#64ffda' 
+    : theme.palette.primary.main,
+  backdropFilter: 'blur(10px)',
+  WebkitBackdropFilter: 'blur(10px)',
+  userSelect: 'none',
+  pointerEvents: 'none',
+  whiteSpace: 'nowrap',
+  [theme.breakpoints.down('sm')]: {
+    padding: '3px 6px',
+    fontSize: '0.6rem',
+    borderRadius: '12px',
+  },
+  [theme.breakpoints.between('sm', 'md')]: {
+    padding: '4px 8px',
+    fontSize: '0.65rem',
+    borderRadius: '14px',
+  },
+}));
+
 // const SocialButton = styled(motion.a)(({ theme }) => ({
 //   textDecoration: 'none',
 //   backgroundColor: 'rgba(100, 255, 218, 0)',
@@ -74,6 +114,16 @@ const ProfileImage = styled(motion.img)(({ theme }) => ({
 
 const Hero = () => {
   const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isTablet = useMediaQuery(theme.breakpoints.between('sm', 'md'));
+
+  const keywords = [
+    { text: 'Python', delay: 0 },
+    { text: 'Machine Learning', delay: 0.5 },
+    { text: 'Data Analysis', delay: 1 },
+    { text: 'Computer Vision', delay: 1.5 },
+    { text: 'TensorFlow', delay: 2 },
+  ];
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -95,6 +145,50 @@ const Hero = () => {
       },
     },
   };
+
+  const getKeywordPosition = (index: number, total: number, isMobile: boolean, isTablet: boolean) => {
+    const angle = (index / total) * 2 * Math.PI;
+    let radius = 180;
+    let shiftX = -40;
+    
+    if (isMobile) {
+      radius = 80; // Much smaller radius for mobile
+      shiftX = -20;
+    } else if (isTablet) {
+      radius = 120; // Medium radius for tablet
+      shiftX = -30;
+    }
+    
+    const x = Math.cos(angle) * radius + shiftX;
+    const y = Math.sin(angle) * radius;
+    return { x, y };
+  };
+
+  const getFloatingVariants = (isMobile: boolean) => ({
+    initial: { opacity: 0, scale: 0 },
+    animate: (custom: number) => ({
+      opacity: 1,
+      scale: 1,
+      x: isMobile ? [0, 5, -5, 0] : [0, 10, -10, 0],
+      y: isMobile ? [0, -8, 5, 0] : [0, -15, 10, 0],
+      transition: {
+        opacity: { delay: custom * 0.2, duration: 0.6 },
+        scale: { delay: custom * 0.2, duration: 0.6 },
+        x: {
+          repeat: Infinity,
+          duration: 4 + custom * 0.5,
+          ease: "easeInOut",
+          delay: custom * 0.2
+        },
+        y: {
+          repeat: Infinity,
+          duration: 5 + custom * 0.3,
+          ease: "easeInOut",
+          delay: custom * 0.2
+        }
+      }
+    })
+  });
 
   return (
     <section id="hero">
@@ -248,12 +342,33 @@ const Hero = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
         >
-          <ProfileImage
-            src={profilePhoto}
-            alt="Kaung Sithu"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          />
+          <ProfileContainer>
+            <ProfileImage
+              src={profilePhoto}
+              alt="Kaung Sithu"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            />
+            {keywords.map((keyword, index) => {
+              const position = getKeywordPosition(index, keywords.length, isMobile, isTablet);
+              return (
+                <FloatingKeyword
+                  key={keyword.text}
+                  custom={index}
+                  initial="initial"
+                  animate="animate"
+                  variants={getFloatingVariants(isMobile)}
+                  style={{
+                    left: `calc(50% + ${position.x}px)`,
+                    top: `calc(50% + ${position.y}px)`,
+                    transform: 'translate(-50%, -50%)',
+                  }}
+                >
+                  {keyword.text}
+                </FloatingKeyword>
+              );
+            })}
+          </ProfileContainer>
         </motion.div>
       </StyledContainer>
     </section>

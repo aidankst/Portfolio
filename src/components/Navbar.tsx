@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { AppBar, Typography, IconButton, useTheme, useMediaQuery, List, ListItem, ListItemText, Box } from '@mui/material';
 import { Menu as MenuIcon } from '@mui/icons-material';
@@ -15,13 +15,19 @@ const StyledAppBar = styled(AppBar)(({ theme }) => ({
 }));
 
 const NavContainer = styled('div')(({ theme }) => ({
-  background: 'rgba(10, 25, 47, 0.85)',
-  backdropFilter: 'blur(10px)',
-  WebkitBackdropFilter: 'blur(10px)',
+  background: theme.palette.mode === 'dark' 
+    ? 'rgba(40, 40, 40, 0.5)' 
+    : 'rgba(255, 255, 255, 0.15)',
+  backdropFilter: 'blur(24px) saturate(180%)',
+  WebkitBackdropFilter: 'blur(24px) saturate(180%)',
   borderRadius: '50px',
-  padding: theme.spacing(1, 3),
-  border: '1px solid rgba(100, 255, 218, 0.1)',
-  boxShadow: '0 10px 30px -10px rgba(0, 0, 0, 0.3)',
+  padding: theme.spacing(0.75, 1.5),
+  border: theme.palette.mode === 'dark' 
+    ? '1px solid rgba(255, 255, 255, 0.125)' 
+    : '1px solid rgba(255, 255, 255, 0.6)',
+  boxShadow: theme.palette.mode === 'dark' 
+    ? '0 0 0 1px rgba(0,0,0,0.04), 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06), inset 0 1px 1px 0 rgba(255,255,255,0.05)' 
+    : '0 0 0 1px rgba(255,255,255,0.2), 0 4px 20px -4px rgba(0,0,0,0.1), 0 8px 16px -8px rgba(0,0,0,0.05), inset 0 1px 1px 0 rgba(255,255,255,0.8), inset 0 -1px 1px 0 rgba(0,0,0,0.05)',
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
@@ -30,29 +36,65 @@ const NavContainer = styled('div')(({ theme }) => ({
   margin: '0 auto',
   transition: 'all 0.3s ease',
   '& > *:not(:last-child)': {
-    marginRight: theme.spacing(4)
-  },
-  '&:hover': {
-    boxShadow: '0 20px 40px -20px rgba(0, 0, 0, 0.4)',
-    transform: 'translateY(2px)',
+    marginRight: theme.spacing(2)
   },
   [theme.breakpoints.down('lg')]: {
     maxWidth: '95%',
-    padding: theme.spacing(1, 2)
+    padding: theme.spacing(0.5, 1)
   },
 }));
 
-const NavItem = styled(motion.div)({
-  cursor: 'pointer',
-  padding: '8px 16px',
-  borderRadius: '4px',
-  color: '#ffffff',
-  transition: 'all 0.3s ease',
-  '&:hover': {
-    background: 'rgba(100, 255, 218, 0.1)',
-    color: '#64ffda',
-  },
+const NavItemContainer = styled(Box)({
+  position: 'relative',
+  display: 'flex',
+  alignItems: 'center',
+  gap: '8px',
 });
+
+const NavItem = styled(motion.div)<{ active: boolean }>(({ theme, active }) => ({
+  cursor: 'pointer',
+  padding: '8px 18px',
+  borderRadius: '30px',
+  color: active ? theme.palette.text.primary : theme.palette.text.secondary,
+  position: 'relative',
+  zIndex: 1,
+  transition: 'color 0.3s ease',
+  fontSize: '15px',
+  fontWeight: 500,
+  fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
+  '&:hover': {
+    color: theme.palette.text.primary,
+  },
+}));
+
+const LiquidBlob = styled(motion.div)(({ theme }) => ({
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  width: '100%',
+  height: '100%',
+  borderRadius: '30px',
+  background: theme.palette.mode === 'dark' 
+    ? 'rgba(255, 255, 255, 0.1)' 
+    : 'rgba(255, 255, 255, 0.4)',
+  boxShadow: theme.palette.mode === 'dark'
+    ? 'inset 0 1px 1px rgba(255,255,255,0.1)'
+    : 'inset 0 1px 1px rgba(255,255,255,0.9), inset 0 -1px 1px rgba(0,0,0,0.1)',
+  zIndex: 0,
+  '&::after': {
+    content: '""',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    borderRadius: '30px',
+    background: theme.palette.mode === 'dark' 
+      ? 'linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 60%)' 
+      : 'linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0) 100%)',
+    mixBlendMode: 'overlay',
+  }
+}));
 
 const MobileMenu = styled(motion.div)(({ theme }) => ({
   position: 'absolute',
@@ -62,13 +104,19 @@ const MobileMenu = styled(motion.div)(({ theme }) => ({
   width: '75%',
   maxWidth: '380px',
   marginTop: theme.spacing(2),
-  background: 'rgba(10, 25, 47, 0.95)',
-  backdropFilter: 'blur(12px)',
-  WebkitBackdropFilter: 'blur(12px)',
-  borderRadius: '16px',
-  border: '1px solid rgba(100, 255, 218, 0.1)',
-  boxShadow: '0 10px 30px -10px rgba(0, 0, 0, 0.3)',
-  padding: theme.spacing(2),
+  background: theme.palette.mode === 'dark' 
+    ? 'rgba(40, 40, 40, 0.7)' 
+    : 'rgba(255, 255, 255, 0.2)',
+  backdropFilter: 'blur(20px) saturate(180%)',
+  WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+  borderRadius: '20px',
+  border: theme.palette.mode === 'dark' 
+    ? '1px solid rgba(255, 255, 255, 0.1)' 
+    : '1px solid rgba(255, 255, 255, 0.6)',
+  boxShadow: theme.palette.mode === 'dark'
+    ? '0 10px 30px -10px rgba(0, 0, 0, 0.2)'
+    : '0 10px 30px -10px rgba(0, 0, 0, 0.1), inset 0 1px 1px rgba(255, 255, 255, 0.8)',
+  padding: theme.spacing(1.5),
   zIndex: 1000,
   transformOrigin: 'top center',
 }));
@@ -76,43 +124,55 @@ const MobileMenu = styled(motion.div)(({ theme }) => ({
 const MobileMenuItem = styled(ListItem)(({ theme }) => ({
   borderRadius: theme.spacing(1),
   marginBottom: theme.spacing(1),
-  background: 'rgba(255, 255, 255, 0.02)',
-  backdropFilter: 'blur(8px)',
-  WebkitBackdropFilter: 'blur(8px)',
-  border: '1px solid rgba(100, 255, 218, 0.1)',
-  transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-  transform: 'translateX(-10px)',
-  opacity: 0,
-  animation: 'slideIn 0.4s forwards',
-  animationDelay: 'calc(0.1s * var(--index))',
+  background: 'transparent',
+  backdropFilter: 'none',
+  WebkitBackdropFilter: 'none',
+  border: 'none',
+  transition: 'all 0.3s ease',
+  transform: 'none',
+  opacity: 1,
+  animation: 'none',
   '&:hover': {
-    backgroundColor: 'rgba(100, 255, 218, 0.1)',
-    transform: 'translateX(8px)',
-    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
-  },
-  '@keyframes slideIn': {
-    to: {
-      transform: 'translateX(0)',
-      opacity: 1,
-    },
+    background: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.03)',
+    transform: 'none',
+    boxShadow: 'none',
   },
 }));
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [activeItem, setActiveItem] = useState('');
+  const [hoveredItem, setHoveredItem] = useState<string | null>(null);
+  const navRef = useRef<HTMLDivElement>(null);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
+  const navItems = useMemo(() => ['About', 'Experience', 'Education', 'Publications', 'Certifications', 'Projects', 'Skills', 'Contact'], []);
+
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      setIsScrolled(window.scrollY > 20);
+
+      let currentSection = '';
+      navItems.forEach(item => {
+        const section = document.getElementById(item.toLowerCase());
+        if (section) {
+          const rect = section.getBoundingClientRect();
+          if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
+            currentSection = item;
+          }
+        }
+      });
+
+      if (currentSection) {
+        setActiveItem(currentSection);
+      }
     };
+
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const navItems = ['About', 'Experience', 'Education', 'Publications', 'Certifications', 'Projects', 'Contact'];
+  }, [navItems]);
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId.toLowerCase());
@@ -131,6 +191,7 @@ const Navbar = () => {
         behavior: 'smooth',
         block: 'start'
       });
+      setActiveItem('');
     }
   };
 
@@ -181,18 +242,28 @@ const Navbar = () => {
     },
   };
 
+  const blobItem = hoveredItem || activeItem;
+
   return (
     <StyledAppBar position="fixed">
-      <NavContainer style={{ background: isScrolled ? 'rgba(10, 25, 47, 0.95)' : 'rgba(10, 25, 47, 0.85)' }}>
+      <NavContainer style={{ 
+        background: isScrolled 
+          ? (theme.palette.mode === 'dark' ? 'rgba(40, 40, 40, 0.6)' : 'rgba(255, 255, 255, 0.25)') 
+          : (theme.palette.mode === 'dark' ? 'rgba(40, 40, 40, 0.5)' : 'rgba(255, 255, 255, 0.15)') 
+      }}>
         <Typography
           variant="h6"
           component="div"
           onClick={scrollToHero}
           sx={{
             cursor: 'pointer',
-            color: '#ffffff',
+            color: theme.palette.text.primary,
+            fontWeight: 600,
+            fontSize: '18px',
+            letterSpacing: '0.2px',
+            fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
             '&:hover': {
-              color: '#64ffda'
+              color: theme.palette.text.primary,
             }
           }}
         >
@@ -214,8 +285,9 @@ const Navbar = () => {
                   position: 'relative',
                   transform: mobileOpen ? 'rotate(90deg)' : 'none',
                   transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                  color: theme.palette.text.primary,
                   '&:hover': {
-                    background: 'rgba(100, 255, 218, 0.1)'
+                    background: theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.05)'
                   }
                 }}
               >
@@ -248,9 +320,11 @@ const Navbar = () => {
                             primary={item}
                             sx={{
                               '& .MuiTypography-root': {
-                                fontSize: '1rem',
-                                fontFamily: '"Roboto Mono", monospace',
-                                color: '#64ffda',
+                                fontSize: '16px',
+                                fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
+                                color: activeItem === item ? theme.palette.text.primary : theme.palette.text.secondary,
+                                fontWeight: activeItem === item ? 600 : 400,
+                                textAlign: 'center',
                               },
                             }}
                           />
@@ -263,24 +337,38 @@ const Navbar = () => {
             </AnimatePresence>
           </>
         ) : (
-          <Box component={motion.div} sx={{ 
-            display: 'flex', 
-            gap: { xs: '15px', lg: '20px' }
-          }}>
+          <NavItemContainer ref={navRef} onMouseLeave={() => setHoveredItem(null)}>
             {navItems.map((item) => (
               <NavItem
                 key={item}
+                active={activeItem === item}
+                onClick={() => scrollToSection(item)}
+                onMouseEnter={() => setHoveredItem(item)}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => scrollToSection(item)}
-                sx={{
-                  fontSize: { md: '0.9rem', lg: '1rem' }
-                }}
+                data-item={item}
               >
-                <Typography>{item}</Typography>
+                {item}
               </NavItem>
-            ))}            
-          </Box>
+            ))}
+            <AnimatePresence>
+              {blobItem && navRef.current && (
+                <LiquidBlob
+                  layoutId="liquid-blob"
+                  initial={false}
+                  animate={{
+                    x: (navRef.current.querySelector(`[data-item="${blobItem}"]`) as HTMLElement)?.offsetLeft || 0,
+                    width: (navRef.current.querySelector(`[data-item="${blobItem}"]`) as HTMLElement)?.offsetWidth || 0,
+                  }}
+                  transition={{
+                    type: 'spring',
+                    stiffness: 500,
+                    damping: 40,
+                  }}
+                />
+              )}
+            </AnimatePresence>
+          </NavItemContainer>
         )}
       </NavContainer>
     </StyledAppBar>
