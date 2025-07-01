@@ -122,6 +122,19 @@ const PeriodBadge = styled(Typography)(({ theme }) => ({
   }
 }));
 
+const TypeBadge = styled(Typography)(({ theme }) => ({
+  padding: '4px 10px',
+  borderRadius: '12px',
+  backgroundColor: theme.palette.primary.main,
+  color: theme.palette.background.default,
+  fontWeight: 600,
+  fontSize: '0.75rem',
+  display: 'inline-block',
+  marginLeft: theme.spacing(1.5),
+  boxShadow: `0 0 12px ${theme.palette.primary.main}33`,
+}));
+
+
 const Experience = () => {
   const fadeInUp = {
     hidden: { opacity: 0, y: 60 },
@@ -138,15 +151,15 @@ const Experience = () => {
   const experiences = {
     agh: [
       {
-        title: 'Machine Learning Research Intern',
+        title: 'Machine Learning Research',
+        type: 'Intern',
         company: 'AGH University of Science and Technology',
         period: 'June, 2024 - Present',
-        achievements: ['15% dataset accuracy improvement', '20% error reduction', '10% model performance boost', '95% on-time delivery'],
         description: [
-          'Assisted in data collection and analysis for research projects, focusing on autonomous driving models, resulting in a 15% improvement in dataset accuracy',
-          'Developed Python scripts to verify dataset quality using metrics such as MSE, SSIM, polarity accuracy, and temporal precision, reducing data errors by 20%',
-          'Contributed to improving dataset reliability for object detection by implementing automated quality assessment pipelines, which increased model performance by 10%',
-          'Collaborated with research teams to ensure project success and timely delivery of results, achieving a 95% on-time project completion rate',
+          { emoji: '🚗', text: 'Assisted in data collection and analysis for research projects, focusing on autonomous driving models, resulting in a 15% improvement in dataset accuracy' },
+          { emoji: '✔️', text: 'Developed Python scripts to verify dataset quality using metrics such as MSE, SSIM, polarity accuracy, and temporal precision, reducing data errors by 20%' },
+          { emoji: '📈', text: 'Contributed to improving dataset reliability for object detection by implementing automated quality assessment pipelines, which increased model performance by 10%' },
+          { emoji: '🎯', text: 'Collaborated with research teams to ensure project success and timely delivery of results, achieving a 95% on-time project completion rate' },
         ],
         skills: ['Python', 'Machine Learning', 'Data Analysis', 'Computer Vision', 'Quality Assessment']
       },
@@ -154,41 +167,41 @@ const Experience = () => {
     haine: [
       {
         title: 'Data Analyst',
+        type: 'Full-time',
         company: 'Haine Food Production Co., Ltd',
         period: 'Dec 2023 - Feb 2025',
-        achievements: ['15% delivery efficiency', 'Real-time tracking', 'Automated reporting', 'Predictive modeling'],
         description: [
-          'Developed and maintained interactive dashboards using SQL and Python, improving data accessibility for key stakeholders',
-          'Conducted in-depth data analysis to optimize supply chain operations, reducing delivery inefficiencies by 15%',
-          'Designed predictive models to forecast product demand, enhancing inventory management and minimizing overstocking',
-          'Automated data extraction and reporting processes, reducing manual workload and improving data accuracy',
+          { emoji: '📈', text: 'Developed and maintained interactive dashboards using SQL and Python, improving data accessibility for key stakeholders' },
+          { emoji: '🚚', text: 'Conducted in-depth data analysis to optimize supply chain operations, reducing delivery inefficiencies by 15%' },
+          { emoji: '📦', text: 'Designed predictive models to forecast product demand, enhancing inventory management and minimizing overstocking' },
+          { emoji: '🤖', text: 'Automated data extraction and reporting processes, reducing manual workload and improving data accuracy' },
         ],
         skills: ['SQL', 'Python', 'Data Analysis', 'Predictive Modeling', 'Dashboard Development', 'Supply Chain Analytics']
       },
       {
-        title: 'Data Analyst (Intern)',
+        title: 'Data Analyst',
+        type: 'Intern',
         company: 'Haine Food Production Co., Ltd',
         period: 'June 2023 - Dec 2023',
-        achievements: ['Improved data reliability', 'Real-time inventory', 'Workflow optimization', 'Data visualization'],
         description: [
-          'Assisted in structuring and cleaning large datasets for sales and production analysis, improving data reliability',
-          'Created data visualizations using Excel and Matplotlib to identify trends and improve operational efficiency',
-          'Supported the implementation of a real-time inventory tracking system, reducing stock discrepancies',
-          'Conducted exploratory data analysis to identify key performance bottlenecks and optimize workflow processes',
+          { emoji: '🧹', text: 'Assisted in structuring and cleaning large datasets for sales and production analysis, improving data reliability' },
+          { emoji: '📊', text: 'Created data visualizations using Excel and Matplotlib to identify trends and improve operational efficiency' },
+          { emoji: '📉', text: 'Supported the implementation of a real-time inventory tracking system, reducing stock discrepancies' },
+          { emoji: '⚙️', text: 'Conducted exploratory data analysis to identify key performance bottlenecks and optimize workflow processes' },
         ],
         skills: ['Excel', 'Python', 'Matplotlib', 'Data Cleaning', 'Data Visualization', 'Inventory Management']
       },
     ],
     oriental: [
       {
-        title: 'OJT Admin Staff',
+        title: 'Admin Staff',
+        type: 'OJT',
         company: 'Oriental Apex Company Limited',
         period: 'March, 2021 - July, 2021',
-        achievements: ['98% response rate', '20% efficiency gain', '95% positive feedback'],
         description: [
-          'Managed administrative tasks, including phone communication, scheduling, and email correspondence, handling over 50 calls and emails daily with a 98% response rate',
-          'Organized meetings and appointments, ensuring smooth operations and effective time management, resulting in a 20% increase in meeting efficiency',
-          'Assisted visitors and provided support to ensure a welcoming and professional environment, receiving a 95% positive feedback rate from visitors',
+          { emoji: '📞', text: 'Managed administrative tasks, including phone communication, scheduling, and email correspondence, handling over 50 calls and emails daily with a 98% response rate' },
+          { emoji: '📅', text: 'Organized meetings and appointments, ensuring smooth operations and effective time management, resulting in a 20% increase in meeting efficiency' },
+          { emoji: '😊', text: 'Assisted visitors and provided support to ensure a welcoming and professional environment, receiving a 95% positive feedback rate from visitors' },
         ],
         skills: ['Communication', 'Time Management', 'Organization', 'Customer Service']
       },
@@ -245,7 +258,7 @@ const Experience = () => {
                     pb: 2,
                     flexDirection: { xs: 'column', sm: 'row' },
                     alignItems: { xs: 'flex-start', sm: 'center' },
-                    borderBottom: '1px solid rgba(100, 255, 218, 0.2)'
+                    borderBottom: '1px solid rgba(100, 255, 218,.2)'
                   }}>
                     {positions[0].company === 'AGH University of Science and Technology' ? (
                       <CompanyLogo src={aghLogo} alt="AGH University Logo" />
@@ -298,9 +311,10 @@ const Experience = () => {
                         <Typography 
                           variant="subtitle1" 
                           color="text.primary"
-                          sx={{ fontWeight: 600 }}
+                          sx={{ fontWeight: 600, display: 'flex', alignItems: 'center' }}
                         >
                           {exp.title}
+                          <TypeBadge>{exp.type}</TypeBadge>
                         </Typography>
                         <motion.div
                           initial={{ opacity: 0, y: -10 }}
@@ -325,15 +339,15 @@ const Experience = () => {
                               fontSize: { xs: '0.9rem', sm: '0.95rem' },
                               alignItems: 'flex-start',
                               '&:before': {
-                                content: '"•"',
-                                mr: 1,
+                                content: `'"${desc.emoji}"'`,
+                                mr: 1.5,
                                 flexShrink: 0,
                                 mt: '2px'
                               }
                             }}
                           >
                             <Box component="span" sx={{ textAlign: 'left' }}>
-                              {desc}
+                              {desc.text}
                             </Box>
                           </Typography>
                         ))}
