@@ -552,22 +552,26 @@ const Projects: React.FC = () => {
                     </TechTagsContainer>
 
                     <ProjectActions>
-                       <ProjectLink
-                         href={project.github}
-                         target="_blank"
-                         rel="noopener noreferrer"
-                       >
-                         <GitHubIcon sx={{ fontSize: 18, mr: 1 }} />
-                         Code
-                       </ProjectLink>
-                       <ProjectLink
-                         href={project.demo}
-                         target="_blank"
-                         rel="noopener noreferrer"
-                       >
-                         <LaunchIcon sx={{ fontSize: 18, mr: 1 }} />
-                         Demo
-                       </ProjectLink>
+                       {project.github && (
+                         <ProjectLink
+                           href={project.github}
+                           target="_blank"
+                           rel="noopener noreferrer"
+                         >
+                           <GitHubIcon sx={{ fontSize: 18, mr: 1 }} />
+                           Code
+                         </ProjectLink>
+                       )}
+                       {project.demo && (
+                         <ProjectLink
+                           href={project.demo}
+                           target="_blank"
+                           rel="noopener noreferrer"
+                         >
+                           <LaunchIcon sx={{ fontSize: 18, mr: 1 }} />
+                           Demo
+                         </ProjectLink>
+                       )}
                      </ProjectActions>
                   </ProjectCard>
                 </motion.div>

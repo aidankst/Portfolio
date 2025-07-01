@@ -10,9 +10,16 @@ const StyledSection = styled('section')(({ theme }) => ({
   padding: theme.spacing(10, 1),
   position: 'relative',
   overflow: 'hidden',
-  background: theme.palette.background.default,
-  color: theme.palette.text.primary,
-  transition: 'all 0.3s ease',
+  background: theme.palette.mode === 'light' 
+    ? 'radial-gradient(circle at 20% 80%, rgba(240, 240, 255, 0.8) 0%, rgba(255, 255, 255, 0.6) 100%)' 
+    : 'radial-gradient(circle at 20% 80%, rgba(10, 25, 47, 0.8) 0%, rgba(10, 25, 47, 0.6) 100%)',
+  backgroundSize: '200% 200%',
+  animation: 'moveGradient 10s ease infinite',
+  '@keyframes moveGradient': {
+    '0%': { backgroundPosition: '0% 50%' },
+    '50%': { backgroundPosition: '100% 50%' },
+    '100%': { backgroundPosition: '0% 50%' },
+  },
   '&::before': {
     content: '""',
     position: 'absolute',
@@ -30,32 +37,20 @@ const StyledSection = styled('section')(({ theme }) => ({
 
 const PublicationCard = styled(motion(Paper))(({ theme }) => ({
   padding: theme.spacing(4),
-  borderRadius: theme.spacing(2),
-  background: 'rgba(255, 255, 255, 0.02)',
-  backdropFilter: 'blur(10px)',
-  border: '1px solid rgba(255, 255, 255, 0.1)',
-  boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
-  transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+  borderRadius: theme.spacing(3),
+  background: theme.palette.mode === 'light' 
+    ? 'rgba(255, 255, 255, 0.6)' 
+    : 'rgba(10, 25, 47, 0.5)',
+  boxShadow: `0 8px 32px 0 ${theme.palette.mode === 'light' ? 'rgba(31, 38, 135, 0.15)' : 'rgba(0, 0, 0, 0.2)'}`,
+  backdropFilter: 'blur(12px)',
+  WebkitBackdropFilter: 'blur(12px)',
+  border: `1px solid ${theme.palette.mode === 'light' ? 'rgba(255, 255, 255, 0.2)' : 'rgba(255, 255, 255, 0.1)'}`,
+  transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
   overflow: 'hidden',
   position: 'relative',
-  '&::before': {
-    content: '""',
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    height: '4px',
-    background: 'linear-gradient(90deg, #64ffda, #00bfa5)',
-    opacity: 0,
-    transition: 'opacity 0.3s ease',
-  },
   '&:hover': {
     transform: 'translateY(-8px)',
-    boxShadow: '0 12px 40px rgba(0, 0, 0, 0.15)',
-    background: 'rgba(255, 255, 255, 0.05)',
-    '&::before': {
-      opacity: 1,
-    },
+    boxShadow: `0 16px 40px 0 ${theme.palette.mode === 'light' ? 'rgba(31, 38, 135, 0.2)' : 'rgba(0, 0, 0, 0.3)'}`,
   },
   [theme.breakpoints.down('sm')]: {
     padding: theme.spacing(3),
@@ -141,6 +136,7 @@ const Publications = () => {
               alignItems: 'center',
               gap: 2,
               mb: 6,
+              fontSize: { xs: '1.75rem', sm: '2rem', md: '2.125rem' },
               '&::after': {
                 content: '""',
                 flex: 1,
@@ -156,21 +152,21 @@ const Publications = () => {
             {publications.map((publication, index) => (
               <Grid item xs={12} key={index}>
                 <PublicationCard
-                  whileHover={{ scale: 1.02 }}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ type: 'spring', stiffness: 300, delay: index * 0.1 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 20, delay: index * 0.1 }}
                 >
                   <PublicationTitle variant="h6">
                     {publication.title}
                   </PublicationTitle>
                   <Typography
-                    variant="body2"
+                    variant="body1"
                     sx={{
                       mb: 1,
                       color: 'text.secondary',
-                      fontSize: { xs: '0.85rem', sm: '0.9rem' },
+                      fontSize: { xs: '0.9rem', sm: '0.95rem' },
+                      fontWeight: 500,
                     }}
                   >
                     {publication.authors}
@@ -187,11 +183,12 @@ const Publications = () => {
                     {publication.journal}, {publication.year}{publication.doi ? ` • DOI: ${publication.doi}` : ''}
                   </Typography>
                   <Typography
-                    variant="body2"
+                    variant="body1"
                     sx={{
                       mb: 3,
                       color: 'text.primary',
-                      fontSize: { xs: '0.85rem', sm: '0.9rem' },
+                      fontSize: { xs: '0.95rem', sm: '1rem' },
+                      lineHeight: 1.6,
                     }}
                   >
                     {publication.abstract}
@@ -222,22 +219,30 @@ const Publications = () => {
                         </PublicationTag>
                       ))}
                     </Box>
-                    <Button
-                      variant="outlined"
-                      size="small"
-                      endIcon={<OpenInNewIcon />}
-                      onClick={() => window.open(publication.link, '_blank')}
-                      sx={{
-                        borderColor: 'rgba(100, 255, 218, 0.3)',
-                        color: 'primary.main',
-                        '&:hover': {
-                          borderColor: '#64ffda',
-                          backgroundColor: 'rgba(100, 255, 218, 0.05)',
-                        },
-                      }}
-                    >
-                      View Publication
-                    </Button>
+                    {publication.link && (
+                      <Button
+                        variant="outlined"
+                        size="medium"
+                        endIcon={<OpenInNewIcon />}
+                        onClick={() => window.open(publication.link, '_blank')}
+                        sx={(theme) => ({
+                          borderColor: theme.palette.primary.main,
+                          color: theme.palette.primary.main,
+                          fontWeight: 600,
+                          borderRadius: '12px',
+                          padding: '8px 16px',
+                          transition: 'all 0.3s ease',
+                          '&:hover': {
+                            borderColor: theme.palette.primary.main,
+                            backgroundColor: 'rgba(100, 255, 218, 0.1)',
+                            boxShadow: `0 4px 15px ${theme.palette.primary.main}33`,
+                            transform: 'translateY(-2px)',
+                          },
+                        })}
+                      >
+                        View Publication
+                      </Button>
+                    )}
                   </Box>
                 </PublicationCard>
               </Grid>
