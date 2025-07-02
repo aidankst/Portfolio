@@ -12,6 +12,26 @@ const ProjectsSection = styled('section')(({ theme }) => ({
   minHeight: '100vh',
   display: 'flex',
   alignItems: 'center',
+  background: theme.palette.mode === 'light' 
+    ? 'radial-gradient(circle at 20% 80%, rgba(240, 240, 255, 0.8) 0%, rgba(255, 255, 255, 0.6) 100%)' 
+    : 'radial-gradient(circle at 20% 80%, rgba(10, 25, 47, 0.8) 0%, rgba(10, 25, 47, 0.6) 100%)',
+  backgroundSize: '200% 200%',
+  animation: 'moveGradient 10s ease infinite',
+  '@keyframes moveGradient': {
+    '0%': { backgroundPosition: '0% 50%' },
+    '50%': { backgroundPosition: '100% 50%' },
+    '100%': { backgroundPosition: '0% 50%' },
+  },
+  '&::before': {
+    content: '""',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    background: 'radial-gradient(circle at 50% 50%, rgba(100, 255, 218, 0.03) 0%, rgba(10, 25, 47, 0) 50%)',
+    pointerEvents: 'none',
+  },
 }));
 
 const ProjectsContent = styled(Box)(({ }) => ({
@@ -37,17 +57,17 @@ const CategoryFilters = styled(Box)(({ theme }) => ({
 const CategoryPill = styled(motion.button)<{ active: boolean }>(({ theme, active }) => ({
   background: active
     ? theme.palette.mode === 'dark'
-      ? 'rgba(255, 255, 255, 0.15)'
+      ? 'rgba(100, 255, 218, 0.15)'
       : 'rgba(0, 0, 0, 0.08)'
     : theme.palette.mode === 'dark'
       ? 'rgba(255, 255, 255, 0.05)'
       : 'rgba(255, 255, 255, 0.8)',
-  backdropFilter: 'blur(20px) saturate(180%)',
-  WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+  backdropFilter: 'blur(15px) saturate(180%)',
+  WebkitBackdropFilter: 'blur(15px) saturate(180%)',
   border: `1px solid ${active
     ? theme.palette.mode === 'dark'
-      ? 'rgba(255, 255, 255, 0.2)'
-      : 'rgba(0, 0, 0, 0.1)'
+      ? 'rgba(100, 255, 218, 0.4)'
+      : 'rgba(0, 0, 0, 0.2)'
     : theme.palette.mode === 'dark'
       ? 'rgba(255, 255, 255, 0.1)'
       : 'rgba(255, 255, 255, 0.6)'
@@ -59,28 +79,28 @@ const CategoryPill = styled(motion.button)<{ active: boolean }>(({ theme, active
   alignItems: 'center',
   gap: theme.spacing(1),
   color: active ? theme.palette.text.primary : theme.palette.text.secondary,
-  fontSize: '0.9rem',
+  fontSize: '0.95rem',
   fontWeight: active ? 600 : 500,
   transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
   boxShadow: active
     ? theme.palette.mode === 'dark'
-      ? '0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
+      ? '0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(100, 255, 218, 0.1)'
       : '0 8px 32px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.8)'
     : theme.palette.mode === 'dark'
       ? '0 4px 16px rgba(0, 0, 0, 0.2)'
       : '0 4px 16px rgba(0, 0, 0, 0.05)',
   '&:hover': {
     background: theme.palette.mode === 'dark'
-      ? 'rgba(255, 255, 255, 0.1)'
+      ? 'rgba(100, 255, 218, 0.1)'
       : 'rgba(255, 255, 255, 0.9)',
-    transform: 'translateY(-2px)',
+    transform: 'translateY(-3px)',
     boxShadow: theme.palette.mode === 'dark'
-      ? '0 12px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.15)'
+      ? '0 12px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(100, 255, 218, 0.15)'
       : '0 12px 40px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 1)',
   },
   [theme.breakpoints.down('sm')]: {
     padding: theme.spacing(1, 2),
-    fontSize: '0.8rem',
+    fontSize: '0.85rem',
   },
 }));
 
@@ -105,20 +125,20 @@ const ProjectsGrid = styled(Box)(({ theme }) => ({
 }));
 
 const ProjectCard = styled(motion.div)(({ theme }) => ({
-  background: theme.palette.mode === 'dark'
-    ? 'rgba(255, 255, 255, 0.05)'
-    : 'rgba(255, 255, 255, 0.8)',
-  backdropFilter: 'blur(20px) saturate(180%)',
-  WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+  background: theme.palette.mode === 'light' 
+    ? 'rgba(255, 255, 255, 0.6)' 
+    : 'rgba(10, 25, 47, 0.5)',
+  backdropFilter: 'blur(15px) saturate(180%)',
+  WebkitBackdropFilter: 'blur(15px) saturate(180%)',
   border: `1px solid ${theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(255, 255, 255, 0.6)'}`,
   borderRadius: '20px',
-  padding: theme.spacing(3),
+  padding: theme.spacing(3.5),
   height: '100%',
   display: 'flex',
   flexDirection: 'column',
   position: 'relative',
   overflow: 'hidden',
-  transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+  transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
   boxShadow: theme.palette.mode === 'dark'
     ? '0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)'
     : '0 8px 32px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.8)',
@@ -144,18 +164,18 @@ const ProjectCard = styled(motion.div)(({ theme }) => ({
     right: 0,
     bottom: 0,
     background: theme.palette.mode === 'dark'
-      ? 'linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 50%)'
-      : 'linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.2) 50%)',
+      ? 'linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0) 50%)'
+      : 'linear-gradient(135deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.1) 50%)',
     opacity: 0,
     transition: 'opacity 0.3s ease',
     pointerEvents: 'none',
     borderRadius: '20px',
   },
   '&:hover': {
-    transform: 'translateY(-8px) scale(1.02)',
+    transform: 'translateY(-8px)',
     background: theme.palette.mode === 'dark'
       ? 'rgba(255, 255, 255, 0.08)'
-      : 'rgba(255, 255, 255, 0.95)',
+      : 'rgba(255, 255, 255, 0.85)',
     boxShadow: theme.palette.mode === 'dark'
       ? '0 20px 60px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2)'
       : '0 20px 60px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 1)',
@@ -248,13 +268,13 @@ const TechTagsContainer = styled(Box)(({ theme }) => ({
 
 const TechTag = styled(motion.span)(({ theme }) => ({
   background: theme.palette.mode === 'dark'
-    ? 'rgba(255, 255, 255, 0.08)'
+    ? 'rgba(100, 255, 218, 0.08)'
     : 'rgba(0, 0, 0, 0.05)',
   backdropFilter: 'blur(10px)',
-  border: `1px solid ${theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.08)'}`,
+  border: `1px solid ${theme.palette.mode === 'dark' ? 'rgba(100, 255, 218, 0.2)' : 'rgba(0, 0, 0, 0.08)'}`,
   borderRadius: '20px',
-  padding: theme.spacing(0.5, 1.5),
-  fontSize: '0.8rem',
+  padding: theme.spacing(0.8, 1.8),
+  fontSize: '0.85rem',
   fontWeight: 500,
   color: theme.palette.mode === 'dark' ? '#64ffda' : '#0066cc',
   display: 'inline-block',
@@ -269,15 +289,15 @@ const TechTag = styled(motion.span)(({ theme }) => ({
     width: '100%',
     height: '100%',
     background: theme.palette.mode === 'dark'
-      ? 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent)'
+      ? 'linear-gradient(90deg, transparent, rgba(100, 255, 218, 0.1), transparent)'
       : 'linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.05), transparent)',
     transition: 'left 0.5s ease',
   },
   '&:hover': {
     background: theme.palette.mode === 'dark'
-      ? 'rgba(255, 255, 255, 0.12)'
+      ? 'rgba(100, 255, 218, 0.12)'
       : 'rgba(0, 0, 0, 0.08)',
-    transform: 'translateY(-2px) scale(1.05)',
+    transform: 'translateY(-3px)',
     '&::before': {
       left: '100%',
     },
@@ -292,10 +312,10 @@ const ProjectActions = styled(Box)(({ theme }) => ({
 
 const ProjectLink = styled(Link)(({ theme }) => ({
   background: theme.palette.mode === 'dark'
-    ? 'rgba(255, 255, 255, 0.05)'
+    ? 'rgba(100, 255, 218, 0.05)'
     : 'rgba(0, 0, 0, 0.03)',
   backdropFilter: 'blur(10px)',
-  border: `1px solid ${theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.08)'}`,
+  border: `1px solid ${theme.palette.mode === 'dark' ? 'rgba(100, 255, 218, 0.2)' : 'rgba(0, 0, 0, 0.08)'}`,
   borderRadius: '12px',
   padding: theme.spacing(1.5),
   display: 'inline-flex',
@@ -304,13 +324,13 @@ const ProjectLink = styled(Link)(({ theme }) => ({
   color: theme.palette.mode === 'dark' ? '#64ffda' : '#0066cc',
   textDecoration: 'none',
   transition: 'all 0.3s ease',
-  minWidth: '48px',
-  height: '48px',
+  minWidth: '52px',
+  height: '52px',
   '&:hover': {
     background: theme.palette.mode === 'dark'
-      ? 'rgba(255, 255, 255, 0.1)'
+      ? 'rgba(100, 255, 218, 0.1)'
       : 'rgba(0, 0, 0, 0.06)',
-    transform: 'translateY(-3px) scale(1.1)',
+    transform: 'translateY(-4px)',
     boxShadow: theme.palette.mode === 'dark'
       ? '0 8px 25px rgba(0, 0, 0, 0.3)'
       : '0 8px 25px rgba(0, 0, 0, 0.1)',
@@ -412,31 +432,33 @@ const Projects: React.FC = () => {
           <Typography
             variant="h2"
             component="h2"
-            sx={{
+            sx={(theme) => ({
               textAlign: 'center',
               mb: 2,
               fontWeight: 700,
-              background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+              background: theme.palette.mode === 'dark'
+                ? 'linear-gradient(135deg, #ffffff 0%, #a8b2d1 100%)'
+                : 'linear-gradient(135deg, #1a1a2e 0%, #4a5568 100%)',
               backgroundClip: 'text',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               fontSize: { xs: '2.5rem', md: '3.5rem' },
-            }}
+            })}
           >
             Projects
           </Typography>
           
           <Typography
             variant="body1"
-            sx={{
+            sx={(theme) => ({
               textAlign: 'center',
               mb: 4,
-              color: 'text.secondary',
+              color: theme.palette.text.secondary,
               maxWidth: '600px',
               mx: 'auto',
               fontSize: '1.1rem',
               lineHeight: 1.6
-            }}
+            })}
           >
             A collection of projects showcasing my expertise in various technologies and domains.
           </Typography>
