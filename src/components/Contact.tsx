@@ -127,10 +127,10 @@ const Contact = () => {
             <span>Get In Touch</span>
           </Typography>
 
-          <Typography variant="h5" color="text.primary" sx={{ textAlign: 'center', mb: 2, fontWeight: 700 }}>
+          <Typography variant="h5" color="text.primary" sx={{ textAlign: 'center', mb: 2, fontWeight: 700, fontSize: { xs: '1.5rem', sm: '2rem' } }}>
             Have a question or want to connect?
           </Typography>
-          <Typography variant="body1" color="text.secondary" paragraph sx={{ maxWidth: '700px', margin: '0 auto', mb: 4, textAlign: 'center', fontSize: '1.1rem', lineHeight: 1.7 }}>
+          <Typography variant="body1" color="text.secondary" paragraph sx={{ maxWidth: '700px', margin: '0 auto', mb: 4, textAlign: 'center', fontSize: { xs: '1rem', sm: '1.1rem' }, lineHeight: 1.7 }}>
             I'm currently looking for new opportunities in data analytics and data science. Whether you have a question or just want to say hi, feel free to reach out! I'll do my best to get back to you promptly.
           </Typography>
 

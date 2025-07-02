@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, Box } from '@mui/material';
+import { Typography, Box, Select, MenuItem, FormControl, useTheme, useMediaQuery } from '@mui/material';
 import { styled, keyframes } from '@mui/material/styles';
 import { motion } from 'framer-motion';
 
@@ -110,14 +110,6 @@ const SkillsNavigation = styled(Box)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   gap: theme.spacing(2),
-  [theme.breakpoints.down('md')]: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
-    gap: theme.spacing(2),
-  },
-  [theme.breakpoints.down('sm')]: {
-    gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
-  },
 }));
 
 const NavItem = styled(motion.button)<{ active?: boolean }>(({ theme, active }) => ({
@@ -149,25 +141,13 @@ const NavItem = styled(motion.button)<{ active?: boolean }>(({ theme, active }) 
     color: theme.palette.text.primary,
     transform: 'translateX(5px)',
   },
-  [theme.breakpoints.down('sm')]: {
-    flexDirection: 'column',
-    textAlign: 'center',
-    gap: theme.spacing(1),
-    padding: theme.spacing(1),
-    '&:hover': {
-      transform: 'translateY(-2px)',
-    },
-  },
 }));
 
-const NavIcon = styled('div')(({ theme }) => ({
+const NavIcon = styled('div')(() => ({
   fontSize: '1.2rem',
   width: '24px',
   display: 'flex',
   justifyContent: 'center',
-  [theme.breakpoints.down('sm')]: {
-    fontSize: '1.5rem',
-  },
 }));
 
 const SkillsDisplay = styled(Box)(() => ({
@@ -309,12 +289,10 @@ const SkillDescription = styled(Typography)(({ theme }) => ({
   margin: 0,
 }));
 
-
-
-
-
 const Skills: React.FC = () => {
   const [activeCategory, setActiveCategory] = React.useState(0);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -379,27 +357,71 @@ const Skills: React.FC = () => {
         </motion.div>
 
         <SkillsContent>
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <SkillsNavigation>
-              {skillCategories.map((category, index) => (
-                <NavItem
-                  key={index}
-                  active={activeCategory === index}
-                  onClick={() => setActiveCategory(index)}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  <NavIcon>{category.icon}</NavIcon>
-                  <span>{category.title}</span>
-                </NavItem>
-              ))}
-            </SkillsNavigation>
-          </motion.div>
+          {isMobile ? (
+            <FormControl fullWidth>
+              <Select
+                value={activeCategory}
+                onChange={(e) => setActiveCategory(e.target.value as number)}
+                sx={{
+                  borderRadius: '16px',
+                  background: theme.palette.mode === 'dark' ? 'rgba(17, 25, 40, 0.75)' : 'rgba(255, 255, 255, 0.4)',
+                  backdropFilter: 'blur(16px) saturate(180%)',
+                  WebkitBackdropFilter: 'blur(16px) saturate(180%)',
+                  border: `1px solid ${theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.125)' : 'rgba(255, 255, 255, 0.2)'}`,
+                  boxShadow: theme.palette.mode === 'dark' ? '0 8px 32px 0 rgba(0, 0, 0, 0.37)' : '0 8px 32px 0 rgba(31, 38, 135, 0.17)',
+                  '& .MuiSelect-select': {
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 1.5,
+                    padding: '14px 18px',
+                  },
+                  '& .MuiOutlinedInput-notchedOutline': {
+                    border: 'none',
+                  },
+                }}
+                MenuProps={{
+                  PaperProps: {
+                    sx: {
+                      borderRadius: '16px',
+                      background: theme.palette.mode === 'dark' ? 'rgba(17, 25, 40, 0.85)' : 'rgba(255, 255, 255, 0.85)',
+                      backdropFilter: 'blur(16px) saturate(180%)',
+                      WebkitBackdropFilter: 'blur(16px) saturate(180%)',
+                      border: `1px solid ${theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.125)' : 'rgba(255, 255, 255, 0.2)'}`,
+                    },
+                  },
+                }}
+              >
+                {skillCategories.map((category, index) => (
+                  <MenuItem key={index} value={index} sx={{ gap: 1.5, padding: '12px 18px' }}>
+                    <NavIcon>{category.icon}</NavIcon>
+                    {category.title}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          ) : (
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <SkillsNavigation>
+                {skillCategories.map((category, index) => (
+                  <NavItem
+                    key={index}
+                    active={activeCategory === index}
+                    onClick={() => setActiveCategory(index)}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <NavIcon>{category.icon}</NavIcon>
+                    <span>{category.title}</span>
+                  </NavItem>
+                ))}
+              </SkillsNavigation>
+            </motion.div>
+          )}
 
           <motion.div
             key={activeCategory}

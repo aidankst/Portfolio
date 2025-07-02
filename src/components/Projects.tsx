@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Typography, Box, Link, Container } from '@mui/material';
+import { Typography, Box, Link, Container, Select, MenuItem, FormControl, useTheme, useMediaQuery } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { GitHub as GitHubIcon, Launch as LaunchIcon, Code as CodeIcon, Web as WebIcon, Storage as DatabaseIcon, School as EducationIcon } from '@mui/icons-material';
 import aghLogo from '../assets/AGH_logo.png';
@@ -339,6 +339,8 @@ const ProjectLink = styled(Link)(({ theme }) => ({
 
 const Projects: React.FC = () => {
   const [activeCategory, setActiveCategory] = React.useState('All');
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const categories = [
     { name: 'All', icon: <CodeIcon />, count: 5 },
@@ -470,49 +472,93 @@ const Projects: React.FC = () => {
           viewport={{ once: true, amount: 0.3 }}
           variants={itemVariants}
         >
-          <CategoryFilters>
-            {categories.map((category) => (
-              <CategoryPill
-                key={category.name}
-                active={activeCategory === category.name}
-                onClick={() => setActiveCategory(category.name)}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+          {isMobile ? (
+            <FormControl fullWidth sx={{ mb: 4 }}>
+              <Select
+                value={activeCategory}
+                onChange={(e) => setActiveCategory(e.target.value)}
+                sx={{
+                  borderRadius: '16px',
+                  background: theme.palette.mode === 'dark' ? 'rgba(17, 25, 40, 0.75)' : 'rgba(255, 255, 255, 0.4)',
+                  backdropFilter: 'blur(16px) saturate(180%)',
+                  WebkitBackdropFilter: 'blur(16px) saturate(180%)',
+                  border: `1px solid ${theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.125)' : 'rgba(255, 255, 255, 0.2)'}`,
+                  boxShadow: theme.palette.mode === 'dark' ? '0 8px 32px 0 rgba(0, 0, 0, 0.37)' : '0 8px 32px 0 rgba(31, 38, 135, 0.17)',
+                  '& .MuiSelect-select': {
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 1.5,
+                    padding: '14px 18px',
+                  },
+                  '& .MuiOutlinedInput-notchedOutline': {
+                    border: 'none',
+                  },
+                }}
+                MenuProps={{
+                  PaperProps: {
+                    sx: {
+                      borderRadius: '16px',
+                      background: theme.palette.mode === 'dark' ? 'rgba(17, 25, 40, 0.85)' : 'rgba(255, 255, 255, 0.85)',
+                      backdropFilter: 'blur(16px) saturate(180%)',
+                      WebkitBackdropFilter: 'blur(16px) saturate(180%)',
+                      border: `1px solid ${theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.125)' : 'rgba(255, 255, 255, 0.2)'}`,
+                    },
+                  },
+                }}
               >
-                <CategoryIcon>{category.icon}</CategoryIcon>
-                {category.name}
-                <Box
-                    component="span"
-                    sx={{
-                      ml: 1,
-                      px: 1.5,
-                      py: 0.5,
-                      borderRadius: '12px',
-                      fontSize: '0.75rem',
-                      fontWeight: 700,
-                      background: activeCategory === category.name 
-                        ? 'linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1))' 
-                        : 'linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05))',
-                      backdropFilter: 'blur(8px)',
-                      WebkitBackdropFilter: 'blur(8px)',
-                      border: activeCategory === category.name 
-                        ? '1px solid rgba(255, 255, 255, 0.3)' 
-                        : '1px solid rgba(255, 255, 255, 0.1)',
-                      boxShadow: activeCategory === category.name 
-                        ? '0 2px 8px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2)' 
-                        : '0 1px 4px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
-                      color: activeCategory === category.name ? 'rgba(255, 255, 255, 0.95)' : 'rgba(255, 255, 255, 0.8)',
-                      transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                      minWidth: '24px',
-                      textAlign: 'center',
-                      letterSpacing: '0.5px',
-                    }}
-                  >
-                    {category.count}
-                  </Box>
-              </CategoryPill>
-            ))}
-          </CategoryFilters>
+                {categories.map((category) => (
+                  <MenuItem key={category.name} value={category.name} sx={{ gap: 1.5, padding: '12px 18px' }}>
+                    <CategoryIcon>{category.icon}</CategoryIcon>
+                    {category.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          ) : (
+            <CategoryFilters>
+              {categories.map((category) => (
+                <CategoryPill
+                  key={category.name}
+                  active={activeCategory === category.name}
+                  onClick={() => setActiveCategory(category.name)}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <CategoryIcon>{category.icon}</CategoryIcon>
+                  {category.name}
+                  <Box
+                      component="span"
+                      sx={{
+                        ml: 1,
+                        px: 1.5,
+                        py: 0.5,
+                        borderRadius: '12px',
+                        fontSize: '0.75rem',
+                        fontWeight: 700,
+                        background: activeCategory === category.name 
+                          ? 'linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1))' 
+                          : 'linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05))',
+                        backdropFilter: 'blur(8px)',
+                        WebkitBackdropFilter: 'blur(8px)',
+                        border: activeCategory === category.name 
+                          ? '1px solid rgba(255, 255, 255, 0.3)' 
+                          : '1px solid rgba(255, 255, 255, 0.1)',
+                        boxShadow: activeCategory === category.name 
+                          ? '0 2px 8px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2)' 
+                          : '0 1px 4px rgba(0, 0, 0, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.1)',
+                        color: activeCategory === category.name ? 'rgba(255, 255, 255, 0.95)' : 'rgba(255, 255, 255, 0.8)',
+                        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                        minWidth: '24px',
+                        textAlign: 'center',
+                        letterSpacing: '0.5px',
+                      }}
+                    >
+                      {category.count}
+                    </Box>
+                </CategoryPill>
+              ))}
+            </CategoryFilters>
+          )}
         </motion.div>
 
         <AnimatePresence mode="wait">
