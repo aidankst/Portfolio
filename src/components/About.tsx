@@ -9,6 +9,28 @@ const StyledSection = styled('section')(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   padding: theme.spacing(10, 1),
+  position: 'relative',
+  overflow: 'hidden',
+  background: theme.palette.mode === 'light' 
+    ? 'radial-gradient(circle at 20% 80%, rgba(240, 240, 255, 0.8) 0%, rgba(255, 255, 255, 0.6) 100%)' 
+    : 'radial-gradient(circle at 20% 80%, rgba(10, 25, 47, 0.8) 0%, rgba(10, 25, 47, 0.6) 100%)',
+  backgroundSize: '200% 200%',
+  animation: 'moveGradient 10s ease infinite',
+  '@keyframes moveGradient': {
+    '0%': { backgroundPosition: '0% 50%' },
+    '50%': { backgroundPosition: '100% 50%' },
+    '100%': { backgroundPosition: '0% 50%' },
+  },
+  '&::before': {
+    content: '""',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    background: 'radial-gradient(circle at 50% 50%, rgba(100, 255, 218, 0.03) 0%, rgba(10, 25, 47, 0) 50%)',
+    pointerEvents: 'none',
+  },
   [theme.breakpoints.up('md')]: {
     padding: theme.spacing(10, 0),
   },
@@ -96,20 +118,23 @@ const About = () => {
           <Grid container spacing={4}>
             <Grid item xs={12}>
               <Typography variant="body1" paragraph color="text.secondary" sx={{
-                fontSize: { xs: '0.9rem', sm: '1rem' },
-                textAlign: { xs: 'left', md: 'justify' }
+                fontSize: { xs: '0.95rem', sm: '1.05rem' },
+                textAlign: { xs: 'left', md: 'justify' },
+                lineHeight: 1.7,
               }}>
                 Hello! I'm Kaung Sithu, a detail-oriented Machine Learning Research Intern at AGH University of Science and Technology. I have a strong foundation in Python, SQL, and data visualization tools, with a focus on enhancing dataset reliability and providing actionable insights through statistical analysis and data modeling.
               </Typography>
               <Typography variant="body1" paragraph color="text.secondary" sx={{
-                fontSize: { xs: '0.9rem', sm: '1rem' },
-                textAlign: { xs: 'left', md: 'justify' }
+                fontSize: { xs: '0.95rem', sm: '1.05rem' },
+                textAlign: { xs: 'left', md: 'justify' },
+                lineHeight: 1.7,
               }}>
                 I hold a Bachelor of Science in Computer Science from AGH University of Science and Technology in Krakow, Poland. I'm passionate about leveraging tools like Python, SQL, and various machine learning frameworks to create meaningful solutions that drive research and development forward.
               </Typography>
               <Typography variant="body1" paragraph color="text.secondary" sx={{
-                fontSize: { xs: '0.9rem', sm: '1rem' },
-                textAlign: { xs: 'left', md: 'justify' }
+                fontSize: { xs: '0.95rem', sm: '1.05rem' },
+                textAlign: { xs: 'left', md: 'justify' },
+                lineHeight: 1.7,
               }}>
                 Here are some technologies I've been working with recently:
               </Typography>
@@ -135,15 +160,20 @@ const About = () => {
                             <Typography
                               variant="body2"
                               color="primary"
-                              sx={{
+                              sx={(theme) => ({
                                 display: 'flex',
                                 alignItems: 'center',
                                 gap: 1,
+                                fontSize: { xs: '0.9rem', sm: '1rem' },
+                                fontWeight: 500,
+                                color: theme.palette.text.primary,
                                 '&::before': {
                                   content: '"✔"',
-                                  color: 'primary.main',
+                                  color: theme.palette.primary.main,
+                                  fontSize: '1.1em',
+                                  mr: 0.5,
                                 },
-                              }}
+                              })}
                             >
                               {skill}
                             </Typography>
@@ -164,16 +194,21 @@ const About = () => {
                         color="primary"
                         size="small"
                         onClick={() => setShowAllSkills(!showAllSkills)}
-                        sx={{
-                          fontSize: '0.75rem',
-                          padding: '4px 12px',
-                          minWidth: '120px',
-                          borderColor: 'rgba(100, 255, 218, 0.3)',
+                        sx={(theme) => ({
+                          fontSize: '0.8rem',
+                          padding: '6px 16px',
+                          minWidth: '140px',
+                          borderRadius: '12px',
+                          borderColor: theme.palette.primary.main,
+                          color: theme.palette.primary.main,
+                          fontWeight: 600,
                           '&:hover': {
-                            borderColor: 'primary.main',
-                            backgroundColor: 'rgba(100, 255, 218, 0.1)'
-                          }
-                        }}
+                            borderColor: theme.palette.primary.main,
+                            backgroundColor: 'rgba(100, 255, 218, 0.1)',
+                            boxShadow: `0 4px 15px ${theme.palette.primary.main}33`,
+                            transform: 'translateY(-2px)',
+                          },
+                        })}
                       >
                         {showAllSkills ? 'Show Less' : 'Show More Skills'}
                       </Button>
@@ -182,7 +217,12 @@ const About = () => {
                 )}
               </Box>
 
-              <Typography variant="body1" color="text.secondary" sx={{ mt: 4, mb: 2, fontSize: { xs: '0.9rem', sm: '1rem' } }}>
+              <Typography variant="body1" color="text.secondary" sx={{
+                mt: 4,
+                mb: 2,
+                fontSize: { xs: '0.95rem', sm: '1.05rem' },
+                lineHeight: 1.7,
+              }}>
                 Languages I speak:
               </Typography>
               <Grid container spacing={2}>
@@ -199,38 +239,44 @@ const About = () => {
                       style={{ width: '100%' }}
                     >
                       <Box
-                        sx={{
-                          p: 1.5,
-                          borderRadius: 4,
-                          border: '1px solid rgba(100, 255, 218, 0.2)',
-                          background: 'rgba(100, 255, 218, 0.03)',
+                        sx={(theme) => ({
+                          p: 2,
+                          borderRadius: 3,
+                          border: `1px solid ${theme.palette.mode === 'light' ? 'rgba(0, 0, 0, 0.1)' : 'rgba(255, 255, 255, 0.1)'}`, 
+                          background: theme.palette.mode === 'light' 
+                            ? 'rgba(255, 255, 255, 0.4)' 
+                            : 'rgba(255, 255, 255, 0.05)',
                           backdropFilter: 'blur(8px)',
+                          WebkitBackdropFilter: 'blur(8px)',
+                          boxShadow: `0 4px 16px ${theme.palette.mode === 'light' ? 'rgba(0, 0, 0, 0.05)' : 'rgba(0, 0, 0, 0.1)'}`, 
                           transition: 'all 0.3s ease',
                           '&:hover': {
-                            background: 'rgba(100, 255, 218, 0.08)',
-                            borderColor: 'rgba(100, 255, 218, 0.4)',
+                            transform: 'translateY(-3px)',
+                            boxShadow: `0 8px 24px ${theme.palette.mode === 'light' ? 'rgba(0, 0, 0, 0.08)' : 'rgba(0, 0, 0, 0.15)'}`, 
                           },
-                        }}
+                        })}
                       >
                         <Typography 
                           component="div"
-                          variant="body2" 
-                          color="primary" 
-                          sx={{ 
-                            display: 'flex', 
-                            alignItems: 'center', 
+                          variant="body1" 
+                          color="text.primary" 
+                          sx={{
+                            display: 'flex',
+                            alignItems: 'center',
                             gap: 1.5,
-                            fontSize: { xs: '0.8rem', sm: '0.9rem' }
+                            fontSize: { xs: '0.95rem', sm: '1.05rem' },
+                            fontWeight: 600,
                           }}
                         >
-                          <span style={{ fontSize: '1.2em' }}>{language.flag}</span>
+                          <span style={{ fontSize: '1.3em' }}>{language.flag}</span>
                           <Box>
                             <div>{language.lang}</div>
                             <div style={{ 
-                              fontSize: '0.75em',
-                              opacity: 0.8,
+                              fontSize: '0.8em',
+                              opacity: 0.7,
                               lineHeight: 1.2,
-                              marginTop: 2
+                              marginTop: 2,
+                              color: theme.palette.text.secondary,
                             }}>
                               {language.level}
                             </div>

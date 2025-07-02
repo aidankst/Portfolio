@@ -14,9 +14,16 @@ const StyledSection = styled('section')(({ theme }) => ({
   padding: theme.spacing(10, 1),
   position: 'relative',
   overflow: 'hidden',
-  background: theme.palette.background.default,
-  color: theme.palette.text.primary,
-  transition: 'all 0.3s ease',
+  background: theme.palette.mode === 'light' 
+    ? 'radial-gradient(circle at 20% 80%, rgba(240, 240, 255, 0.8) 0%, rgba(255, 255, 255, 0.6) 100%)' 
+    : 'radial-gradient(circle at 20% 80%, rgba(10, 25, 47, 0.8) 0%, rgba(10, 25, 47, 0.6) 100%)',
+  backgroundSize: '200% 200%',
+  animation: 'moveGradient 10s ease infinite',
+  '@keyframes moveGradient': {
+    '0%': { backgroundPosition: '0% 50%' },
+    '50%': { backgroundPosition: '100% 50%' },
+    '100%': { backgroundPosition: '0% 50%' },
+  },
   '&::before': {
     content: '""',
     position: 'absolute',
@@ -34,32 +41,20 @@ const StyledSection = styled('section')(({ theme }) => ({
 
 const AchievementCard = styled(motion(Paper))(({ theme }) => ({
   padding: theme.spacing(4),
-  borderRadius: theme.spacing(2),
-  background: 'rgba(255, 255, 255, 0.02)',
-  backdropFilter: 'blur(10px)',
-  border: '1px solid rgba(255, 255, 255, 0.1)',
-  boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
-  transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+  borderRadius: theme.spacing(3),
+  background: theme.palette.mode === 'light' 
+    ? 'rgba(255, 255, 255, 0.6)' 
+    : 'rgba(10, 25, 47, 0.5)',
+  boxShadow: `0 8px 32px 0 ${theme.palette.mode === 'light' ? 'rgba(31, 38, 135, 0.15)' : 'rgba(0, 0, 0, 0.2)'}`,
+  backdropFilter: 'blur(12px)',
+  WebkitBackdropFilter: 'blur(12px)',
+  border: `1px solid ${theme.palette.mode === 'light' ? 'rgba(255, 255, 255, 0.2)' : 'rgba(255, 255, 255, 0.1)'}`,
+  transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
   overflow: 'hidden',
   position: 'relative',
-  '&::before': {
-    content: '""',
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    height: '4px',
-    background: 'linear-gradient(90deg, #64ffda, #00bfa5)',
-    opacity: 0,
-    transition: 'opacity 0.3s ease',
-  },
   '&:hover': {
     transform: 'translateY(-8px)',
-    boxShadow: '0 12px 40px rgba(0, 0, 0, 0.15)',
-    background: 'rgba(255, 255, 255, 0.05)',
-    '&::before': {
-      opacity: 1,
-    },
+    boxShadow: `0 16px 40px 0 ${theme.palette.mode === 'light' ? 'rgba(31, 38, 135, 0.2)' : 'rgba(0, 0, 0, 0.3)'}`,
   },
   [theme.breakpoints.down('sm')]: {
     padding: theme.spacing(3),
@@ -68,26 +63,30 @@ const AchievementCard = styled(motion(Paper))(({ theme }) => ({
 
 const CompanyLogo = styled('img')(({ theme }) => ({
   width: 'auto',
-  height: '40px',
+  height: '50px',
   objectFit: 'contain',
   opacity: 0.9,
   transition: 'all 0.3s ease',
+  filter: theme.palette.mode === 'dark' ? 'brightness(1.2)' : 'none',
   '&:hover': {
     opacity: 1,
-    transform: 'scale(1.05)',
+    transform: 'scale(1.08)',
   },
   [theme.breakpoints.up('sm')]: {
-    height: '50px',
+    height: '60px',
   },
 }));
 
 const SkillChip = styled(motion.span)(({ theme }) => ({
   color: theme.palette.primary.main,
-  background: 'rgba(100, 255, 218, 0.03)',
-  border: '1px solid rgba(100, 255, 218, 0.15)',
+  background: theme.palette.mode === 'dark'
+    ? 'rgba(100, 255, 218, 0.05)'
+    : 'rgba(0, 0, 0, 0.03)',
+  border: `1px solid ${theme.palette.mode === 'dark' ? 'rgba(100, 255, 218, 0.2)' : 'rgba(0, 0, 0, 0.08)'}`,
   borderRadius: '20px',
-  padding: theme.spacing(0.5, 2),
-  fontSize: '0.75rem',
+  padding: theme.spacing(0.8, 2),
+  fontSize: '0.8rem',
+  fontWeight: 500,
   display: 'inline-block',
   margin: theme.spacing(0.5),
   cursor: 'default',
@@ -96,61 +95,52 @@ const SkillChip = styled(motion.span)(({ theme }) => ({
   transition: 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
   boxShadow: '0 2px 8px rgba(0, 0, 0, 0.05)',
   [theme.breakpoints.down('sm')]: {
-    fontSize: '0.7rem',
-    padding: theme.spacing(0.4, 1.5),
+    fontSize: '0.75rem',
+    padding: theme.spacing(0.6, 1.8),
   },
   '&:hover': {
-    background: 'rgba(100, 255, 218, 0.08)',
+    background: theme.palette.mode === 'dark'
+      ? 'rgba(100, 255, 218, 0.1)'
+      : 'rgba(0, 0, 0, 0.06)',
     transform: 'translateY(-4px) scale(1.05)',
     boxShadow: '0 8px 16px rgba(100, 255, 218, 0.15)',
-    border: '1px solid rgba(100, 255, 218, 0.3)',
+    border: `1px solid ${theme.palette.mode === 'dark' ? 'rgba(100, 255, 218, 0.4)' : 'rgba(0, 0, 0, 0.15)'}`, 
   },
 }));
 
 const CertificationTitle = styled(Typography)(({ theme }) => ({
-  color: theme.palette.primary.main,
-  fontSize: '1.1rem',
+  color: theme.palette.text.primary,
+  fontSize: '1.25rem',
   [theme.breakpoints.up('sm')]: {
-    fontSize: '1.25rem',
+    fontSize: '1.4rem',
   },
-  fontWeight: 600,
+  fontWeight: 700,
   marginBottom: theme.spacing(1),
+  lineHeight: 1.3,
   transition: 'color 0.3s ease',
   '&:hover': {
-    color: '#64ffda',
+    color: theme.palette.primary.main,
   },
 }));
 
-// const SingleCertCard = styled(AchievementCard)(({ theme }) => ({
-//   display: 'flex',
-//   flexDirection: 'column',
-//   alignItems: 'center',
-//   '& .company-logo': {
-//     marginBottom: theme.spacing(3),
-//     height: '60px',
-//     [theme.breakpoints.up('sm')]: {
-//       height: '70px',
-//     },
-//   },
-// }));
-
 const CertBadge = styled('img')(({ theme }) => ({
-  width: '100px',
+  width: '120px',
   height: 'auto',
   position: 'absolute',
-  top: '10px',
-  left: '10px',
-  transform: 'rotate(-5deg)',
+  top: '15px',
+  right: '15px',
+  transform: 'rotate(8deg)',
   transition: 'all 0.3s ease',
-  filter: 'drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2))',
+  filter: 'drop-shadow(0 6px 12px rgba(0, 0, 0, 0.2))',
+  zIndex: 1,
   '&:hover': {
-    transform: 'rotate(-8deg) scale(1.05)',
-    filter: 'drop-shadow(0 6px 12px rgba(0, 0, 0, 0.3))',
+    transform: 'rotate(12deg) scale(1.08)',
+    filter: 'drop-shadow(0 8px 16px rgba(0, 0, 0, 0.3))',
   },
   [theme.breakpoints.down('sm')]: {
-    width: '80px',
-    top: '8px',
-    left: '8px',
+    width: '90px',
+    top: '10px',
+    right: '10px',
   },
 }));
 
@@ -186,6 +176,7 @@ const Certifications = () => {
         credentialId: 'JS5MOS9SOV3D',
         link: 'https://www.coursera.org/account/accomplishments/verify/JS5MOS9SOV3D',
         skills: ['Data Analysis', 'SQL', 'Spreadsheets', 'Data Management'],
+        image: 'https://www.credly.com/images/b6a6c1a6-224e-4126-920b-122222f821b6/Google_Data_Analytics_Professional_Certificate_Badge.png',
       },
       {
         title: 'Data Analysis with R Programming',
@@ -193,6 +184,7 @@ const Certifications = () => {
         credentialId: '8OJSFHYC6HHW',
         link: 'https://www.coursera.org/account/accomplishments/verify/8OJSFHYC6HHW',
         skills: ['Data Analysis', 'R Markdown', 'Data Visualization', 'R Programming', 'Rstudio'],
+        image: 'https://www.coursera.org/individual-course-badge-image/8OJSFHYC6HHW',
       },
       {
         title: 'Share Data Through the Art of Visualization',
@@ -200,6 +192,7 @@ const Certifications = () => {
         credentialId: '67JLUGMS70F8',
         link: 'https://www.coursera.org/account/accomplishments/verify/67JLUGMS70F8',
         skills: ['Data Analysis', 'Tableau Software', 'Data Visualization', 'Presentation'],
+        image: 'https://www.coursera.org/individual-course-badge-image/67JLUGMS70F8',
       },
       {
         title: 'Analyze Data to Answer Questions',
@@ -207,6 +200,7 @@ const Certifications = () => {
         credentialId: 'E71T9UJOR0T8',
         link: 'https://www.coursera.org/account/accomplishments/verify/E71T9UJOR0T8',
         skills: ['Data Aggregation', 'Spreadsheet', 'Data Analysis', 'Data Calculations', 'SQL'],
+        image: 'https://www.coursera.org/individual-course-badge-image/E71T9UJOR0T8',
       },
       {
         title: 'Process Data from Dirty to Clean',
@@ -214,6 +208,7 @@ const Certifications = () => {
         credentialId: 'TMHFH9OBG1A7',
         link: 'https://www.coursera.org/account/accomplishments/verify/TMHFH9OBG1A7',
         skills: ['Data Analysis', 'R Markdown', 'Data Visualization', 'R Programming', 'Rstudio'],
+        image: 'https://www.coursera.org/individual-course-badge-image/TMHFH9OBG1A7',
       },
       {
         title: 'Prepare Data for Exploration',
@@ -221,6 +216,7 @@ const Certifications = () => {
         credentialId: 'TJBBCL8WEPS9',
         link: 'https://www.coursera.org/account/accomplishments/verify/TJBBCL8WEPS9',
         skills: ['Decision-Making', 'Spreadsheet', 'Data Analysis', 'Problem Solving', 'Questioning'],
+        image: 'https://www.coursera.org/individual-course-badge-image/TJBBCL8WEPS9',
       },
       {
         title: 'Ask Questions to Make Data-Driven Decisions',
@@ -228,6 +224,7 @@ const Certifications = () => {
         credentialId: 'TQOL78EMFEQ0',
         link: 'https://www.coursera.org/account/accomplishments/verify/TQOL78EMFEQ0',
         skills: ['Decision-Making', 'Spreadsheets', 'Data Analysis', 'Problem Solving', 'Questioning'],
+        image: 'https://www.coursera.org/individual-course-badge-image/TQOL78EMFEQ0',
       },
       {
         title: 'Foundations: Data, Data, Everywhere',
@@ -235,6 +232,7 @@ const Certifications = () => {
         credentialId: '8MG2THRLCNHB',
         link: 'https://www.coursera.org/account/accomplishments/verify/8MG2THRLCNHB',
         skills: ['Spreadsheets', 'Data Analysis', 'SQL', 'Data Visualization', 'Data Cleaning'],
+        image: 'https://www.coursera.org/individual-course-badge-image/8MG2THRLCNHB',
       },
     ],
     ibm: [
@@ -244,6 +242,7 @@ const Certifications = () => {
         credentialId: 'ZFYVMCALGRSR',
         link: 'https://www.coursera.org/account/accomplishments/verify/ZFYVMCALGRSR',
         skills: ['Software Architecture', 'Programming Principles', 'Agile and Scrum', 'Software Engineering', 'Software Development Lifecycle (SDLC)'],
+        image: 'https://www.coursera.org/individual-course-badge-image/ZFYVMCALGRSR',
       },
       {
         title: 'Exploratory Data Analysis for Machine Learning',
@@ -251,6 +250,7 @@ const Certifications = () => {
         credentialId: 'KNYHNHNCTUQ4',
         link: 'https://www.coursera.org/account/accomplishments/verify/KNYHNHNCTUQ4',
         skills: ['Artificial Intelligence (AI)', 'Machine Learning', 'Feature Engineering', 'Statistical Hypothesis Testing', 'Exploratory Data Analysis'],
+        image: 'https://www.coursera.org/individual-course-badge-image/KNYHNHNCTUQ4',
       },
     ],
     cisco: [
@@ -260,8 +260,8 @@ const Certifications = () => {
         credentialId: '#',
         link: 'https://www.credly.com/badges/4aa8a6c5-4846-489b-8ffa-890b1fb4dfd1',
         skills: ['Cyber Best Practices', 'Cybersecurity', 'Network Vulnerabilities', 'Privacy and Data Confidentiality', 'Threat Detection'],
-        hasBadge: true,
-        badgeId: '4aa8a6c5-4846-489b-8ffa-890b1fb4dfd1',
+        image: ciscoBadge,
+        displayBadge: true,
       },
     ],
   };
@@ -272,7 +272,12 @@ const Certifications = () => {
       transition={{ type: 'spring', stiffness: 300 }}
     >
       {showLogo && (
-        <Box sx={{ display: 'flex', justifyContent: 'center', mb: 3 }}>
+        <Box sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          mb: 3,
+          filter: (theme) => theme.palette.mode === 'dark' ? 'brightness(1.2)' : 'none',
+        }}>
           <CompanyLogo
             src={company === 'google' ? googleLogo : company === 'ibm' ? ibmLogo : ciscoLogo}
             alt={`${company.toUpperCase()} Logo`}
@@ -280,8 +285,8 @@ const Certifications = () => {
           />
         </Box>
       )}
-      {cert.hasBadge && (
-        <CertBadge src={ciscoBadge} alt="Cisco Cybersecurity Badge" />
+      {cert.displayBadge && (
+        <CertBadge src={cert.image} alt={`${cert.title} Badge`} />
       )}
       <CertificationTitle variant="h6">
         {cert.title}
@@ -316,10 +321,10 @@ const Certifications = () => {
               py: 0.2,
               px: 1.5,
               fontSize: '0.75rem',
-              borderColor: 'rgba(100, 255, 218, 0.3)',
+              borderColor: 'primary.main',
               color: 'primary.main',
               '&:hover': {
-                borderColor: '#64ffda',
+                borderColor: 'primary.main',
                 backgroundColor: 'rgba(100, 255, 218, 0.05)',
               },
             }}
@@ -367,6 +372,7 @@ const Certifications = () => {
               alignItems: 'center',
               gap: 2,
               mb: 6,
+              fontSize: { xs: '1.75rem', sm: '2rem', md: '2.125rem' },
               '&::after': {
                 content: '""',
                 flex: 1,

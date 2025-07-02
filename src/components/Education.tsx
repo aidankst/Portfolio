@@ -145,14 +145,14 @@ const Education = () => {
               >
                 AGH University of Science and Technology
               </Typography>
-              <Typography variant="body1" color="text.secondary" sx={(theme) => ({
+              <Typography variant="body1" color="text.secondary" sx={{
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
                 gap: 1,
                 fontSize: { xs: '0.95rem', sm: '1rem' },
                 fontWeight: 500,
-              })}>
+              }}>
                 <span>🇵🇱 🇪🇺</span>
                 Kraków, Poland · 2021 - 2025
               </Typography>
@@ -186,10 +186,10 @@ const Education = () => {
                     })}>
                       B.Sc Computer Science
                     </Typography>
-                    <Typography variant="body1" color="text.secondary" sx={(theme) => ({
+                    <Typography variant="body1" color="text.secondary" sx={{
                       fontSize: { xs: '0.9rem', sm: '0.95rem' },
                       lineHeight: 1.6,
-                    })}>
+                    }}>
                       Focus on software engineering, data structures, and machine learning
                     </Typography>
                   </Box>
@@ -215,7 +215,7 @@ const Education = () => {
                       boxShadow: `0 8px 24px ${theme.palette.mode === 'light' ? 'rgba(0, 0, 0, 0.08)' : 'rgba(0, 0, 0, 0.15)'}`, 
                     }
                   })}>
-                    <Box sx={(theme) => ({ mb: { xs: 1.5, sm: 2 } })}>
+                    <Box sx={{ mb: { xs: 1.5, sm: 2 } }}>
                       <Typography variant="body2" sx={(theme) => ({
                         opacity: 0.8,
                         fontSize: { xs: '0.8rem', sm: '0.85rem' },
@@ -231,7 +231,7 @@ const Education = () => {
                         4.5/5.0
                       </Typography>
                     </Box>
-                    <Box sx={(theme) => ({})}>
+                    <Box sx={{}}>
                       <Typography variant="body2" sx={(theme) => ({
                         opacity: 0.8,
                         fontSize: { xs: '0.8rem', sm: '0.85rem' },
