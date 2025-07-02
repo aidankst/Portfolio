@@ -1,5 +1,5 @@
 import './App.css'
-import { useState, useMemo, useEffect } from 'react';
+import { useMemo } from 'react';
 import { ThemeProvider, createTheme, CssBaseline } from '@mui/material';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -13,15 +13,26 @@ import Skills from './components/Skills';
 import Contact from './components/Contact';
 import { ThemeProvider as CustomThemeProvider, useTheme } from './context/ThemeContext';
 import styled from '@emotion/styled';
+import { keyframes } from '@emotion/react';
 import { Theme as MuiTheme } from '@mui/material/styles';
-// import { useTheme as useMuiTheme } from '@mui/material/styles';
 
-// Update ThemeTransitionRoot to use proper theme typing
-const ThemeTransitionRoot = styled('div')<{ theme?: MuiTheme }>(({ theme }) => ({
+const gradientAnimation = keyframes`
+  0% {
+    transform: translate(0%, 0%) rotate(15deg);
+  }
+  50% {
+    transform: translate(-10%, 10%) rotate(5deg);
+  }
+  100% {
+    transform: translate(0%, 0%) rotate(15deg);
+  }
+`;
+
+const AppContainer = styled('div')<{ theme?: MuiTheme }>(({ theme }) => ({
   position: 'relative',
   minHeight: '100vh',
-  backgroundColor: theme?.palette?.background?.default,
-  color: theme?.palette?.text?.primary,
+  backgroundColor: theme?.palette.background.default,
+  color: theme?.palette.text.primary,
   overflow: 'hidden',
   '&::before': {
     content: '""',
@@ -31,46 +42,32 @@ const ThemeTransitionRoot = styled('div')<{ theme?: MuiTheme }>(({ theme }) => (
     width: '200%',
     height: '200%',
     background: `linear-gradient(
-      30deg,
-      ${theme?.palette?.primary?.main} 0%,
-      ${theme?.palette?.background?.paper} 50%,
-      ${theme?.palette?.background?.default} 100%
+      45deg,
+      ${theme?.palette.primary.main} 0%,
+      ${theme?.palette.background.paper} 50%,
+      ${theme?.palette.background.default} 100%
     )`,
-    transform: 'translateY(-100%) rotate(15deg)',
-    transition: 'transform 1s cubic-bezier(0.19, 1, 0.22, 1)',
-    zIndex: 9999,
+    animation: `${gradientAnimation} 30s ease infinite`,
+    transition: 'background 1.5s cubic-bezier(0.19, 1, 0.22, 1)',
+    zIndex: -1,
     mixBlendMode: 'soft-light',
-    opacity: 0.4,
-    filter: 'blur(30px)',
+    opacity: theme?.palette.mode === 'dark' ? 0.3 : 0.5,
+    filter: 'blur(60px)',
   },
-  '&.theme-switching::before': {
-    transform: 'translateY(0) rotate(15deg)',
-  }
 }));
 
-// Update ThemedApp to use MUI theme
 const ThemedApp = () => {
   const { isDarkMode } = useTheme();
-  const [isThemeSwitching, setIsThemeSwitching] = useState(false);
   
   const theme = useMemo(
     () => createTheme(getDesignTokens(isDarkMode ? 'dark' : 'light')),
     [isDarkMode]
   );
 
-  // Handle theme transition
-  useEffect(() => {
-    setIsThemeSwitching(true);
-    const timer = setTimeout(() => {
-      setIsThemeSwitching(false);
-    }, 1000);  // Match CSS transition duration
-    return () => clearTimeout(timer);
-  }, [isDarkMode]);
-
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <ThemeTransitionRoot className={isThemeSwitching ? 'theme-switching' : ''}>
+      <AppContainer>
         <Navbar />
         <main>
           <Hero />
@@ -83,12 +80,11 @@ const ThemedApp = () => {
           <Skills />
           <Contact />
         </main>
-      </ThemeTransitionRoot>
+      </AppContainer>
     </ThemeProvider>
   );
 };
 
-// Main App component
 function App() {
   return (
     <CustomThemeProvider>
@@ -99,23 +95,22 @@ function App() {
 
 export default App;
 
-// Add the getDesignTokens function
 const getDesignTokens = (mode: 'light' | 'dark') => ({
   palette: {
     mode,
     ...(mode === 'light'
       ? {
           background: {
-            default: '#fafafa',
+            default: '#f0f4f8',
             paper: '#ffffff',
           },
           text: {
-            primary: '#1a1a2e',
+            primary: '#1a202c',
             secondary: '#4a5568',
           },
           primary: {
-            main: '#0066cc',
-            light: 'rgba(0, 102, 204, 0.15)',
+            main: '#007aff',
+            light: 'rgba(0, 122, 255, 0.15)',
           },
         }
       : {
@@ -152,6 +147,9 @@ const getDesignTokens = (mode: 'light' | 'dark') => ({
         teal: '#64ffda',
       },
     },
+  },
+  typography: {
+    fontFamily: '"SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
   },
   transitions: {
     duration: {
