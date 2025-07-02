@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Typography, Container, Box, Chip, useTheme } from '@mui/material';
+import { Typography, Container, Box, Chip, useTheme, useMediaQuery } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { Work as WorkIcon } from '@mui/icons-material';
 import aghLogo from '../assets/AGH_logo.png';
@@ -26,9 +26,11 @@ const StyledSection = styled('section')(({ theme }) => ({
   },
 }));
 
-const TimelineConnector = styled('div')(({ theme }) => ({
+const TimelineConnector = styled('div', {
+  shouldForwardProp: (prop) => prop !== 'isMobile',
+})<{ isMobile?: boolean }>(({ theme, isMobile }) => ({
   position: 'absolute',
-  left: '10px',
+  left: isMobile ? '10px' : '10px',
   top: '40px',
   bottom: 0,
   width: '2px',
@@ -36,34 +38,57 @@ const TimelineConnector = styled('div')(({ theme }) => ({
     ${theme.palette.primary.main} 0%, 
     rgba(100, 255, 218, 0.2) 100%)`,
   zIndex: 0,
+  display: isMobile ? 'none' : 'block',
 }));
 
-const ExperienceCard = styled(Box)(({ theme }) => ({
+const ExperienceCard = styled(Box, {
+  shouldForwardProp: (prop) => prop !== 'isMobile',
+})<{ isMobile?: boolean }>(({ theme, isMobile }) => ({
   position: 'relative',
   marginBottom: theme.spacing(5),
-  padding: theme.spacing(4),
+  padding: isMobile ? theme.spacing(3, 1) : theme.spacing(4),
   marginLeft: 0,
-  background: theme.palette.mode === 'light' 
-    ? 'rgba(255, 255, 255, 0.6)' 
+  background: isMobile
+    ? 'transparent'
+    : theme.palette.mode === 'light'
+    ? 'rgba(255, 255, 255, 0.6)'
     : 'rgba(10, 25, 47, 0.5)',
-  borderRadius: theme.spacing(3),
-  boxShadow: `0 8px 32px 0 ${theme.palette.mode === 'light' ? 'rgba(31, 38, 135, 0.15)' : 'rgba(0, 0, 0, 0.2)'}`,
-  backdropFilter: 'blur(12px)',
-  WebkitBackdropFilter: 'blur(12px)',
-  border: `1px solid ${theme.palette.mode === 'light' ? 'rgba(255, 255, 255, 0.2)' : 'rgba(255, 255, 255, 0.1)'}`,
+  borderRadius: isMobile ? 0 : theme.spacing(3),
+  boxShadow: isMobile
+    ? 'none'
+    : `0 8px 32px 0 ${
+        theme.palette.mode === 'light'
+          ? 'rgba(31, 38, 135, 0.15)'
+          : 'rgba(0, 0, 0, 0.2)'
+      }`,
+  backdropFilter: isMobile ? 'none' : 'blur(12px)',
+  WebkitBackdropFilter: isMobile ? 'none' : 'blur(12px)',
+  border: isMobile
+    ? 'none'
+    : `1px solid ${
+        theme.palette.mode === 'light'
+          ? 'rgba(255, 255, 255, 0.2)'
+          : 'rgba(255, 255, 255, 0.1)'
+      }`,
   transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
   [theme.breakpoints.down('sm')]: {
-    padding: theme.spacing(3),
+    padding: theme.spacing(3, 0),
     marginBottom: theme.spacing(4),
   },
   '&:hover': {
-    transform: 'translateY(-8px)',
-    boxShadow: `0 16px 40px 0 ${theme.palette.mode === 'light' ? 'rgba(31, 38, 135, 0.2)' : 'rgba(0, 0, 0, 0.3)'}`,
+    transform: isMobile ? 'none' : 'translateY(-8px)',
+    boxShadow: isMobile
+      ? 'none'
+      : `0 16px 40px 0 ${
+          theme.palette.mode === 'light'
+            ? 'rgba(31, 38, 135, 0.2)'
+            : 'rgba(0, 0, 0, 0.3)'
+        }`,
   },
   '&::before': {
     content: '""',
     position: 'absolute',
-    left: '-29px',
+    left: isMobile ? '-19px' : '-29px',
     top: '45px',
     width: '16px',
     height: '16px',
@@ -72,6 +97,7 @@ const ExperienceCard = styled(Box)(({ theme }) => ({
     border: `3px solid ${theme.palette.background.default}`,
     zIndex: 1,
     boxShadow: `0 0 10px 0 ${theme.palette.primary.main}99`,
+    display: isMobile ? 'none' : 'block',
   },
 }));
 
@@ -145,6 +171,7 @@ const TypeBadge = styled(Typography)(({ theme }) => ({
 
 const Experience = () => {
   const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const fadeInUp = {
     hidden: { opacity: 0, y: 60 },
     visible: {
@@ -241,14 +268,15 @@ const Experience = () => {
                 flex: 1,
                 height: '1px',
                 background: 'rgba(100, 255, 218, 0.3)',
+                display: isMobile ? 'none' : 'block',
               },
             }}
           >
             <span>Where I've Worked</span>
           </Typography>
 
-          <Box sx={{ position: 'relative', pl: 4, pb: 4 }}>
-            <TimelineConnector />
+          <Box sx={{ position: 'relative', pl: isMobile ? 0 : 4, pb: 4 }}>
+            <TimelineConnector isMobile={isMobile} />
             {Object.entries(experiences).map(([groupKey, positions]) => (
               <motion.div
                 key={groupKey}
@@ -258,24 +286,26 @@ const Experience = () => {
                 viewport={{ once: true }}
                 transition={{ delay: 0.2 }}
               >
-                <ExperienceCard>
+                <ExperienceCard isMobile={isMobile}>
                   {/* Company Header */}
                   <Box sx={{
                     display: 'flex',
-                    gap: 2.5,
+                    gap: 2,
                     mb: 3.5,
                     pb: 3,
                     flexDirection: { xs: 'column', sm: 'row' },
-                    alignItems: { xs: 'flex-start', sm: 'center' },
+                    alignItems: { xs: 'center', sm: 'center' },
                     borderBottom: `1px solid ${theme.palette.mode === 'light' ? 'rgba(0, 0, 0, 0.1)' : 'rgba(255, 255, 255, 0.1)'}`
                   }}>
-                    {positions[0].company === 'AGH University of Science and Technology' ? (
-                      <CompanyLogo src={aghLogo} alt="AGH University Logo" />
-                    ) : (
-                      <CompanyIcon />
-                    )}
-                    <Box>
-                      <Typography variant="h5" color="primary" sx={{ mb: 0.5, fontWeight: 700 }}>
+                    <Box sx={{ width: { xs: '100%', sm: 'auto' }, textAlign: { xs: 'center', sm: 'left' } }}>
+                      {positions[0].company === 'AGH University of Science and Technology' ? (
+                        <CompanyLogo src={aghLogo} alt="AGH University Logo" />
+                      ) : (
+                        <CompanyIcon />
+                      )}
+                    </Box>
+                    <Box sx={{ textAlign: { xs: 'center', sm: 'left' } }}>
+                      <Typography variant="h5" color="primary" sx={{ mb: 0.5, fontWeight: 700, fontSize: { xs: '1.25rem', sm: '1.5rem' } }}>
                         {positions[0].company}
                       </Typography>
                       <Typography
@@ -285,7 +315,6 @@ const Experience = () => {
                           display: 'flex',
                           alignItems: 'center',
                           gap: 1,
-                          textAlign: { xs: 'center', sm: 'left' },
                           justifyContent: { xs: 'center', sm: 'flex-start' },
                           fontWeight: 500,
                         }}
@@ -304,9 +333,9 @@ const Experience = () => {
                     <Box
                       key={idx}
                       sx={{
-                        ml: { xs: 0, sm: 2 },
-                        pl: { xs: 0, sm: 2 },
-                        borderLeft: { xs: 'none', sm: `2px solid rgba(100, 255, 218, 0.2)` },
+                        ml: 0,
+                        pl: 0,
+                        borderLeft: 'none',
                         '&:not(:last-child)': { mb: 4 }
                       }}
                     >
@@ -314,14 +343,14 @@ const Experience = () => {
                         display: 'flex',
                         justifyContent: 'space-between',
                         alignItems: 'flex-start',
-                        mb: { xs: 2, sm: 1.5 },
-                        flexDirection: { xs: 'column', sm: 'row' },
-                        gap: { xs: 1.5, sm: 0 }
+                        mb: 2,
+                        flexDirection: 'column',
+                        gap: 1.5
                       }}>
                         <Typography
                           variant="h6"
                           color="text.primary"
-                          sx={{ fontWeight: 600, display: 'flex', alignItems: 'center' }}
+                          sx={{ fontWeight: 600, display: 'flex', alignItems: 'center', fontSize: { xs: '1.1rem', sm: '1.25rem' } }}
                         >
                           {exp.title}
                           <TypeBadge>{exp.type}</TypeBadge>
@@ -331,7 +360,7 @@ const Experience = () => {
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ duration: 0.4, delay: 0.2 }}
                         >
-                          <PeriodBadge variant="subtitle2">
+                          <PeriodBadge variant="subtitle2" sx={{ fontSize: { xs: '0.8rem', sm: '0.875rem' } }}>
                             {exp.period}
                           </PeriodBadge>
                         </motion.div>
@@ -346,7 +375,7 @@ const Experience = () => {
                               display: 'flex',
                               mb: 1.5,
                               lineHeight: 1.8,
-                              fontSize: { xs: '0.95rem', sm: '1rem' },
+                              fontSize: { xs: '0.9rem', sm: '1rem' },
                               alignItems: 'flex-start',
                               '&:before': {
                                 content: `'${desc.emoji}'`,
@@ -363,7 +392,7 @@ const Experience = () => {
                           </Typography>
                         ))}
                       </Box>
-                      <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1.5, '& .MuiChip-root': { fontSize: { xs: '0.75rem', sm: '0.85rem' } } }}>
+                      <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1.5, '& .MuiChip-root': { fontSize: { xs: '0.7rem', sm: '0.85rem' } } }}>
                         {exp.skills.map((skill, i) => (
                           <AchievementChip
                             key={i}
