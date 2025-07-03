@@ -56,6 +56,9 @@ const AppContainer = styled('div')<{ theme?: MuiTheme }>(({ theme }) => ({
   },
 }));
 
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import PublicationDetail from './pages/PublicationDetail';
+
 const ThemedApp = () => {
   const { isDarkMode } = useTheme();
   
@@ -70,15 +73,22 @@ const ThemedApp = () => {
       <AppContainer>
         <Navbar />
         <main>
-          <Hero />
-          <About />
-          <Experience />
-          <Education />
-          <Publications />
-          <Certifications />
-          <Projects />
-          <Skills />
-          <Contact />
+          <Routes>
+            <Route path="/" element={
+              <>
+                <Hero />
+                <About />
+                <Experience />
+                <Education />
+                <Publications />
+                <Certifications />
+                <Projects />
+                <Skills />
+                <Contact />
+              </>
+            } />
+            <Route path="/publication/:id" element={<PublicationDetail />} />
+          </Routes>
         </main>
       </AppContainer>
     </ThemeProvider>
@@ -88,7 +98,9 @@ const ThemedApp = () => {
 function App() {
   return (
     <CustomThemeProvider>
-      <ThemedApp />
+      <Router basename="/Portfolio">
+        <ThemedApp />
+      </Router>
     </CustomThemeProvider>
   );
 }

@@ -1,8 +1,23 @@
-import { useState, useEffect, useRef, useMemo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { AppBar, Typography, IconButton, useTheme, useMediaQuery, List, ListItem, ListItemText, Box } from '@mui/material';
-import { Menu as MenuIcon } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
+import {
+  Menu as MenuIcon,
+} from '@mui/icons-material';
+import {
+  AppBar, Box,
+  IconButton,
+  List,
+  ListItem,
+  ListItemText,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material';
 import { styled } from '@mui/material/styles';
+import { AnimatePresence, motion } from 'framer-motion';
+import {
+  useEffect, useMemo, useRef, useState,
+} from 'react';
+
 import ThemeToggle from './ThemeToggle';
 
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
@@ -140,6 +155,7 @@ const MobileMenuItem = styled(ListItem)(({ theme }) => ({
 }));
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeItem, setActiveItem] = useState('');
@@ -175,24 +191,30 @@ const Navbar = () => {
   }, [navItems]);
 
   const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId.toLowerCase());
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      if (isMobile) {
-        setMobileOpen(false);
+    navigate('/');
+    setTimeout(() => {
+      const element = document.getElementById(sectionId.toLowerCase());
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+        if (isMobile) {
+          setMobileOpen(false);
+        }
       }
-    }
+    }, 100);
   };
 
   const scrollToHero = () => {
-    const heroSection = document.getElementById('hero');
-    if (heroSection) {
-      heroSection.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
-      });
-      setActiveItem('');
-    }
+    navigate('/');
+    setTimeout(() => {
+      const heroSection = document.getElementById('hero');
+      if (heroSection) {
+        heroSection.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start'
+        });
+        setActiveItem('');
+      }
+    }, 100);
   };
 
   const menuVariants = {

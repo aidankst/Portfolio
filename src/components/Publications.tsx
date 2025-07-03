@@ -95,7 +95,13 @@ const PublicationTag = styled(motion.span)(({ theme }) => ({
 }));
 
 
+import { useNavigate } from 'react-router-dom';
+import { ReadMore as ReadMoreIcon } from '@mui/icons-material';
+
+// ... (imports and styled components remain the same)
+
 const Publications = () => {
+  const navigate = useNavigate();
   const fadeInUp = {
     hidden: { opacity: 0, y: 60 },
     visible: {
@@ -107,10 +113,22 @@ const Publications = () => {
 
   const publications = [
     {
+      id: 'cyberattack-resilience',
+      title: 'Cyberattack Resilience of Autonomous Vehicle Sensor Systems: Evaluating RGB vs. Dynamic Vision Sensors in CARLA',
+      authors: 'Mustafa Sakhai, Kaung Sithu, Min Khant Soe Oke, Szymon Mazurek, Maciej Wielgosz',
+      journal: 'Applied Sciences, 2025, 15(13), 7493',
+      year: '',
+      abstract: 'This paper evaluates the resilience of AV sensor systems to cyberattacks, comparing RGB and DVS sensors in the CARLA simulator.',
+      doi: '10.3390/app15137493',
+      link: 'https://doi.org/10.3390/app15137493',
+      tags: ['Autonomous Vehicles', 'Cybersecurity', 'Dynamic Vision Sensors', 'CARLA'],
+      featured: true,
+    },
+    {
       title: 'Evaluating Synthetic vs. Real Dynamic Vision Sensor Data for SNN-Based Object Detection Classification',
       authors: 'Mustafa Sakhai, Kaung Sithu, Min Khant Soe Oke, Szymon Mazurek, Maciej Wielgosz',
-      journal: 'Konferencja Użytkowników Komputerów Dużej Mocy - KUKDM 2025',
-      year: '2025',
+      journal: 'In Proceedings of the KU KDM 2025 Conference, Zakopane, Poland, 2–5 April 2025',
+      year: '',
       abstract: 'This paper compares synthetic and real DVS data with RGB imagery, focusing on detection performance and latency.',
       doi: '',
       link: 'https://events.plgrid.pl/event/70/attachments/143/364/PROCEEDINGS%202025_na%20www%20bez%20notatek.pdf',
@@ -136,7 +154,6 @@ const Publications = () => {
               alignItems: 'center',
               gap: 2,
               mb: 6,
-              fontSize: { xs: '1.75rem', sm: '2rem', md: '2.125rem' },
               '&::after': {
                 content: '""',
                 flex: 1,
@@ -147,7 +164,7 @@ const Publications = () => {
           >
             <span>Publications</span>
           </Typography>
-
+          
           <Grid container spacing={4}>
             {publications.map((publication, index) => (
               <Grid item xs={12} key={index}>
@@ -157,9 +174,30 @@ const Publications = () => {
                   viewport={{ once: true, amount: 0.2 }}
                   transition={{ type: 'spring', stiffness: 300, damping: 20, delay: index * 0.1 }}
                 >
-                  <PublicationTitle variant="h6">
-                    {publication.title}
-                  </PublicationTitle>
+                  <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                    <PublicationTitle variant="h6">
+                      {publication.title}
+                    </PublicationTitle>
+                    {publication.featured && (
+                      <Box
+                        sx={{
+                          display: 'inline-block',
+                          px: 1,
+                          py: 0.25,
+                          borderRadius: '12px',
+                          fontSize: '0.7rem',
+                          fontWeight: 600,
+                          background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                          color: 'white',
+                          mt: 0.5,
+                          ml: 2,
+                          flexShrink: 0,
+                        }}
+                      >
+                        Featured
+                      </Box>
+                    )}
+                  </Box>
                   <Typography
                     variant="body1"
                     sx={{
@@ -180,7 +218,7 @@ const Publications = () => {
                       fontSize: { xs: '0.85rem', sm: '0.9rem' },
                     }}
                   >
-                    {publication.journal}, {publication.year}{publication.doi ? ` • DOI: ${publication.doi}` : ''}
+                    {publication.journal}{publication.year ? `, ${publication.year}` : ''}{publication.doi ? ` • DOI: ${publication.doi}` : ''}
                   </Typography>
                   <Typography
                     variant="body1"
@@ -219,30 +257,29 @@ const Publications = () => {
                         </PublicationTag>
                       ))}
                     </Box>
-                    {publication.link && (
-                      <Button
-                        variant="outlined"
-                        size="medium"
-                        endIcon={<OpenInNewIcon />}
-                        onClick={() => window.open(publication.link, '_blank')}
-                        sx={(theme) => ({
-                          borderColor: theme.palette.primary.main,
-                          color: theme.palette.primary.main,
-                          fontWeight: 600,
-                          borderRadius: '12px',
-                          padding: '8px 16px',
-                          transition: 'all 0.3s ease',
-                          '&:hover': {
-                            borderColor: theme.palette.primary.main,
-                            backgroundColor: 'rgba(100, 255, 218, 0.1)',
-                            boxShadow: `0 4px 15px ${theme.palette.primary.main}33`,
-                            transform: 'translateY(-2px)',
-                          },
-                        })}
-                      >
-                        View Publication
-                      </Button>
-                    )}
+                    <Box>
+                      {publication.id && (
+                        <Button
+                          variant="contained"
+                          size="medium"
+                          endIcon={<ReadMoreIcon />}
+                          onClick={() => navigate(`/publication/${publication.id}`)}
+                          sx={{ mr: 1 }}
+                        >
+                          Read More
+                        </Button>
+                      )}
+                      {publication.link && (
+                        <Button
+                          variant="outlined"
+                          size="medium"
+                          endIcon={<OpenInNewIcon />}
+                          onClick={() => window.open(publication.link, '_blank')}
+                        >
+                          View Publication
+                        </Button>
+                      )}
+                    </Box>
                   </Box>
                 </PublicationCard>
               </Grid>
@@ -253,5 +290,6 @@ const Publications = () => {
     </StyledSection>
   );
 };
+
 
 export default Publications;
