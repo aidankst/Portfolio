@@ -95,10 +95,13 @@ const ThemedApp = () => {
   );
 };
 
+import ScrollToTop from './components/ScrollToTop';
+
 function App() {
   return (
     <CustomThemeProvider>
       <Router basename="/Portfolio">
+        <ScrollToTop />
         <ThemedApp />
       </Router>
     </CustomThemeProvider>

@@ -342,15 +342,15 @@ const Experience = () => {
                       <Box sx={{
                         display: 'flex',
                         justifyContent: 'space-between',
-                        alignItems: 'flex-start',
+                        alignItems: 'center',
                         mb: 2,
-                        flexDirection: 'column',
+                        flexDirection: { xs: 'column', sm: 'row' },
                         gap: 1.5
                       }}>
                         <Typography
                           variant="h6"
                           color="text.primary"
-                          sx={{ fontWeight: 600, display: 'flex', alignItems: 'center', fontSize: { xs: '1.1rem', sm: '1.25rem' } }}
+                          sx={{ fontWeight: 600, display: 'flex', alignItems: 'center', fontSize: { xs: '1.1rem', sm: '1.25rem' }, textAlign: { xs: 'center', sm: 'left' } }}
                         >
                           {exp.title}
                           <TypeBadge>{exp.type}</TypeBadge>
