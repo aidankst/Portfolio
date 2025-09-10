@@ -68,7 +68,17 @@ const KeywordChip = styled(Chip)(({ theme }) => ({
   },
 }));
 
-const publicationsData = {
+interface Publication {
+  title: string;
+  authors: string;
+  journal: string;
+  doi: string;
+  abstract: string;
+  keywords: string[];
+  arxivId?: string;
+}
+
+const publicationsData: Record<string, Publication> = {
   'cyberattack-resilience': {
     title: 'Cyberattack Resilience of Autonomous Vehicle Sensor Systems: Evaluating RGB vs. Dynamic Vision Sensors in CARLA',
     authors: 'Mustafa Sakhai, Kaung Sithu, Min Khant Soe Oke, Szymon Mazurek, Maciej Wielgosz',
