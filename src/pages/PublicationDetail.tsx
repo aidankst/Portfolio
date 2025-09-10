@@ -77,6 +77,15 @@ const publicationsData = {
     abstract: 'Autonomous vehicles (AVs) rely on a heterogeneous sensor suite of RGB cameras, LiDAR, GPS/IMU, and emerging event-based dynamic vision sensors (DVS) to perceive and navigate complex environments. However, these sensors can be deceived by realistic cyberattacks, undermining safety. In this work, we systematically implement seven attack vectors in the CARLA simulator—salt and pepper noise, event flooding, depth map tampering, LiDAR phantom injection, GPS spoofing, denial of service, and steering bias control—and measure their impact on a state-of-the-art end-to-end driving agent. We then equip each sensor with tailored defenses (e.g., adaptive median filtering for RGB and spatial clustering for DVS) and integrate a unsupervised anomaly detector (EfficientAD from anomalib) trained exclusively on benign data. Our detector achieves clear separation between normal and attacked conditions (mean RGB anomaly scores of 0.00 vs. 0.38; DVS: 0.61 vs. 0.76), yielding over 95% detection accuracy with fewer than 5% false positives. Defense evaluations reveal that GPS spoofing is fully mitigated, whereas RGB- and depth-based attacks still induce 30–45% trajectory drift despite filtering. Notably, our research-focused evaluation of DVS sensors suggests potential intrinsic resilience advantages in high-dynamic-range scenarios, though their asynchronous output necessitates carefully tuned thresholds. These findings underscore the critical role of multi-modal anomaly detection and demonstrate that DVS sensors exhibit greater intrinsic resilience in high-dynamic-range scenarios, suggesting their potential to enhance AV cybersecurity when integrated with conventional sensors.',
     keywords: ['autonomous vehicles', 'cybersecurity attacks', 'dynamic vision sensor'],
   },
+  'dvs-pedx-dataset': {
+    title: 'DVS-PedX: Synthetic-and-Real Event-Based Pedestrian Dataset',
+    authors: 'Mustafa Sakhai, Kaung Sithu, Min Khant Soe Oke, Maciej Wielgosz',
+    journal: 'arXiv preprint arXiv:2509.04117, 2025',
+    doi: '',
+    arxivId: '2509.04117',
+    abstract: 'This paper presents DVS-PedX, a comprehensive dataset that combines synthetic and real event-based data for pedestrian detection and tracking using Dynamic Vision Sensors (DVS). The dataset addresses the critical need for high-quality event-based data in computer vision applications, particularly for pedestrian detection in autonomous systems. DVS-PedX includes both synthetic data generated from simulation environments and real-world recordings, providing researchers with a diverse and robust foundation for developing and evaluating event-based pedestrian detection algorithms. The dataset features various scenarios including different lighting conditions, pedestrian movements, and environmental settings, making it suitable for training robust neural networks for real-world deployment.',
+    keywords: ['dynamic vision sensors', 'event-based vision', 'pedestrian detection', 'dataset', 'computer vision'],
+  },
 };
 
 const PublicationDetail = () => {
@@ -115,15 +124,17 @@ const PublicationDetail = () => {
             Back to Publications
           </Button>
           <GlassmorphicPaper>
-            <Box sx={{ mb: 4, borderRadius: '16px', overflow: 'hidden', maxWidth: '600px', margin: '0 auto' }}>
-              <img
-                src="/Portfolio/badges/Article_Banner_MDPI_applsci-15-07493.png"
-                alt="Article Banner"
-                style={{
-                  width: '100%', height: 'auto', display: 'block',
-                }}
-              />
-            </Box>
+            {id === 'cyberattack-resilience' && (
+              <Box sx={{ mb: 4, borderRadius: '16px', overflow: 'hidden', maxWidth: '600px', margin: '0 auto' }}>
+                <img
+                  src="/Portfolio/badges/Article_Banner_MDPI_applsci-15-07493.png"
+                  alt="Article Banner"
+                  style={{
+                    width: '100%', height: 'auto', display: 'block',
+                  }}
+                />
+              </Box>
+            )}
             <Typography
               variant="h4"
               component="h1"
@@ -195,7 +206,7 @@ const PublicationDetail = () => {
             </Typography>
             <Button
               variant="outlined"
-              href={`https://doi.org/${publication.doi}`}
+              href={publication.doi ? `https://doi.org/${publication.doi}` : `https://arxiv.org/abs/${publication.arxivId}`}
               target="_blank"
               rel="noopener noreferrer"
               sx={(theme) => ({
@@ -209,7 +220,7 @@ const PublicationDetail = () => {
                 },
               })}
             >
-              Read on Publisher&apos;s Site
+              {publication.doi ? "Read on Publisher's Site" : "Read on arXiv"}
             </Button>
           </GlassmorphicPaper>
         </motion.div>

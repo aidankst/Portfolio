@@ -125,6 +125,17 @@ const Publications = () => {
       featured: true,
     },
     {
+      id: 'dvs-pedx-dataset',
+      title: 'DVS-PedX: Synthetic-and-Real Event-Based Pedestrian Dataset',
+      authors: 'Mustafa Sakhai, Kaung Sithu, Min Khant Soe Oke, Maciej Wielgosz',
+      journal: 'arXiv preprint arXiv:2509.04117',
+      year: '2025',
+      abstract: 'A comprehensive dataset combining synthetic and real event-based data for pedestrian detection and tracking using Dynamic Vision Sensors.',
+      doi: '',
+      link: 'https://arxiv.org/abs/2509.04117',
+      tags: ['Dynamic Vision Sensors', 'Dataset', 'Pedestrian Detection', 'Event-Based Vision'],
+    },
+    {
       title: 'Evaluating Synthetic vs. Real Dynamic Vision Sensor Data for SNN-Based Object Detection Classification',
       authors: 'Mustafa Sakhai, Kaung Sithu, Min Khant Soe Oke, Szymon Mazurek, Maciej Wielgosz',
       journal: 'In Proceedings of the KU KDM 2025 Conference, Zakopane, Poland, 2–5 April 2025',
@@ -174,13 +185,16 @@ const Publications = () => {
                   viewport={{ once: true, amount: 0.2 }}
                   transition={{ type: 'spring', stiffness: 300, damping: 20, delay: index * 0.1 }}
                 >
-                  <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                  <Box sx={{ position: 'relative', textAlign: 'center', mb: 1 }}>
                     <PublicationTitle variant="h6">
                       {publication.title}
                     </PublicationTitle>
                     {publication.featured && (
                       <Box
                         sx={{
+                          position: 'absolute',
+                          top: 0,
+                          right: 0,
                           display: 'inline-block',
                           px: 1,
                           py: 0.25,
@@ -189,8 +203,6 @@ const Publications = () => {
                           fontWeight: 600,
                           background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
                           color: 'white',
-                          mt: 0.5,
-                          ml: 2,
                           flexShrink: 0,
                         }}
                       >
