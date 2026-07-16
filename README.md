@@ -10,7 +10,7 @@ I am a machine learning researcher working at the intersection of computer visio
 
 - Machine Learning Research Intern at AGH University of Science and Technology, researching DVS and RGB perception, synthetic datasets, and automated quality assessment
 - Former Data Analyst with experience in predictive analysis, supply-chain data, dashboards, and operational reporting
-- Co-author of three 2025 research outputs covering autonomous-vehicle sensor resilience, event-based pedestrian data, and low-latency perception
+- Co-author of five research outputs since 2025 covering autonomous-vehicle sensor resilience, event-based perception, multimodal sensor fusion, and synthetic-data quality
 - B.Sc. in Computer Science with a **4.5/5.0 GPA** and **5.0/5.0 dissertation grade**
 - Based in Kraków, Poland; fluent in English and a native Burmese speaker
 
@@ -36,13 +36,25 @@ Compared RGB and Dynamic Vision Sensor pipelines under cyberattack scenarios to 
 
 Contributed to a combined synthetic-and-real event-camera dataset for pedestrian detection and tracking, connecting simulation with practical event-based perception.
 
-*arXiv:2509.04117 (2025)* · [View on arXiv](https://arxiv.org/abs/2509.04117)
+*Scientific Data, 13, 614 (2026)* · [Read the paper](https://doi.org/10.1038/s41597-026-06969-y)
 
-### Evaluating Synthetic vs. Real Dynamic Vision Sensor Data for SNN-Based Object Detection Classification
+### InterFuserDVS: Event-Enhanced Sensor Fusion for Safe RL-Based Decision Making
+
+Integrated DVS event data with RGB and LiDAR in a transformer-based autonomous-driving agent for more robust perception and decision-making in CARLA.
+
+*arXiv:2605.04355 (2026)* · [View on arXiv](https://arxiv.org/abs/2605.04355)
+
+### Evaluating Synthetic vs. Real Dynamic Vision Sensor Data for SNN-Based Object Classification
 
 Compared synthetic and real DVS data with RGB imagery, with an emphasis on detection performance and latency.
 
-*KU KDM 2025 Conference, Zakopane, Poland* · [View the proceedings](https://events.plgrid.pl/event/70/attachments/143/364/PROCEEDINGS%202025_na%20www%20bez%20notatek.pdf)
+*KU KDM 2025 Conference, pp. 51–52* · [View the proceedings](https://events.plgrid.pl/event/70/attachments/143/364/PROCEEDINGS%202025_na%20www%20bez%20notatek.pdf)
+
+### Microseconds Matter: Temporal and Perceptual Metrics for Synthetic Event Streams and Spiking Neural Networks
+
+Developed a quality-verification framework for benchmarking the temporal precision and perceptual fidelity of synthetic event streams.
+
+*Available at SSRN 6442903 (2026)* · [View on SSRN](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6442903)
 
 ## Experience
 

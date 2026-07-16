@@ -1,0 +1,434 @@
+- generic [ref=e2]:
+  - link "Skip to content" [ref=e3] [cursor=pointer]:
+    - /url: "#main-content"
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - link "KS — Kaung Sithu, back to top" [ref=e6] [cursor=pointer]:
+        - /url: "#top"
+      - navigation "Primary navigation" [ref=e7]:
+        - link "Research" [ref=e8] [cursor=pointer]:
+          - /url: "#research"
+        - link "Experience" [ref=e9] [cursor=pointer]:
+          - /url: "#experience"
+        - link "Projects" [ref=e10] [cursor=pointer]:
+          - /url: "#projects"
+        - link "Expertise" [ref=e11] [cursor=pointer]:
+          - /url: "#expertise"
+        - link "Credentials" [ref=e12] [cursor=pointer]:
+          - /url: "#credentials"
+        - link "Connect" [ref=e13] [cursor=pointer]:
+          - /url: "#connect"
+  - main [ref=e14]:
+    - region [ref=e15]:
+      - generic [ref=e16]:
+        - generic [ref=e17]:
+          - generic [ref=e18]: Based in Kraków, Poland
+          - paragraph [ref=e20]: Computer vision · Event-based sensing · Data reliability
+          - heading "Building perception systems that see faster—and data pipelines we can trust." [level=1] [ref=e21]
+          - paragraph [ref=e22]: I work at the intersection of machine learning, autonomous systems, and data quality. My research compares event-based and conventional vision while turning complex datasets into dependable evidence.
+          - generic [ref=e23]:
+            - link "LinkedIn" [ref=e24] [cursor=pointer]:
+              - /url: https://www.linkedin.com/in/aidankst/
+            - link "GitHub" [ref=e27] [cursor=pointer]:
+              - /url: https://github.com/aidankst/
+        - generic [ref=e30]:
+          - generic [ref=e31]: "01"
+          - img "Editorial illustration of Kaung Sithu in a dark overshirt against forest-green and amber shapes" [ref=e33]
+          - generic [ref=e34]:
+            - generic [ref=e35]: Kaung Sithu
+            - generic [ref=e36]: Machine Learning Researcher
+      - generic "Selected facts" [ref=e37]:
+        - generic [ref=e38]:
+          - generic [ref=e39]:
+            - term [ref=e40]: Publications
+            - definition [ref=e41]: "03"
+            - definition [ref=e42]: Research outputs in 2025
+          - generic [ref=e43]:
+            - term [ref=e44]: Projects
+            - definition [ref=e45]: "05"
+            - definition [ref=e46]: Research and engineering
+          - generic [ref=e47]:
+            - term [ref=e48]: GPA
+            - definition [ref=e49]: 4.5/5
+            - definition [ref=e50]: B.Sc. Computer Science
+          - generic [ref=e51]:
+            - term [ref=e52]: Dissertation
+            - definition [ref=e53]: 5.0/5
+            - definition [ref=e54]: Final thesis grade
+    - generic [ref=e56]:
+      - generic [ref=e57]:
+        - generic [ref=e58]: "01"
+        - generic [ref=e61]:
+          - paragraph [ref=e62]: Selected research
+          - heading "From sensing to evidence." [level=2] [ref=e63]
+          - paragraph [ref=e64]: Research focused on the reliability, latency, and security of perception systems for autonomous environments.
+      - generic [ref=e65]:
+        - article [ref=e66]:
+          - generic [ref=e67]:
+            - generic [ref=e68]: Peer-reviewed paper
+            - generic [ref=e69]: "01"
+          - heading "Cyberattack resilience of autonomous-vehicle sensor systems" [level=3] [ref=e70]
+          - paragraph [ref=e71]: Compared RGB and Dynamic Vision Sensor pipelines under cyberattack scenarios in CARLA to understand how sensing choices shape system resilience.
+          - list "Topics" [ref=e72]:
+            - listitem [ref=e73]: Autonomous vehicles
+            - listitem [ref=e74]: Cybersecurity
+            - listitem [ref=e75]: CARLA
+          - generic [ref=e76]:
+            - generic [ref=e77]: Applied Sciences, 15(13), 7493 · 2025
+            - 'link "Read the paper: Cyberattack resilience of autonomous-vehicle sensor systems" [ref=e78] [cursor=pointer]':
+              - /url: https://doi.org/10.3390/app15137493
+              - text: Read the paper
+        - article [ref=e81]:
+          - generic [ref=e82]:
+            - generic [ref=e83]: Dataset paper
+            - generic [ref=e84]: "02"
+          - 'heading "DVS-PedX: synthetic-and-real event-based pedestrian data" [level=3] [ref=e85]'
+          - paragraph [ref=e86]: Built a combined synthetic and real event-camera dataset for pedestrian detection and tracking, connecting simulation with practical event-based perception.
+          - list "Topics" [ref=e87]:
+            - listitem [ref=e88]: DVS
+            - listitem [ref=e89]: Datasets
+            - listitem [ref=e90]: Pedestrian detection
+          - generic [ref=e91]:
+            - generic [ref=e92]: arXiv:2509.04117 · 2025
+            - 'link "View on arXiv: DVS-PedX: synthetic-and-real event-based pedestrian data" [ref=e93] [cursor=pointer]':
+              - /url: https://arxiv.org/abs/2509.04117
+              - text: View on arXiv
+        - article [ref=e96]:
+          - generic [ref=e97]:
+            - generic [ref=e98]: Dissertation research
+            - generic [ref=e99]: "03"
+          - heading "Low-latency object detection for autonomous vehicles" [level=3] [ref=e100]
+          - paragraph [ref=e101]: Generated synthetic AEDAT data with v2e and assessed DVS/RGB quality through MSE, SSIM, polarity accuracy, and temporal precision.
+          - list "Topics" [ref=e102]:
+            - listitem [ref=e103]: Computer vision
+            - listitem [ref=e104]: Event cameras
+            - listitem [ref=e105]: Data quality
+          - generic [ref=e106]: AGH University of Science and Technology · 2025
+      - generic [ref=e108]:
+        - generic [ref=e109]:
+          - paragraph [ref=e110]: Publication record
+          - heading "Three contributions, one research direction." [level=3] [ref=e111]
+        - list [ref=e112]:
+          - listitem [ref=e113]:
+            - generic [ref=e114]: "01"
+            - generic [ref=e115]:
+              - 'link "Cyberattack Resilience of Autonomous Vehicle Sensor Systems: Evaluating RGB vs. Dynamic Vision Sensors in CARLA" [ref=e116] [cursor=pointer]':
+                - /url: https://doi.org/10.3390/app15137493
+              - paragraph [ref=e119]: Mustafa Sakhai, Kaung Sithu, Min Khant Soe Oke, Szymon Mazurek, Maciej Wielgosz
+              - generic [ref=e120]: Applied Sciences, 15(13), 7493 · DOI 10.3390/app15137493
+            - time [ref=e121]: "2025"
+          - listitem [ref=e122]:
+            - generic [ref=e123]: "02"
+            - generic [ref=e124]:
+              - 'link "DVS-PedX: Synthetic-and-Real Event-Based Pedestrian Dataset" [ref=e125] [cursor=pointer]':
+                - /url: https://arxiv.org/abs/2509.04117
+              - paragraph [ref=e128]: Mustafa Sakhai, Kaung Sithu, Min Khant Soe Oke, Maciej Wielgosz
+              - generic [ref=e129]: arXiv preprint arXiv:2509.04117
+            - time [ref=e130]: "2025"
+          - listitem [ref=e131]:
+            - generic [ref=e132]: "03"
+            - generic [ref=e133]:
+              - link "Evaluating Synthetic vs. Real Dynamic Vision Sensor Data for SNN-Based Object Detection Classification" [ref=e134] [cursor=pointer]:
+                - /url: https://events.plgrid.pl/event/70/attachments/143/364/PROCEEDINGS%202025_na%20www%20bez%20notatek.pdf
+              - paragraph [ref=e137]: Mustafa Sakhai, Kaung Sithu, Min Khant Soe Oke, Szymon Mazurek, Maciej Wielgosz
+              - generic [ref=e138]: KU KDM 2025 Conference, Zakopane, Poland, 2–5 April 2025
+            - time [ref=e139]: "2025"
+    - generic [ref=e141]:
+      - generic [ref=e142]:
+        - generic [ref=e143]: "02"
+        - generic [ref=e146]:
+          - paragraph [ref=e147]: Experience
+          - heading "Research rigor, grounded in real data." [level=2] [ref=e148]
+          - paragraph [ref=e149]: A path from operational analysis to machine-learning research—always centered on clearer decisions and more reliable systems.
+      - list [ref=e150]:
+        - listitem [ref=e151]:
+          - generic [ref=e152]: "01"
+          - generic [ref=e153]:
+            - generic [ref=e154]: June 2024 — Present
+            - generic [ref=e155]: Kraków, Poland
+          - generic [ref=e156]:
+            - generic [ref=e157]:
+              - heading "Machine Learning Research" [level=3] [ref=e158]
+              - generic [ref=e159]: Intern
+            - paragraph [ref=e160]: AGH University of Science and Technology
+            - paragraph [ref=e161]: Researching perception for autonomous systems, with a focus on DVS and RGB data, synthetic datasets, and automated quality-assessment pipelines.
+            - list "Topics" [ref=e162]:
+              - listitem [ref=e163]: Python
+              - listitem [ref=e164]: Machine Learning
+              - listitem [ref=e165]: Computer Vision
+              - listitem [ref=e166]: Quality Assessment
+        - listitem [ref=e167]:
+          - generic [ref=e168]: "02"
+          - generic [ref=e169]:
+            - generic [ref=e170]: December 2023 — February 2025
+            - generic [ref=e171]: Yangon, Myanmar
+          - generic [ref=e172]:
+            - generic [ref=e173]:
+              - heading "Data Analyst" [level=3] [ref=e174]
+              - generic [ref=e175]: Full-time
+            - paragraph [ref=e176]: Haine Food Production Co., Ltd
+            - paragraph [ref=e177]: Used SQL and Python to turn operational and supply-chain data into predictive analysis, decision-ready dashboards, and clearer business reporting.
+            - list "Topics" [ref=e178]:
+              - listitem [ref=e179]: SQL
+              - listitem [ref=e180]: Python
+              - listitem [ref=e181]: Predictive Modeling
+              - listitem [ref=e182]: Dashboard Development
+        - listitem [ref=e183]:
+          - generic [ref=e184]: "03"
+          - generic [ref=e185]:
+            - generic [ref=e186]: June 2023 — December 2023
+            - generic [ref=e187]: Yangon, Myanmar
+          - generic [ref=e188]:
+            - generic [ref=e189]:
+              - heading "Data Analyst" [level=3] [ref=e190]
+              - generic [ref=e191]: Intern
+            - paragraph [ref=e192]: Haine Food Production Co., Ltd
+            - paragraph [ref=e193]: Cleaned, structured, and visualized inventory data to support more consistent reporting and day-to-day operational decisions.
+            - list "Topics" [ref=e194]:
+              - listitem [ref=e195]: Excel
+              - listitem [ref=e196]: Python
+              - listitem [ref=e197]: Matplotlib
+              - listitem [ref=e198]: Inventory Management
+        - listitem [ref=e199]:
+          - generic [ref=e200]: "04"
+          - generic [ref=e201]:
+            - generic [ref=e202]: March 2021 — July 2021
+            - generic [ref=e203]: Yangon, Myanmar
+          - generic [ref=e204]:
+            - generic [ref=e205]:
+              - heading "Admin Staff" [level=3] [ref=e206]
+              - generic [ref=e207]: On-the-job training
+            - paragraph [ref=e208]: Oriental Apex Company Limited
+            - paragraph [ref=e209]: Supported administrative workflows and customer communication while developing a disciplined approach to organization and delivery.
+            - list "Topics" [ref=e210]:
+              - listitem [ref=e211]: Communication
+              - listitem [ref=e212]: Time Management
+              - listitem [ref=e213]: Organization
+              - listitem [ref=e214]: Customer Service
+    - generic [ref=e216]:
+      - generic [ref=e217]:
+        - generic [ref=e218]: "03"
+        - generic [ref=e221]:
+          - paragraph [ref=e222]: Selected systems
+          - heading "Research thinking, engineered into useful tools." [level=2] [ref=e223]
+          - paragraph [ref=e224]: Projects across event-based perception, databases, and workflow applications—designed around concrete operational needs.
+      - generic [ref=e225]:
+        - article [ref=e226]:
+          - strong [ref=e232]: "01"
+          - generic [ref=e233]:
+            - generic [ref=e234]:
+              - generic [ref=e235]: Research
+              - generic [ref=e236]: Featured
+            - heading "Low-Latency Object Detection in Autonomous Vehicles" [level=3] [ref=e237]
+            - paragraph [ref=e238]: Evaluated synthetic event-camera data and conventional RGB data with image, polarity, and temporal quality metrics for low-latency perception.
+            - list "Topics" [ref=e239]:
+              - listitem [ref=e240]: Python
+              - listitem [ref=e241]: Computer Vision
+              - listitem [ref=e242]: Machine Learning
+              - listitem [ref=e243]: v2e
+            - generic [ref=e244]: Dissertation research
+        - article [ref=e245]:
+          - strong [ref=e251]: "02"
+          - generic [ref=e252]:
+            - generic [ref=e253]: Data systems
+            - heading "Database Project" [level=3] [ref=e255]
+            - paragraph [ref=e256]: Built a PostgreSQL taxonomy manager with Python utilities for traversing hierarchies, renaming nodes, importing CSV data, and finding roots—improving query efficiency by 20%.
+            - list "Topics" [ref=e257]:
+              - listitem [ref=e258]: Python
+              - listitem [ref=e259]: PostgreSQL
+              - listitem [ref=e260]: Database Design
+            - link "Explore the code" [ref=e261] [cursor=pointer]:
+              - /url: https://github.com/aidankst/DBProject
+        - article [ref=e264]:
+          - strong [ref=e270]: "03"
+          - generic [ref=e271]:
+            - generic [ref=e272]: Workflow platform
+            - heading "Education Agency Management App" [level=3] [ref=e274]
+            - paragraph [ref=e275]: Centralized client management, invoicing, email notifications, and information tracking in a Flask application, reducing administrative workload by 30%.
+            - list "Topics" [ref=e276]:
+              - listitem [ref=e277]: Python
+              - listitem [ref=e278]: Flask
+              - listitem [ref=e279]: PostgreSQL
+            - link "Explore the code" [ref=e280] [cursor=pointer]:
+              - /url: https://github.com/aidankst/Education_Agency_Management_App
+      - button "View all five projects" [ref=e284] [cursor=pointer]:
+        - text: View all five projects
+        - generic [ref=e285]: +
+    - generic [ref=e287]:
+      - generic [ref=e288]:
+        - generic [ref=e289]: "04"
+        - generic [ref=e292]:
+          - paragraph [ref=e293]: Education & expertise
+          - heading "A technical foundation built for applied research." [level=2] [ref=e294]
+          - paragraph [ref=e295]: Computer science fundamentals, practical analysis, and the research methods needed to evaluate intelligent systems.
+      - generic [ref=e296]:
+        - article [ref=e297]:
+          - paragraph [ref=e299]: Education
+          - heading "B.Sc. Computer Science" [level=3] [ref=e300]
+          - paragraph [ref=e301]: AGH University of Science and Technology
+          - generic [ref=e302]:
+            - generic [ref=e303]: Kraków, Poland
+            - generic [ref=e304]: 2021 — 2025
+          - paragraph [ref=e305]: Software engineering, data structures, and machine learning
+          - generic [ref=e306]:
+            - generic [ref=e307]:
+              - term [ref=e308]: GPA
+              - definition [ref=e309]: 4.5/5.0
+            - generic [ref=e310]:
+              - term [ref=e311]: Dissertation grade
+              - definition [ref=e312]: 5.0/5.0
+          - generic [ref=e313]:
+            - generic [ref=e314]: Dissertation
+            - strong [ref=e315]: Low-Latency Object Detection in Autonomous Vehicles
+        - generic [ref=e316]:
+          - group [ref=e317]:
+            - generic "01 Programming & Technical" [ref=e318] [cursor=pointer]:
+              - generic [ref=e319]: "01"
+              - strong [ref=e320]: Programming & Technical
+              - generic [ref=e321]: +
+            - generic [ref=e322]:
+              - generic [ref=e323]:
+                - generic [ref=e324]:
+                  - strong [ref=e325]: Python
+                  - generic [ref=e326]: NumPy, Pandas, TensorFlow, Scikit-learn
+                - generic [ref=e327]:
+                  - generic [ref=e328]: 95%
+                  - progressbar "Python proficiency" [ref=e329]
+              - generic [ref=e330]:
+                - generic [ref=e331]:
+                  - strong [ref=e332]: SQL
+                  - generic [ref=e333]: PostgreSQL, query optimization
+                - generic [ref=e334]:
+                  - generic [ref=e335]: 90%
+                  - progressbar "SQL proficiency" [ref=e336]
+              - generic [ref=e337]:
+                - generic [ref=e338]:
+                  - strong [ref=e339]: NoSQL
+                  - generic [ref=e340]: Firebase, document databases
+                - generic [ref=e341]:
+                  - generic [ref=e342]: 80%
+                  - progressbar "NoSQL proficiency" [ref=e343]
+              - generic [ref=e344]:
+                - generic [ref=e345]:
+                  - strong [ref=e346]: R
+                  - generic [ref=e347]: Statistical analysis, data mining
+                - generic [ref=e348]:
+                  - generic [ref=e349]: 75%
+                  - progressbar "R proficiency" [ref=e350]
+              - generic [ref=e351]:
+                - generic [ref=e352]:
+                  - strong [ref=e353]: Flask
+                  - generic [ref=e354]: Web development, API design
+                - generic [ref=e355]:
+                  - generic [ref=e356]: 85%
+                  - progressbar "Flask proficiency" [ref=e357]
+              - generic [ref=e358]:
+                - generic [ref=e359]:
+                  - strong [ref=e360]: Git
+                  - generic [ref=e361]: Version control, collaboration
+                - generic [ref=e362]:
+                  - generic [ref=e363]: 90%
+                  - progressbar "Git proficiency" [ref=e364]
+          - group [ref=e365]:
+            - generic "02 Data Analysis & Visualization" [ref=e366] [cursor=pointer]:
+              - generic [ref=e367]: "02"
+              - strong [ref=e368]: Data Analysis & Visualization
+              - generic [ref=e369]: +
+          - group [ref=e370]:
+            - generic "03 Software Development & IT" [ref=e371] [cursor=pointer]:
+              - generic [ref=e372]: "03"
+              - strong [ref=e373]: Software Development & IT
+              - generic [ref=e374]: +
+          - group [ref=e375]:
+            - generic "04 Research Problem-Solving" [ref=e376] [cursor=pointer]:
+              - generic [ref=e377]: "04"
+              - strong [ref=e378]: Research Problem-Solving
+              - generic [ref=e379]: +
+          - group [ref=e380]:
+            - generic "05 Collaboration" [ref=e381] [cursor=pointer]:
+              - generic [ref=e382]: "05"
+              - strong [ref=e383]: Collaboration
+              - generic [ref=e384]: +
+          - group [ref=e385]:
+            - generic "06 Languages" [ref=e386] [cursor=pointer]:
+              - generic [ref=e387]: "06"
+              - strong [ref=e388]: Languages
+              - generic [ref=e389]: +
+    - generic [ref=e391]:
+      - generic [ref=e392]:
+        - generic [ref=e393]: "05"
+        - generic [ref=e396]:
+          - paragraph [ref=e397]: Continued learning
+          - heading "Credentials that extend the research toolkit." [level=2] [ref=e398]
+          - paragraph [ref=e399]: Focused training across analytics, machine learning, software engineering, visualization, and cybersecurity.
+      - generic [ref=e400]:
+        - article [ref=e401]:
+          - generic [ref=e404]:
+            - generic [ref=e405]:
+              - generic [ref=e406]: Google
+              - generic [ref=e407]: April 2025
+            - heading "Google Data Analytics Professional Certificate" [level=3] [ref=e408]
+            - paragraph [ref=e409]: Credential JS5MOS9SOV3D
+            - list "Topics" [ref=e410]:
+              - listitem [ref=e411]: Data Analysis
+              - listitem [ref=e412]: SQL
+              - listitem [ref=e413]: Spreadsheets
+            - link "Verify credential" [ref=e414] [cursor=pointer]:
+              - /url: https://www.coursera.org/account/accomplishments/verify/JS5MOS9SOV3D
+        - article [ref=e417]:
+          - generic [ref=e420]:
+            - generic [ref=e421]:
+              - generic [ref=e422]: IBM
+              - generic [ref=e423]: April 2025
+            - heading "Introduction to Software Engineering" [level=3] [ref=e424]
+            - paragraph [ref=e425]: Credential ZFYVMCALGRSR
+            - list "Topics" [ref=e426]:
+              - listitem [ref=e427]: Software Architecture
+              - listitem [ref=e428]: Agile
+              - listitem [ref=e429]: Programming
+            - link "Verify credential" [ref=e430] [cursor=pointer]:
+              - /url: https://www.coursera.org/account/accomplishments/verify/ZFYVMCALGRSR
+        - article [ref=e433]:
+          - generic [ref=e436]:
+            - generic [ref=e437]:
+              - generic [ref=e438]: IBM
+              - generic [ref=e439]: December 2024
+            - heading "Exploratory Data Analysis for Machine Learning" [level=3] [ref=e440]
+            - paragraph [ref=e441]: Credential KNYHNHNCTUQ4
+            - list "Topics" [ref=e442]:
+              - listitem [ref=e443]: Machine Learning
+              - listitem [ref=e444]: Feature Engineering
+              - listitem [ref=e445]: EDA
+            - link "Verify credential" [ref=e446] [cursor=pointer]:
+              - /url: https://www.coursera.org/account/accomplishments/verify/KNYHNHNCTUQ4
+        - article [ref=e449]:
+          - generic [ref=e452]:
+            - generic [ref=e453]:
+              - generic [ref=e454]: Cisco
+              - generic [ref=e455]: 16 February 2025
+            - heading "Introduction to Cyber Security" [level=3] [ref=e456]
+            - paragraph [ref=e457]: Credential Credly verified
+            - list "Topics" [ref=e458]:
+              - listitem [ref=e459]: Cybersecurity
+              - listitem [ref=e460]: Network Vulnerabilities
+              - listitem [ref=e461]: Best Practices
+            - link "Verify credential" [ref=e462] [cursor=pointer]:
+              - /url: https://www.credly.com/badges/4aa8a6c5-4846-489b-8ffa-890b1fb4dfd1
+      - button "View all eleven credentials" [ref=e466] [cursor=pointer]:
+        - text: View all eleven credentials
+        - generic [ref=e467]: +
+  - contentinfo [ref=e468]:
+    - generic [ref=e469]:
+      - generic [ref=e470]:
+        - paragraph [ref=e471]: Open to research and collaboration
+        - heading "Let's make intelligent systems more reliable." [level=2] [ref=e472]
+      - generic [ref=e473]:
+        - link "LinkedIn" [ref=e474] [cursor=pointer]:
+          - /url: https://www.linkedin.com/in/aidankst/
+        - link "GitHub" [ref=e479] [cursor=pointer]:
+          - /url: https://github.com/aidankst/
+      - generic [ref=e484]:
+        - generic [ref=e485]: © 2026 Kaung Sithu
+        - generic [ref=e486]: Designed for clarity. Built for the open web.
+        - link "Back to top ↑" [ref=e487] [cursor=pointer]:
+          - /url: "#top"

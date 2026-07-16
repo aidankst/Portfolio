@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#f4f1e8"/>
+  <path d="M0 0h290c150 170 189 387 117 630H0Z" fill="#173b2b"/>
+  <circle cx="1040" cy="108" r="112" fill="#e3a008"/>
+  <circle cx="1028" cy="500" r="210" fill="#ced8c8"/>
+  <text x="460" y="196" fill="#173b2b" font-family="Georgia, serif" font-size="84" font-weight="700">Kaung Sithu</text>
+  <text x="464" y="274" fill="#1d221f" font-family="Arial, sans-serif" font-size="34" font-weight="600">MACHINE LEARNING RESEARCHER</text>
+  <line x1="464" y1="316" x2="1030" y2="316" stroke="#173b2b" stroke-width="2"/>
+  <text x="464" y="378" fill="#1d221f" font-family="Arial, sans-serif" font-size="27">Computer vision · Event-based sensing</text>
+  <text x="464" y="420" fill="#1d221f" font-family="Arial, sans-serif" font-size="27">Reliable data pipelines · Autonomous systems</text>
+  <rect x="68" y="240" width="154" height="154" rx="40" fill="#f4f1e8"/>
+  <text x="101" y="343" fill="#173b2b" font-family="Georgia, serif" font-size="72" font-weight="700">KS</text>
+</svg>
